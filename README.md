@@ -3,7 +3,7 @@
 To develop a 
 
 ## Motivation 
-This is a student project that is a part of the 3 month web developemnt course organised by [Incode Academy](https://www.inco.org.au/incode)
+This is a student project that is a part of the 3 month web development course organised by [Incode Academy](https://www.inco.org.au/incode)
 
 ## Demo 
 ![Demo]
@@ -20,7 +20,7 @@ This is a student project that is a part of the 3 month web developemnt course o
 </a>
 
 <a href="https://github.com/hi-i-am-ana">
-  <img src="https://github.com/hi-i-am-ana.ong" alt="Annatasia Chen" width="100"/>
+  <img src="https://github.com/hi-i-am-ana.png" alt="Annatasia Chen" width="100"/>
 </a>
 
 <a href="https://github.com/cattrn">
