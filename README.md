@@ -31,6 +31,23 @@ This is a student project that is a part of the 3 month web development course o
   <img src="https://github.com/patk.png" alt="Pat" width="100"/>
 </a>
 
+## Getting Started
+
+1. Edit your .env file to suit your own Postgres settings, making sure to change your username, password, and port if need be.
+
+2. Run the following scripts to create the database, create tables, and seed tables.
+
+```zsh
+npm run create-database
+```
+
+```zsh
+npm run create-tables
+```
+
+```zsh
+npm run seed-tables
+```
 
 
 ## Licence 
