@@ -15,31 +15,31 @@
 
 ### ratings
 
-| `Column Name` | `Type`      | `Constrains`                                  | `Description` |
-| ------------- | ----------- | --------------------------------------------- | ------------- |
-| rating_id     | INT         | PRIMARY KEY                                   |               |
-| movie_id      | INT         | NOT NULL                                      |               |
-| user_id       | INT         | FOREIGN KEY REFERENCE users(user_id) NOT NULL |               |
-| rating_value  | INT         | NOT NULL CHECK (rating_value BETWEEN 0 AND 5) |               |
-| create_at     | TIMESTAMPTZ |                                               |               |
-| update_at     | TIMESTAMPTZ |                                               |               |
+| `Column Name` | `Type`      | `Constrains`                                                     | `Description` |
+| ------------- | ----------- | ---------------------------------------------------------------- | ------------- |
+| rating_id     | INT         | PRIMARY KEY                                                      |               |
+| movie_id      | INT         | NOT NULL                                                         |               |
+| user_id       | INT         | FOREIGN KEY REFERENCES users(user_id) NOT NULL ON DELETE CASCADE |               |
+| rating_value  | INT         | NOT NULL CHECK (rating_value BETWEEN 0 AND 5)                    |               |
+| create_at     | TIMESTAMPTZ |                                                                  |               |
+| update_at     | TIMESTAMPTZ |                                                                  |               |
 
 ## Table: Email Confirmation
 
 ### email_confirmation
 
-| `Column Name` | `Type`      | `Constrains`                                         | `Description` |
-| ------------- | ----------- | ---------------------------------------------------- | ------------- |
-| hash_id       | INT         | PRIMARY KEY                                          |               |
-| email         | VARCHAR(50) | FOREIGN KEY REFERENCE users(user_id) NOT NULL UNIQUE |               |
-| hash          | CHAR(60)    | NOT NULL                                             |               |
+| `Column Name` | `Type`      | `Constrains`                                                          | `Description` |
+| ------------- | ----------- | --------------------------------------------------------------------- | ------------- |
+| hash_id       | INT         | PRIMARY KEY                                                           |               |
+| email         | VARCHAR(50) | FOREIGN KEY REFERENCES users(email) NOT NULL UNIQUE ON DELETE CASCADE |               |
+| hash          | CHAR(60)    | NOT NULL                                                              |               |
 
 ## Table: Password Reset
 
 ### password_reset
 
-| `Column Name` | `Type`      | `Constrains`                                         | `Description` |
-| ------------- | ----------- | ---------------------------------------------------- | ------------- |
-| hash_id       | INT         | PRIMARY KEY                                          |               |
-| email         | VARCHAR(50) | FOREIGN KEY REFERENCE users(user_id) NOT NULL UNIQUE |               |
-| hash          | CHAR(60)    | NOT NULL                                             |               |
+| `Column Name` | `Type`      | `Constrains`                                                          | `Description` |
+| ------------- | ----------- | --------------------------------------------------------------------- | ------------- |
+| hash_id       | INT         | PRIMARY KEY                                                           |               |
+| email         | VARCHAR(50) | FOREIGN KEY REFERENCES users(email) NOT NULL UNIQUE ON DELETE CASCADE |               |
+| hash          | CHAR(60)    | NOT NULL                                                              |               |
