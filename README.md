@@ -20,7 +20,7 @@ This is a student project that is a part of the 3 month web development course o
 </a>
 
 <a href="https://github.com/hi-i-am-ana">
-  <img src="https://github.com/hi-i-am-ana.png" alt="Annatasia Chen" width="100"/>
+  <img src="https://github.com/hi-i-am-ana.png" alt="Anastasia Chen" width="100"/>
 </a>
 
 <a href="https://github.com/cattrn">
