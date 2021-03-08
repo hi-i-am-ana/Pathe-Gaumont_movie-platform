@@ -7,11 +7,91 @@
 }
 
 html body {
-  background-color: #FFFFF4;
+  background-color: #fffff4;
   height: 100%;
 }
 
 footer {
   bottom: 0;
+}
+
+/* Navigation Bar */
+.logo {
+  width: 120px;
+  padding: 10px 20px;
+}
+
+nav {
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+nav a {
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  letter-spacing: 0.025em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: black;
+  margin: 10px;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+nav li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 50px;
+}
+
+.rectangle-one {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #7304ff;
+  border-radius: 37px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: left;
+  background-color: white;
+}
+
+nav input {
+  outline: none;
+  width: 350px;
+}
+
+.searchBtn {
+  background-color: white;
+  cursor: pointer;
+}
+
+.iconsButton {
+  padding-right: 20px;
+  padding-top: 18px;
 }
 /*# sourceMappingURL=index.css.map */
