@@ -1,6 +1,6 @@
 #  No CAAP Movie Database :clapper:
 
-To develop a 
+To develop a movie rating platform accessing the API from [TMDb](https://www.themoviedb.org/). 
 
 ## Motivation 
 This is a student project that is a part of the 3 month web development course organised by [Inco Academy](https://www.inco.org.au/incode)
@@ -48,6 +48,11 @@ npm run seed-tables
 <a href="https://github.com/patk">
   <img src="https://github.com/patk.png" alt="Pat" width="100"/>
 </a>
+
+## Credits
+All film-related metadata used in No CAAP, including actor, director and studio names, synopses, release dates, trailers and poster art is supplied by The Movie Database [TMDb](https://www.themoviedb.org/)
+
+No CAAP uses the TMDb API but is not endorsed or certified by TMDb.
 
 ## Licence 
 ![](https://img.shields.io/badge/cocoapods/l/:spec)
