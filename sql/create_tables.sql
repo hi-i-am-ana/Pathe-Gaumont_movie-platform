@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS ratings (
     user_id INT NOT NULL,
     rating_value INT NOT NULL CHECK (rating_value BETWEEN 0 AND 5),
     create_at TIMESTAMPTZ,
-    update_at TIMESTAMPTZ
+    update_at TIMESTAMPTZ,
 
     FOREIGN KEY(user_id)
       REFERENCES users(user_id)
