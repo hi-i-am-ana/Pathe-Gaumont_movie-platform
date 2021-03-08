@@ -8,7 +8,7 @@ This is a student project that is a part of the 3 month web development course o
 ## Demo 
 ![Demo]
 
-## Frameworks used:
+## Technologies/Frameworks used:
 
 - HTML, CSS, JavaScript, JQuery
 - Node, Handlebars
