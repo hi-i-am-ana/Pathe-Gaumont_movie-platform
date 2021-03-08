@@ -1,4 +1,4 @@
-![contributor shield](https://img.shields.io/badge/Contributors-2-%23c24d89?style=for-the-badge)![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![contributor shield](https://img.shields.io/badge/Contributors-4-%23c24d89?style=for-the-badge)![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 # <img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/df339a2d657f42ec9e6dc6df0ac2ccb8f2cf80c7/public/assets/2.png" alt="No CAAP logo" width="50"/>Movie Database :clapper:
 
