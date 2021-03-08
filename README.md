@@ -1,7 +1,7 @@
 #  No CAAP Movie Database :clapper:
 
 To develop a fictitious movie rating platform for Pathé Gaumont cinemas, by accessing the API from [TMDb](https://www.themoviedb.org/). 
-The website is accessible for both registered and unregistered visiors, however the ratings are only accessible for registered users. Registered users is to rate their favourite movies (between 0 and 5), thus creating our own community score. 
+The website is accessible for both registered and unregistered visiors, however the ratings are only accessible for registered users. Registered users is to rate their favourite movies (between 0 and 5), thus creating Pathé Gaumont cinemas' own community score. 
 
 ## Motivation 
 This is a student project that is a part of the 3 month web development course organised by [Inco Academy](https://www.inco.org.au/incode)
