@@ -1,4 +1,6 @@
-# <img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/df339a2d657f42ec9e6dc6df0ac2ccb8f2cf80c7/public/assets/2.png" alt="No CAAP logo" width="200"/> No CAAP Movie Database :clapper:
+<img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/df339a2d657f42ec9e6dc6df0ac2ccb8f2cf80c7/public/assets/2.png" alt="No CAAP logo" width="100"/>
+
+# No CAAP Movie Database :clapper:
 
 To develop a fictitious movie rating platform for Pathé Gaumont cinemas, by accessing the API from [TMDb](https://www.themoviedb.org/). 
 The website is accessible for both registered and unregistered visiors, however the ratings are only accessible for registered users. Registered users is to rate their favourite movies (between 0 and 5), thus creating Pathé Gaumont cinemas' own community score. 
