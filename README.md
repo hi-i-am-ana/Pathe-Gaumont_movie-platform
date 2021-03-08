@@ -53,6 +53,8 @@ npm run seed-tables
 ## Credits
 All film-related metadata used in No CAAP, including actor, director and studio names, synopses, release dates, trailers and poster art is supplied by The Movie Database [TMDb](https://www.themoviedb.org/)
 
+<img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/97c96767bb47369f5b196a9cc99515b8cf4fac0b/public/assets/TMDb.svg" alt="TMBd logo" width="200"/>
+
 No CAAP uses the TMDb API but is not endorsed or certified by TMDb.
 
 ## Licence 
