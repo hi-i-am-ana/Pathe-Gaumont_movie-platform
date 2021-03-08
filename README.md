@@ -68,7 +68,7 @@ All film-related metadata used in No CAAP, including actor, director and studio 
 No CAAP uses the TMDb API but is not endorsed or certified by TMDb.
 
 ## Licence 
-![](https://img.shields.io/badge/cocoapods/l/:spec)
+![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ## Acknowledgements
 
