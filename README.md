@@ -14,23 +14,6 @@ This is a student project that is a part of the 3 month web development course o
 - Node, Handlebars
 - PostgreSQL
 
-## Contributors 
-<a href="https://github.com/AmeliaLim">
-  <img src="https://github.com/AmeliaLim.png" alt="Amelia Lim" width="100"/>
-</a>
-
-<a href="https://github.com/hi-i-am-ana">
-  <img src="https://github.com/hi-i-am-ana.png" alt="Anastasia Chen" width="100"/>
-</a>
-
-<a href="https://github.com/cattrn">
-  <img src="https://github.com/cattrn.png" alt="Cat Turnbull" width="100"/>
-</a>
-
-<a href="https://github.com/patk">
-  <img src="https://github.com/patk.png" alt="Pat" width="100"/>
-</a>
-
 ## Getting Started
 
 1. Edit your .env file to suit your own Postgres settings, making sure to change your username, password, and port if need be.
@@ -49,6 +32,22 @@ npm run create-tables
 npm run seed-tables
 ```
 
+## Contributors 
+<a href="https://github.com/AmeliaLim">
+  <img src="https://github.com/AmeliaLim.png" alt="Amelia Lim" width="100"/>
+</a>
+
+<a href="https://github.com/hi-i-am-ana">
+  <img src="https://github.com/hi-i-am-ana.png" alt="Anastasia Chen" width="100"/>
+</a>
+
+<a href="https://github.com/cattrn">
+  <img src="https://github.com/cattrn.png" alt="Cat Turnbull" width="100"/>
+</a>
+
+<a href="https://github.com/patk">
+  <img src="https://github.com/patk.png" alt="Pat" width="100"/>
+</a>
 
 ## Licence 
 ![](https://img.shields.io/badge/cocoapods/l/:spec)
