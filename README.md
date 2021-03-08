@@ -1,10 +1,12 @@
+![contributor shield](https://img.shields.io/badge/Contributors-2-%23c24d89?style=for-the-badge)![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
 # <img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/df339a2d657f42ec9e6dc6df0ac2ccb8f2cf80c7/public/assets/2.png" alt="No CAAP logo" width="50"/>Movie Database :clapper:
 
 To develop a fictitious movie rating platform for Pathé Gaumont cinemas, by accessing the API from [TMDb](https://www.themoviedb.org/). 
 The website is accessible for both registered and unregistered visiors, however the ratings are only accessible for registered users. Registered users is to rate their favourite movies (between 0 and 5), thus creating Pathé Gaumont cinemas' own community score. 
 
 ## Motivation 
-This is a student project that is a part of the 3 month web development course organised by [Inco Academy](https://www.inco.org.au/incode)
+This is a student project only for the purpose of learning, which is a part of the 3 month web development course organised by [Inco Academy](https://www.inco.org.au/incode)
 
 ## Demo 
 ![Demo]
@@ -14,6 +16,14 @@ This is a student project that is a part of the 3 month web development course o
 - HTML, CSS, JavaScript, JQuery
 - Node, Handlebars
 - PostgreSQL
+
+## Installation
+
+Download or clone the repo and run the following in the same folder.
+
+```zsh
+npm install
+```
 
 ## Getting Started
 
@@ -59,3 +69,8 @@ No CAAP uses the TMDb API but is not endorsed or certified by TMDb.
 
 ## Licence 
 ![](https://img.shields.io/badge/cocoapods/l/:spec)
+
+## Acknowledgements
+
+- Harry Aydin
+- INCO Academy
