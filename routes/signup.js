@@ -13,49 +13,53 @@ router.post('/', redirectHome, (req, res) => {
     const confirmPassword = req.body['confirm-password']
 
     // validate
-    const fnValid = /^([A-Za-zÀ-ÖØ-öø-ÿ])+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ?]?)+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ?]?)+$/.test(firstname)
-    const lnValid = /^([A-Za-zÀ-ÖØ-öø-ÿ])+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ?]?)+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ?]?)+$/.test(lastname)
+    const fnValid = /^([A-Za-zÀ-ÖØ-öø-ÿ'])+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ'?]?)+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ'?]?)+$/.test(firstname)
+    const lnValid = /^([A-Za-zÀ-ÖØ-öø-ÿ'])+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ'?]?)+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ'?]?)+$/.test(lastname)
     const eValid = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(email)
     const pValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/.test(password)
 
     let newUser = {}
+    let message = 'There was an error signing up.'
     
 
-    db.any('SELECT * FROM users;')
-    .then((users) => {
-        if (fnValid && lnValid && eValid && pValid) {
-            if (password === confirmPassword) {
-                const exists = users.some(user => user.email === email.toLowerCase())
-                if (!exists) {
-                    bcrypt.hash(password, 10, function(err, hash) {
-                        newUser = {
-                            firstname: firstname,
-                            lastname: lastname,
-                            email: email.toLowerCase(),
-                            password: hash
-                        }
-                        db.none('INSERT INTO users(firstname, surname, email, password) VALUES ($1, $2, $3, $4);', [newUser.firstname, newUser.surname, newUser.email, newUser.password])
-                        .then (() => {
-                            // TODO: choose action after signup
-                            return res.redirect('/login?message=Signup%20successful.')
-                        })
-                        .catch((err) => {
-                            return res.render('pages/error', {
-                                err: err
-                            })
-                        })
-                    })
-                } else {
-                    // TODO: choose redirect url
-                    res.redirect('/signup?message=User%20already%20exists.')
-                }
-            } else {
-                // TODO: choose redirect url
-                res.redirect('/signup?message=Passwords%20do%20not%20match.')
-            }
+    db.oneOrNone('SELECT * FROM users WHERE email = $1', [email])
+    .then((user) => {
+        let valid = true
+        
+        if (fnValid && lnValid && eValid && pValid === false) {
+            message = 'Inputs are invalid.'
+            valid = false
+        } else if (password !== confirmPassword) {
+            message = 'Passwords do not match.'
+            valid = false
+        } else if (user.length === 1) {
+            message = 'User already exists.'
+            valid = false
+        }
+
+        if (!valid) {
+            res.redirect(`/signup?message=${message}`)
         } else {
-            // TODO: choose redirect url
-            res.redirect('/signup?message=Form%20is%20not%20valid.')
+            bcrypt.hash(password, 10, function(err, hash) {
+                newUser = {
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email.toLowerCase(),
+                    password: hash
+                }
+                // TODO: email confirmation
+                // TODO: confirm database fields
+                db.none('INSERT INTO users(firstname, lastname, email, password) VALUES ($1, $2, $3, $4);', [newUser.firstname, newUser.lastname, newUser.email, newUser.password])
+                .then (() => {
+                    // TODO: choose action after signup
+                    return res.redirect('/login?message=Signup%20successful.')
+                })
+                .catch((err) => {
+                    return res.render('pages/error', {
+                        err: err
+                    })
+                })
+            })
         }
     })
     .catch((err) => {
