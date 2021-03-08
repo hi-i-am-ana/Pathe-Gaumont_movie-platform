@@ -3,7 +3,7 @@
 To develop a 
 
 ## Motivation 
-This is a student project that is a part of the 3 month web development course organised by [Incode Academy](https://www.inco.org.au/incode)
+This is a student project that is a part of the 3 month web development course organised by [Inco Academy](https://www.inco.org.au/incode)
 
 ## Demo 
 ![Demo]
