@@ -7,7 +7,6 @@ const db = require('../db/database.js');
 // post new user
 //TODO: confirm redirect middleware name
 router.post('/', (req, res) => {
-
     const firstname = req.body['first-name']
     const lastname = req.body['last-name']
     const email = req.body['signup-email']
@@ -27,34 +26,26 @@ router.post('/', (req, res) => {
     db.oneOrNone('SELECT * FROM users WHERE email = $1', [email])
     .then((user) => {
         let valid = true
-        console.log('first db query fired')
-        console.log(password)
-        console.log(confirmPassword)
         
         if (fnValid && lnValid && eValid && pValid === false) {
             message = 'Inputs are invalid.'
             valid = false
-            console.log('invalid')
         } else if (password !== confirmPassword) {
             message = 'Passwords do not match.'
             valid = false
-            console.log('password dont match')
-            // HERE
         } else if (user !== null) {
             message = 'User already exists.'
             valid = false
-            console.log('user already exists')
         }
 
         if (!valid) {
+            // TODO: add conditional to home and details page that immediately shows the modal if there is a message query in the URL
             // res.redirect(`/signup?message=${message}`)
             return res.render('pages/error', {
                 err: message
             })
         } else {
-            console.log('everything valid')
             bcrypt.hash(password, 10, function(err, hash) {
-                console.log('password encrypted')
                 newUser = {
                     firstname: firstname,
                     lastname: lastname,
@@ -62,11 +53,9 @@ router.post('/', (req, res) => {
                     password: hash
                 }
                 // TODO: email confirmation
-                // TODO: confirm database fields
                 db.none('INSERT INTO users(firstname, lastname, email, password, is_active) VALUES ($1, $2, $3, $4, false);', [newUser.firstname, newUser.lastname, newUser.email, newUser.password])
                 .then (() => {
-                    console.log('second db query fired')
-                    // TODO: choose action after signup
+                    // TODO: add conditional to home and details page that immediately shows the modal if there is a message query in the URL
                     // return res.redirect('/?message=Sign%20up%20successful.')
                     return res.redirect('/')
                 })
