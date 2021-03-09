@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="icon" href="/static/assets/favicon.ico?v=1.2" />
+    {{!-- TODO: The v=1.2 query forces the favicon to update if previously cached. Can be removed. --}}
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
+    <script
+      src="https://kit.fontawesome.com/019cb3d00c.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/lottie-player.js"></script>
+    <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
+    <script src="https://cdn.plyr.io/3.6.4/plyr.polyfilled.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+    <script src="/static/js/modal.js"></script>
+    {{#if title}}
+    <title>{{title}}</title>
+    {{else}}
+    <title>No CAAP</title>
+    {{/if}}
+</head>
+<body>
+    {{>login-signup }}
+    {{>nav }}
+    <div>
+      {{{body}}}
+    </div>
+    {{>footer }}
+</body>
+</html>

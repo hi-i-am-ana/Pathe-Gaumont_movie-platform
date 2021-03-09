@@ -1,0 +1,56 @@
+    <header>
+      <nav>
+        <div>
+          <ul>
+            <li>
+              <img src="/static/assets/Logo.png" class="logo" alt="No CAAP Logo" />
+            </li>
+            <li>
+              <form class="rectangle-one" action="" method="">
+                <input type="text" placeholder="Search" name="" />
+                <span
+                  ><button type="submit" class="searchBtn">
+                    <i class="fas fa-search"></i></button
+                ></span>
+              </form>
+            </li>
+          </ul>
+        </div>
+
+        <div class="iconsButton">
+          <ul>
+            {{#if currentUser}}
+            <li>
+              <a href="#">
+                <i class="far fa-circle"></i>
+                <span>Profile</span>
+              </a>
+            </li>
+            {{/if}}
+            <li>
+              <a href="/">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            {{#if currentUser}}
+            <li>
+              {{!-- <form method="post" action="/logout"> --}}
+                <a href="/logout">
+                  <i class="fas fa-door-closed"></i>
+                  <span>Logout</span>
+                </a>
+              {{!-- </form> --}}
+            </li>
+            {{else}}
+            <li>
+              <a id="open-modal">
+                <i class="fas fa-door-open"></i>
+                <span>Login</span>
+              </a>
+            </li>
+            {{/if}}
+          </ul>
+        </div>
+      </nav>
+    </header>

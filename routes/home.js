@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const db = require('../db/database.js');
 const { api_key } = require('../config');
 
 router.get('',(req, res) => {
   res.render('pages/home', {
+    currentUser: req.session.userId,
     title: 'Home | No CAAP',
     api_key: api_key
   });
-
 });
 
 // TODO: Add regex or change path, but first research fetch API and axios
