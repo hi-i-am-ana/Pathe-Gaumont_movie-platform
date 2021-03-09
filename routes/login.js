@@ -6,37 +6,47 @@ const db = require('../db/database.js');
 
 // post route for login form
 // TODO: confirm middelware name
-router.post('/', redirectHome, (req, res) => {
+router.post('/', (req, res) => {
     // TODO: confirm form names
-    const email = req.body.email.toLowerCase()
-    const password = req.body.password
+    const email = req.body['login-email'].toLowerCase()
+    const password = req.body['login-password']
 
     if (email && password) {
-        // TODO: confirm database fields
-        db.any('SELECT user_id, lower(email), password FROM users WHERE email = $1', [email])
+        db.oneOrNone('SELECT user_id, lower(email), password, is_active FROM users WHERE email = $1 AND is_active = true', [email])
         .then((user) => {
-            if (user.length === 1) {
-                bcrypt.compare(password, user[0].password, function(err, result) {
+            if (user !== null) {
+                bcrypt.compare(password, user.password, function(err, result) {
                     if (result) {
                         // create user id session data for logged in user
-                        req.session.userId = user[0].id
+                        req.session.userId = user['user_id']
                         return res.redirect('/')
                     } else {
-                        return res.redirect('/login?message=Incorrect%20email%20or%20password.')
+                        // TODO: add conditional to home and details page that immediately shows the modal if there is a message query in the URL
+                        // return res.redirect('/?message=Incorrect%20email%20or%20password.')
+                        return res.render('pages/error', {
+                            err: {message: 'Incorrect email or password'}
+                        })
                     }
                 })
             } else {
-                return res.redirect('/login?message=Incorrect%20email%20or%20password.')
+                // TODO: add conditional to home and details page that immediately shows the modal if there is a message query in the URL
+                // return res.redirect('/?message=Incorrect%20email%20or%20password.')
+                return res.render('pages/error', {
+                    err: {message: 'Incorrect email or password'}
+                })
             }
         })
         .catch((err) => {
             return res.render('pages/error', {
-                layout: './layouts/login-layout',
                 err: err
             })
         })      
     } else {
-        res.redirect('/login?message=Please%20insert%20both%20email%20and%20password.')
+        // TODO: add conditional to home and details page that immediately shows the modal if there is a message query in the URL
+        // res.redirect('/?message=Please%20insert%20both%20email%20and%20password.')
+        return res.render('pages/error', {
+            err: {message: 'Insert both email and password'}
+        })
     }
 })
 
