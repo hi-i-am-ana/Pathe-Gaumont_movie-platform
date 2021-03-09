@@ -1,0 +1,96 @@
+<div class="overlay">
+    <div class="modal">
+        <i class="fas fa-times-circle" id="close-modal"></i>
+        <div class="flex">
+            <div>
+                <img src="#" alt="">
+                <img src="#" alt="">
+            </div>
+
+            <div class="login">
+                <h3 class="center">Login</h3>
+                <p class="alert">{{message}}</p>
+                <form method="POST" action="/login">
+                    <div>
+                        <label for="login-email">Email</label>
+                        <input id="login-email" name="login-email" type="text" />
+                        <small class="alert hidden">Invalid input</small>
+                    </div>
+                    <div>
+                        <label for="login-password">Password</label>
+                        <input id="login-password" class="password" name="login-password" type="password" />
+                        <i class="fas fa-eye password-toggle"></i>
+                        {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
+                        <small class="alert hidden">Invalid input</small>
+                    </div>
+                    {{!-- TODO: toggleForgottenPassword function --}}
+                    <p>Forget <a id="forgotten-password" >Password</a>?
+                    <button class="center" type="submit">Login</button>
+                </form>
+                <p class="center">
+                    Don't have an account yet?
+                    {{!-- TODO: toggleSignUp function --}}
+                    <a class="uppercase" id="toggle-signup">Sign Up</a>
+                </p>
+            </div>
+
+            <div class="signup hidden">
+                <h3 class="center">Sign up</h3>
+                <p class="alert">{{message}}</p>
+                <form method="POST" action="/signup">
+                    <div class="flex">
+                        <div>
+                            <label for="first-name">First Name</label>
+                            <input id="first-name" name="first-name" type="text" />
+                            <small class="alert hidden">Invalid input</small>
+                        </div>
+                        <div>
+                            <label for="last-name">Last Name</label>
+                            <input id="last-name" name="last-name" type="text" />
+                            <small class="alert hidden">Invalid input</small>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="signup-email">Email</label>
+                        <input id="signup-email" name="signup-email" type="text" />
+                        <small class="alert hidden">Invalid input</small>
+                    </div>
+                    <div>
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" class="password" name="signup-password" type="password" />
+                        <i class="fas fa-eye password-toggle"></i>
+                        {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
+                        <small class="alert hidden">Invalid input</small>
+                    </div>
+                    <div>
+                        <label for="confirm-password">Confirm Password</label>
+                        <input id="confirm-password" class="password" name="confirm-password" type="password" />
+                        <i class="fas fa-eye password-toggle"></i>
+                        {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
+                        <small class="alert hidden">Invalid input</small>
+                    </div>
+                    <button class="center" type="submit">Login</button>
+                </form>
+                <p class="center">
+                    Already have an account?
+                    <a class="uppercase toggle-login">Log In</a>
+                </p>
+            </div>
+
+            <div class="forgotten-password hidden">
+                <h3 class="center">Forgotten Password</h3>
+                <p class="alert">{{message}}</p>
+                <form method="POST" action="/forgotten-password">
+                    <div>
+                        <label for="forgot-pass-email">Email</label>
+                        <input id="forgot-pass-email" name="forgot-pass-email" type="text" />
+                        <small class="alert hidden">Invalid input</small>
+                    </div>
+                    <button class="center" type="submit">Send</button>
+                </form>
+                <p class="center">
+                    <a class="uppercase toggle-login">Log In</a>
+                </p>
+            </div>
+        </div>
+    </div>
