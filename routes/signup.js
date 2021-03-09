@@ -6,7 +6,7 @@ const db = require('../db/database.js');
 
 // post new user
 //TODO: confirm redirect middleware name
-router.post('/', redirectHome, (req, res) => {
+router.post('/', (req, res) => {
 
     const {firstname, lastname, email, password} = req.body
     // TODO: confirm "confirm password" field name
@@ -25,22 +25,32 @@ router.post('/', redirectHome, (req, res) => {
     db.oneOrNone('SELECT * FROM users WHERE email = $1', [email])
     .then((user) => {
         let valid = true
+        console.log('first db query fired')
         
         if (fnValid && lnValid && eValid && pValid === false) {
             message = 'Inputs are invalid.'
             valid = false
+            console.log('invalid')
         } else if (password !== confirmPassword) {
             message = 'Passwords do not match.'
             valid = false
+            console.log('password dont match')
+            // HERE
         } else if (user.length === 1) {
             message = 'User already exists.'
             valid = false
+            console.log('user already exists')
         }
 
         if (!valid) {
-            res.redirect(`/signup?message=${message}`)
+            // res.redirect(`/signup?message=${message}`)
+            return res.render('pages/error', {
+                err: message
+            })
         } else {
+            console.log('everything valid')
             bcrypt.hash(password, 10, function(err, hash) {
+                console.log('password encrypted')
                 newUser = {
                     firstname: firstname,
                     lastname: lastname,
@@ -51,8 +61,10 @@ router.post('/', redirectHome, (req, res) => {
                 // TODO: confirm database fields
                 db.none('INSERT INTO users(firstname, lastname, email, password) VALUES ($1, $2, $3, $4);', [newUser.firstname, newUser.lastname, newUser.email, newUser.password])
                 .then (() => {
+                    console.log('second db query fired')
                     // TODO: choose action after signup
-                    return res.redirect('/login?message=Signup%20successful.')
+                    // return res.redirect('/?message=Sign%20up%20successful.')
+                    return res.redirect('/')
                 })
                 .catch((err) => {
                     return res.render('pages/error', {
