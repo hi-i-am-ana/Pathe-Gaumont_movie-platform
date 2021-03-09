@@ -4,7 +4,10 @@ const db = require("../db/database.js");
 
 
 router.get('/', (req, res) => {
-    res.render('pages/home')
+    res.render('pages/home', {
+        currentUser: req.session.userId,
+        title: 'Home | No CAAP'
+    })
 })
 
 module.exports = router;

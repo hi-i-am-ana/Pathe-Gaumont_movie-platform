@@ -19,24 +19,37 @@
 
         <div class="iconsButton">
           <ul>
+            {{#if currentUser}}
             <li>
-                <a href="#">
-                    <i class="far fa-circle"></i>
-                    <span>Profile</span>
-                </a>
+              <a href="#">
+                <i class="far fa-circle"></i>
+                <span>Profile</span>
+              </a>
             </li>
+            {{/if}}
             <li>
-                <a href="#">
-                    <i class="fas fa-home"></i>
-                    <span>Home</span>
-                </a>
+              <a href="/">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
             </li>
-            <form method="post" action="/logout">
-                <a id="open-modal" href="#">
-                    <i class="fas fa-door-open"></i>
-                    <span>Login</span>
+            {{#if currentUser}}
+            <li>
+              {{!-- <form method="post" action="/logout"> --}}
+                <a href="/logout">
+                  <i class="fas fa-door-closed"></i>
+                  <span>Logout</span>
                 </a>
-            </form>
+              {{!-- </form> --}}
+            </li>
+            {{else}}
+            <li>
+              <a id="open-modal">
+                <i class="fas fa-door-open"></i>
+                <span>Login</span>
+              </a>
+            </li>
+            {{/if}}
           </ul>
         </div>
       </nav>
