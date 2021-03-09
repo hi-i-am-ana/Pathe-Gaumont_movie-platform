@@ -1,30 +1,31 @@
-<section>
-    <div class="main-wrapper">
-    </div>
+<link rel="stylesheet" href="/static/css/home.css">
 
-    <div class="secondary-wrapper">
-        <div class="movie-cards">
-    
-        </div>
-        <div class="movie-cards">
+{{!-- This will be in navbar --}}
+<input type="search" id="search" name="search" autocomplete="off" placeholder="Search for a movie">
+<button class="search-button" type="button">Find</button>
+<div class="search-dropdown">
+  {{!-- Search dropdown will go here --}}
+</div>
 
-        </div> 
-        <div class="movie-cards">
-
-        </div>
-    </div>
-
-     <div class="secondary-wrapper">
-        <div class="movie-cards">
-    
-        </div>
-        <div class="movie-cards">
-
-        </div> 
-        <div class="movie-cards">
-
-        </div>
-    </div>
-
-
+<section class="hero-section">
+  {{!-- src (link to video of random "now-playing" movie) will be added by script --}}
+  <iframe class="hero-video" width="853" height="480" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </section>
+
+<section class="movies-section">
+  {{!-- This title will be added by script --}}
+  <h2 class="movies-section-header"></h2>
+  <div class="movies-container">
+    <div class="filters-container">
+      <h3>Filter by genre</h3>
+      <button class="clear-filters" type="button">Clear all</button>
+      {{!-- Filters will appear here --}}
+    </div>
+    <div class="movies">
+      {{!-- 20 most popular movies will be loaded into this space --}}
+    </div>
+  </div>
+</section>
+
+<script src="/static/js/home.js" defer></script>
+<script>const api_key = "{{api_key}}"</script>

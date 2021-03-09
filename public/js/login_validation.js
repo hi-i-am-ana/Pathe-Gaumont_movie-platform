@@ -2,6 +2,7 @@
 // const emailOne = document.getElementById("inputEmail");
 // const passwordOne = document.getElementById("inputPassword");
 
+
 loginForm.addEventListener("submit", e => {
 
   if (!checkLoginInput())

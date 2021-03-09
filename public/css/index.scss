@@ -9,8 +9,8 @@
 $primary-color: #fffff4;
 $black: black;
 $white: white;
-$accent-border: linear-gradient(180deg, #440BD4 0%, #FFC0CB 100%);
-
+$accent-border: linear-gradient(180deg, #440bd4 0%, #ffc0cb 100%);
+$purple: #7304ff;
 
 html,
 body {
@@ -36,14 +36,13 @@ footer {
   padding: 20px;
   background-color: $white;
   flex-shrink: 0;
+    img {
+        width: 80px;
+        padding: 10px;
+    }
 }
 
 /* Navigation Bar */
-.logo {
-  width: 80px;
-  padding: 10px;
-}
-
 nav {
   width: 100vw;
   display: flex;
@@ -70,23 +69,26 @@ nav {
     min-width: 20px;
   }
   input {
-      outline: none; 
-      width: 350px;
+    outline: none;
+    width: 350px;
+  }
+  img { 
+    width: 80px;
+    padding: 10px;
   }
 }
 
 .rectangle-one {
-  width: 100%;
   padding: 10px;
-  border: 2px solid #7304ff;
+  border: 2px solid $purple;
   border-radius: 37px;
   display: flex;
   text-align: left;
-  background-color: white;
+  background-color: $white;
 }
 
 .searchBtn {
-  background-color: white;
+  background-color: $white;
   cursor: pointer;
 }
 
@@ -104,7 +106,7 @@ nav {
 /* HOMEPAGE */
 .main-wrapper {
   width: 100vw;
-  background-color: black;
+  background-color: $black;
   padding: 20%;
   flex: 1 0 auto;
   margin-top: auto;
@@ -129,9 +131,9 @@ div#blur.active {
 
 .modal {
   z-index: 1;
-  min-width: 70%;
+  //min-width: 50%;
   position: fixed;
-  top: 50%;
+  top: 86%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 30px;
@@ -183,6 +185,8 @@ div#blur.active {
 
 .form-control input {
   display: block;
+
+
 }
 
 .form-control input:focus {
