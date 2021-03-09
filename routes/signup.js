@@ -8,8 +8,10 @@ const db = require('../db/database.js');
 //TODO: confirm redirect middleware name
 router.post('/', (req, res) => {
 
-    const {firstname, lastname, email, password} = req.body
-    // TODO: confirm "confirm password" field name
+    const firstname = req.body['first-name']
+    const lastname = req.body['last-name']
+    const email = req.body['signup-email']
+    const password = req.body['signup-password']
     const confirmPassword = req.body['confirm-password']
 
     // validate
@@ -26,6 +28,8 @@ router.post('/', (req, res) => {
     .then((user) => {
         let valid = true
         console.log('first db query fired')
+        console.log(password)
+        console.log(confirmPassword)
         
         if (fnValid && lnValid && eValid && pValid === false) {
             message = 'Inputs are invalid.'
@@ -36,7 +40,7 @@ router.post('/', (req, res) => {
             valid = false
             console.log('password dont match')
             // HERE
-        } else if (user.length === 1) {
+        } else if (user !== null) {
             message = 'User already exists.'
             valid = false
             console.log('user already exists')
@@ -59,7 +63,7 @@ router.post('/', (req, res) => {
                 }
                 // TODO: email confirmation
                 // TODO: confirm database fields
-                db.none('INSERT INTO users(firstname, lastname, email, password) VALUES ($1, $2, $3, $4);', [newUser.firstname, newUser.lastname, newUser.email, newUser.password])
+                db.none('INSERT INTO users(firstname, lastname, email, password, is_active) VALUES ($1, $2, $3, $4, false);', [newUser.firstname, newUser.lastname, newUser.email, newUser.password])
                 .then (() => {
                     console.log('second db query fired')
                     // TODO: choose action after signup
