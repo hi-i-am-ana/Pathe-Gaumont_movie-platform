@@ -5,9 +5,16 @@
   scroll-behavior: smooth;
   font-family: "fairplay display";
 }
+
+$primary-color: #fffff4;
+$black: black;
+$white: white;
+$accent-border: linear-gradient(180deg, #440BD4 0%, #FFC0CB 100%);
+
+
 html,
 body {
-  background-color: #fffff4;
+  background-color: $primary-color;
   height: 100%;
 }
 
@@ -16,7 +23,7 @@ body {
   flex-direction: column;
 }
 
-h3 { 
+h3 {
   text-align: center;
 }
 
@@ -27,7 +34,7 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  background-color: white;
+  background-color: $white;
   flex-shrink: 0;
 }
 
@@ -42,29 +49,30 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 5px;
-}
-
-nav a {
-  text-decoration: none;
-  font-size: 18px;
-  letter-spacing: 0.025em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: black;
-  margin: 10px;
-}
-
-nav ul {
-  display: flex;
-  list-style-type: none;
-  padding: 0;
-}
-
-nav li {
-  display: flex;
-  align-items: center;
-  min-width: 20px;
+  a {
+    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: 0.025em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $black;
+    margin: 10px;
+  }
+  ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    min-width: 20px;
+  }
+  input {
+      outline: none; 
+      width: 350px;
+  }
 }
 
 .rectangle-one {
@@ -75,11 +83,6 @@ nav li {
   display: flex;
   text-align: left;
   background-color: white;
-}
-
-nav input {
-  outline: none;
-  width: 350px;
 }
 
 .searchBtn {
@@ -171,7 +174,7 @@ div#blur.active {
   width: 100px;
   height: 40px;
   color: white;
-  background: linear-gradient(180deg, #440BD4 0%, #FFC0CB 100%);
+  background: linear-gradient(180deg, #440bd4 0%, #ffc0cb 100%);
   box-sizing: border-box;
   border-radius: 37px;
   outline: none;
