@@ -22,12 +22,15 @@
 </head>
 
 <body>
+
     {{>login-signup }}
-    {{>nav }}
-    <div>
-        {{{body}}}
+    <div id="blur">
+        {{>nav }}
+        <div>
+            {{{body}}}
+        </div>
+        {{>footer }}
     </div>
-    {{>footer }}
 </body>
 
 </html>

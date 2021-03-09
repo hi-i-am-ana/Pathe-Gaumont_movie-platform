@@ -4,12 +4,23 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   scroll-behavior: smooth;
-  font-family: 'fairplay display';
+  font-family: "fairplay display";
 }
 
-html body {
+html,
+body {
   background-color: #fffff4;
   height: 100%;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 /* FOOTER */
@@ -19,14 +30,13 @@ footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  text-align: center;
-}
-
-footer div {
-  width: 10%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px;
+  background-color: white;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 
 /* Navigation Bar */
@@ -109,23 +119,30 @@ nav input {
   padding-top: 10px;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-}
-
 /* HOMEPAGE */
 .main-wrapper {
   width: 100vw;
   background-color: black;
-  padding: 15%;
+  padding: 20%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  margin-top: auto;
+}
+
+.secondary-wrapper {
+  width: 80%;
+  height: 200px;
+}
+
+.movie-cards {
+  width: 33.33%;
 }
 
 /* POP UP WINDOW*/
-.container#blur.active {
-  -webkit-filter: blur(20px);
-          filter: blur(20px);
+div#blur.active {
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
   pointer-events: none;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -133,27 +150,116 @@ nav input {
           user-select: none;
 }
 
-#popup {
+.modal {
+  z-index: 1;
+  min-width: 70%;
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 600px;
-  padding: 50px;
+  padding: 30px;
+  background: #fffff4;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
   -webkit-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
           box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-  background: #fff;
-  visibility: hidden;
-  opacity: 0;
+}
+
+.modal.active {
+  visibility: visible;
+  opacity: 1;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-#popup.active {
+#close-modal {
+  font-size: 1em;
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.rectangle-two {
+  width: 350px;
+  height: 45px;
+  margin: 5px 0;
+  border: 2px solid #7304ff;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 37px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+
+.btn {
+  width: 100px;
+  height: 40px;
+  color: white;
+  background: -webkit-gradient(linear, left top, left bottom, from(#440BD4), to(#FFC0CB));
+  background: linear-gradient(180deg, #440BD4 0%, #FFC0CB 100%);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 37px;
+  outline: none;
+  margin-right: 50px;
+}
+
+.form-control input {
+  display: block;
+}
+
+.form-control input:focus {
+  outline: 0;
+  border-color: #6a7b8b;
+}
+
+.form-control.success input {
+  border-color: #2ecc71;
+}
+
+.form-control.error input {
+  border-color: #e74c3c;
+}
+
+.form-control.success i.fa-check-circle {
+  color: #2ecc71;
+  visibility: visible;
+}
+
+.form-control.error i.fa-exclamation-circle {
+  color: #e74c3c;
+  visibility: visible;
+}
+
+.form-control.error small {
+  visibility: visible;
+}
+
+.form-control small {
+  color: #e74c3c;
+  position: absolute;
   visibility: hidden;
-  opacity: 1;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  left: 10px;
+  top: 47px;
+  font-size: 10px;
+}
+
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 /*# sourceMappingURL=index.css.map */
