@@ -1,6 +1,6 @@
-<div class="modal overlay hidden">
-    <div class="login-signup">
-        <i class="fas fa-times-circle" onclick="closeModal()"></i>
+<div class="overlay">
+    <div class="modal">
+        <i class="fas fa-times-circle" id="close-modal"></i>
         <div class="flex">
             <div>
                 <img src="#" alt="">
@@ -19,18 +19,18 @@
                     <div>
                         <label for="login-password">Password</label>
                         <input id="login-password" class="password" name="login-password" type="password" />
-                        <i class="fas fa-eye" onclick="passwordToggle()"></i>
+                        <i class="fas fa-eye password-toggle"></i>
                         {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
                         <small class="alert hidden">Invalid input</small>
                     </div>
                     {{!-- TODO: toggleForgottenPassword function --}}
-                    <p>Forget <a onClick="toggleForgottenPassword()">Password</a>?
+                    <p>Forget <a id="forgotten-password" >Password</a>?
                     <button class="center" type="submit">Login</button>
                 </form>
                 <p class="center">
                     Don't have an account yet?
                     {{!-- TODO: toggleSignUp function --}}
-                    <a class="uppercase" onClick="toggleSignUp()">Sign Up</a>
+                    <a class="uppercase" id="toggle-signup">Sign Up</a>
                 </p>
             </div>
 
@@ -58,14 +58,14 @@
                     <div>
                         <label for="signup-password">Password</label>
                         <input id="signup-password" class="password" name="signup-password" type="password" />
-                        <i class="fas fa-eye" onclick="passwordToggle()"></i>
+                        <i class="fas fa-eye password-toggle"></i>
                         {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
                         <small class="alert hidden">Invalid input</small>
                     </div>
                     <div>
                         <label for="confirm-password">Confirm Password</label>
                         <input id="confirm-password" class="password" name="confirm-password" type="password" />
-                        <i class="fas fa-eye" onclick="passwordToggle()"></i>
+                        <i class="fas fa-eye password-toggle"></i>
                         {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
                         <small class="alert hidden">Invalid input</small>
                     </div>
@@ -73,7 +73,7 @@
                 </form>
                 <p class="center">
                     Already have an account?
-                    <a class="uppercase" onClick="toggleLogIn()">Log In</a>
+                    <a class="uppercase toggle-login">Log In</a>
                 </p>
             </div>
 
@@ -89,7 +89,7 @@
                     <button class="center" type="submit">Send</button>
                 </form>
                 <p class="center">
-                    <a class="uppercase" onClick="toggleLogIn()">Log In</a>
+                    <a class="uppercase toggle-login">Log In</a>
                 </p>
             </div>
         </div>
