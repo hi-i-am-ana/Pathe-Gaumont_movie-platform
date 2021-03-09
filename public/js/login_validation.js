@@ -5,7 +5,7 @@
 loginForm.addEventListener("submit", e => {
 
   if (!checkLoginInput())
-    +e.preventDefault();
+    e.preventDefault();
 
 });
 
