@@ -23,6 +23,10 @@ body {
           flex-direction: column;
 }
 
+h3 {
+  text-align: center;
+}
+
 /* FOOTER */
 footer {
   bottom: 0;
@@ -133,10 +137,6 @@ nav input {
 .secondary-wrapper {
   width: 80%;
   height: 200px;
-}
-
-.movie-cards {
-  width: 33.33%;
 }
 
 /* POP UP WINDOW*/

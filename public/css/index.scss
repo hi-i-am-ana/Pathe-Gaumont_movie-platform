@@ -16,6 +16,10 @@ body {
   flex-direction: column;
 }
 
+h3 { 
+  text-align: center;
+}
+
 /* FOOTER */
 footer {
   bottom: 0;
@@ -108,9 +112,10 @@ nav input {
   height: 200px;
 }
 
-.movie-cards {
-  width: 33.33%;
-}
+//NOT WORKING AT THE MOMENT
+// .movie-cards {
+//   width: 33.33%;
+// }
 
 /* POP UP WINDOW*/
 div#blur.active {
