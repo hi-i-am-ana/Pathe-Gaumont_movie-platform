@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
             // TODO: add conditional to home and details page that immediately shows the modal if there is a message query in the URL
             // res.redirect(`/signup?message=${message}`)
             return res.render('pages/error', {
-                err: message
+                err: {message: message}
             })
         } else {
             bcrypt.hash(password, 10, function(err, hash) {
