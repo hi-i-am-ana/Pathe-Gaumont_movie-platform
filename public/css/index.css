@@ -133,7 +133,7 @@ nav input {
           user-select: none;
 }
 
-.modal {
+#popup {
   position: fixed;
   top: 40%;
   left: 50%;
@@ -150,8 +150,8 @@ nav input {
   transition: 0.5s;
 }
 
-.modal.active {
-  visibility: visible;
+#popup.active {
+  visibility: hidden;
   opacity: 1;
   -webkit-transition: 0.5s;
   transition: 0.5s;
