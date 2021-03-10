@@ -1,18 +1,5 @@
 /* This is just for testing, that's why it's so messy, you can change content of this file */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-color: #fffff4;
-  font-family: 'Playfair Display', serif;
-}
-
 h2 {
   font-size: 3rem;
   margin: 2rem 0 0 2rem;
@@ -22,21 +9,60 @@ h3 {
   margin-bottom: 1rem;
 }
 
+.search-bar {
+  position: relative;
+}
+
 .search-dropdown {
-  position: fixed;
+  position: absolute;
   left: 0;
-  top: 56;
+  top: 45px;
   background-color: #ffff;
-  width: 50%;
+  width: 100%;
   z-index: 1;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  max-height: 85vh;
+  border-radius: 4px;
+  letter-spacing: initial;
+  align-items: initial;
 }
 
-.search-dropdown > a {
+.search-item {
   text-decoration: none;
   color: inherit;
   font-family: inherit;
+  font-size: inherit;
+  margin: initial;
+}
+
+.search-item:hover {
+  background-color: #fffff4;
+}
+
+.search-item-container {
+  display: flex;
+  min-height: 140px;
+  width: 100%;
+  border-bottom: 1px solid #9c84d6;
+}
+
+.search-item-poster {
+  width: calc(92px+1rem);
+  padding: 0.5rem;
+}
+
+.search-item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.search-item-title {
+  font-weight: 900;
+  margin-bottom: 0.5rem;
 }
 
 .hero-section {
@@ -101,7 +127,6 @@ iframe {
   display: flex;
   flex-direction: column;
   border: 0;
-  font-size: 0.9rem;
   width: 40%;
 }
 

@@ -5,6 +5,7 @@
 // TODO: Display hero movie details
 // TODO: Add images to search dropdown - this doesn't look very nice because many movies don't have images
 // TODO: Hide search dropdown on scroll
+// TODO: CSS media queries
 
 // Declare function to display list of movies from received data
 const displayMovies = (data) => {
@@ -105,12 +106,21 @@ $('#search-input').on('input', () => {
       // Fill search dropdown with the list of found movies
       let searchDropdownContent = '';
       $.each(data.results, (i, movie) => {
-        // let posterURL = '';
-        // if (movie.poster_path !== null) {
-        //   posterURL = `https://image.tmdb.org/t/p/w92/${movie.poster_path}`;
-        // };
+        let posterURL = '';
+        if (movie.poster_path !== null) {
+          posterURL = `https://image.tmdb.org/t/p/w92/${movie.poster_path}`;
+        };
+        const releaseYear = movie.release_date.substring(0,4);
         searchDropdownContent += `
-          <a class="search-item" id="search-item-${movie.id}" href="/movie/${movie.id}">${movie.title}</a>
+          <a class="search-item" href="/movie/${movie.id}">
+            <div class="search-item-container" >
+              <img class="search-item-poster" src=${posterURL}>
+              <div class="search-item-details">
+                <div class="search-item-title">${movie.title}</div>
+                <div class="search-item-year">${releaseYear}</div>
+              </div>
+            </div>
+          </a>
         `;
       });
       $('.search-dropdown').html(searchDropdownContent);
@@ -121,7 +131,13 @@ $('#search-input').on('input', () => {
   };
 });
 
+// Clear search dropdown when search input loses focus
 $('#search-input').blur(() => {
+  $('.search-dropdown').html('');
+});
+
+// Clear search dropdown when window is scrolled
+$(window).scroll(() => {
   $('.search-dropdown').html('');
 });
 
@@ -148,8 +164,8 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
   $.each(data.genres, (i, genre) => {
     $(`
       <div class="genre-filter-container">
-      <input class="genre-filter" type="checkbox" id="genre-${genre.id}" name="genre" value="${genre.id}">
-      <label for="genre-${genre.id}">${genre.name}</label>
+        <input class="genre-filter" type="checkbox" id="genre-${genre.id}" name="genre" value="${genre.id}">
+        <label for="genre-${genre.id}">${genre.name}</label>
       </div>  
       `).appendTo('.filters-container');
   });
