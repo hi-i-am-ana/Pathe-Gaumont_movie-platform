@@ -11,7 +11,7 @@ router.get('^/:id([a-z0-9]{60})$', (req, res) => {
             .then (() => {
                 db.none('DELETE FROM email_confirmation WHERE hash = $1', req.params.id)
                 .then (() => {
-                    res.render('pages/email')
+                    res.render('pages/emailconfirmation')
                 })
                 .catch((err) => {
                     res.render('pages/error', {
