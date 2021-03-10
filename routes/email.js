@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const crypto = require("crypto");
 const db = require("../db/database.js");
-const nodemailer = require("nodemailer");
-const nodemailerSendgrid = require("nodemailer-sendgrid");
 
 
 router.get('^/:id([a-z0-9]{60})$', (req, res) => {
