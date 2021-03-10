@@ -1,3 +1,12 @@
+// TODO: .catch() - display errors
+// TODO: Clear all button doesn't work properly - order of API responses
+// TODO: Pagination
+// TODO: Local filters for search results
+// TODO: Display hero movie details
+// TODO: Add images to search dropdown - this doesn't look very nice because many movies don't have images
+// TODO: Hide search dropdown on scroll
+
+// Declare function to display list of movies from received data
 const displayMovies = (data) => {
   console.log(data);
   let moviesContent = '';
@@ -7,6 +16,7 @@ const displayMovies = (data) => {
     $.each(data.results, (i, movie) => {
       let posterUrl = '';
       if (movie.poster_path === null) {
+        // TODO: Change placeholder image
         posterUrl = 'https://loremflickr.com/185/278';
       } else {
         posterUrl = `https://image.tmdb.org/t/p/w185/${movie.poster_path}`;
@@ -24,6 +34,8 @@ const displayMovies = (data) => {
           </div>
         </div>
       `;
+      // TODO: Try put ID as parameter
+      // TODO: Research fetch API and axios
       $.getJSON(`/${movie.id}`)
       .then(data => {
         if (data.numberOfVotes !== 0) {
@@ -37,6 +49,7 @@ const displayMovies = (data) => {
   $('.movies').html(moviesContent);
 };
 
+// Get now-playing movie for hero
 $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&page=1`)
 .then(data => {
   console.log(data);
@@ -53,6 +66,7 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
     const randomIndex = Math.floor(Math.random() * filteredResults.length);
     const heroVideo = filteredResults[randomIndex];
     console.log(heroVideo);
+    // TODO: Add condition for case of other sites
     let heroVideoURL = '';
     if (heroVideo.site === 'YouTube') {
       heroVideoURL = `https://www.youtube.com/embed/${heroVideo.key}`;
@@ -69,6 +83,7 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
   // display error
 });
 
+// Get list of movies sorted by popularity (desc), then display list
 $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
 .then(data => {
   $('.movies-section-header').text(`What's Populal`);
@@ -78,14 +93,16 @@ $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_b
   // display error
 })
 
-$('#search').on('input', () => {
-  const searchValue = $('#search').val();
+// Perform movie search for every change in search value (everything is sorted by their match relevancy boosted by popularity)
+$('#search-input').on('input', () => {
+  const searchValue = $('#search-input').val();
   if (searchValue === '') {
     $('.search-dropdown').html('');
   } else {
     const encodedSearchValue = encodeURIComponent(searchValue);
     $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
     .then(data => {
+      // Fill search dropdown with the list of found movies
       let searchDropdownContent = '';
       $.each(data.results, (i, movie) => {
         // let posterURL = '';
@@ -104,12 +121,13 @@ $('#search').on('input', () => {
   };
 });
 
-$('#search').blur(() => {
+$('#search-input').blur(() => {
   $('.search-dropdown').html('');
 });
 
-$('.search-button').click(() => {
-  const searchValue = $('#search').val();
+// Perform movie search for final search value, then display list of found movies
+$('.searchBtn').click(() => {
+  const searchValue = $('#search-input').val();
   const encodedSearchValue = encodeURIComponent(searchValue);
   $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
   .then(data => {
@@ -123,6 +141,7 @@ $('.search-button').click(() => {
   });
 });
 
+// Get list of existing genres, then display them as checkboxes
 $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
 .then(data => {
   console.log(data.genres);
@@ -135,6 +154,7 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
       `).appendTo('.filters-container');
   });
 })
+// Then add onchange event listeners for checkboxes to get list of filtered movies and to display them
 .then(() => {
   $('.genre-filter').change(() => {
     let checkedGenres = '';
@@ -158,6 +178,7 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
   // display error
 });
 
+// Then add onclick event listener for "clear all" button to clear all filters
 $('.clear-filters').click(() => {
   $('.genre-filter').each((i, checkbox) =>  {
     if (checkbox.checked) {
@@ -165,3 +186,9 @@ $('.clear-filters').click(() => {
     };
   });
 });
+
+// This is just test function:
+// $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=28&with_genres=12&include_adult=false&page=1`)
+// .then(data => {
+//   console.log(data);
+// });
