@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    $('#close-modal').click(modalToggle);
-    $('#open-modal').click(modalToggle);
-    $('#toggle-signup').click(toggleSignUp);
+    $('.close-modal').click(modalToggle);
+    $('.open-modal').click(modalToggle);
+    $('.toggle-signup').click(toggleSignUp);
     $('.toggle-login').click(toggleLogIn);
     $('#forgotten-password').click(toggleForgottenPassword);
 
