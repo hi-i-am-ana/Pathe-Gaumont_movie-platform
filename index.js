@@ -12,6 +12,7 @@ const logoutRouter = require('./routes/logout.js');
 const signupRouter = require('./routes/signup.js');
 const movieRouter = require('./routes/movie.js');
 const homeRouter = require('./routes/home.js');
+const emailRouter = require('./routes/email.js');
 
 const app = express();
 
@@ -45,7 +46,9 @@ app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/users', movieRouter);
+app.use('/email', emailRouter);
 app.use('/', homeRouter);
+
 
 // Add route for handling 404 requests - unavailable routes (should be in the end)
 app.use((req, res) => {
