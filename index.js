@@ -49,7 +49,7 @@ app.use(
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
-app.use("/users", movieRouter);
+app.use("/movie", movieRouter);
 app.use("/", homeRouter);
 
 // Add route for handling 404 requests - unavailable routes (should be in the end)
