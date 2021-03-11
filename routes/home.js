@@ -11,7 +11,7 @@ router.get('',(req, res) => {
   });
 });
 
-// TODO: Add regex or change path, but first research fetch API and axios
+// TODO: Add regex or change path
 router.get('/:id', (req,res) => {
   db.any('SELECT rating_value FROM ratings WHERE movie_id = $1', req.params.id)
   .then(ratings => {
@@ -22,7 +22,7 @@ router.get('/:id', (req,res) => {
       const communityRating = reducedRatings/ratings.length;
       res.json({movie_id: req.params.id, communityRating: communityRating, numberOfVotes: ratings.length});
     } else {
-      // Do I need this else??? Without it community rating will be null
+      // Do I need this else??? Without it community rating will be null, but I don't show rating if it's 0
       console.log(`inside else for ${req.params.id}`)
       res.json({movie_id: req.params.id, communityRating: 0, numberOfVotes: 0});
     };

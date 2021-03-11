@@ -58,6 +58,9 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
 .then(data => {
   const randomIndex = Math.floor(Math.random() * data.results.length);
   const heroMovie = data.results[randomIndex];
+
+
+  
   console.log(heroMovie);
   return heroMovie;
 })
