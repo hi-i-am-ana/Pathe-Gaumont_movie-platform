@@ -1,11 +1,11 @@
 // TODO: .catch() - display errors
-// TODO: Clear all button doesn't work properly - order of API responses
 // TODO: Pagination
+// TODO: Logic for searching from movie page??? search button onclick -> get request with special URL -> in get route redirect (render? - url will be misleading) home page but passing some query parameter -> in home get route pass this parameter to template -> using this parameter in script
 // TODO: Local filters for search results
 // TODO: Display hero movie details
-// TODO: Add images to search dropdown - this doesn't look very nice because many movies don't have images
-// TODO: Hide search dropdown on scroll
-// TODO: CSS media queries
+// TODO: Media queries
+// TODO: Put search bar dropdown logic in a separate file - will be used on both pages
+// TODO: Put search bar/dropdown CSS in Amelia's file
 
 // Declare function to display list of movies from received data
 const displayMovies = (data) => {
@@ -92,13 +92,17 @@ $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_b
 })
 .catch(err => {
   // display error
-})
+});
+
+// in case search dropdown has borders
+$('.search-dropdown').hide();
 
 // Perform movie search for every change in search value (everything is sorted by their match relevancy boosted by popularity)
 $('#search-input').on('input', () => {
   const searchValue = $('#search-input').val();
   if (searchValue === '') {
-    $('.search-dropdown').html('');
+    // $('.search-dropdown').html('');
+    $('.search-dropdown').hide();
   } else {
     const encodedSearchValue = encodeURIComponent(searchValue);
     $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
@@ -123,7 +127,13 @@ $('#search-input').on('input', () => {
           </a>
         `;
       });
-      $('.search-dropdown').html(searchDropdownContent);
+      console.log(searchDropdownContent)
+      if (searchDropdownContent === '') {
+        $('.search-dropdown').hide();
+      } else {
+        $('.search-dropdown').show();
+        $('.search-dropdown').html(searchDropdownContent);
+      };
     })
     .catch(err => {
       // display error
@@ -133,12 +143,14 @@ $('#search-input').on('input', () => {
 
 // Clear search dropdown when search input loses focus
 $('#search-input').blur(() => {
-  $('.search-dropdown').html('');
+  // $('.search-dropdown').html('');
+  $('.search-dropdown').hide();
 });
 
 // Clear search dropdown when window is scrolled
 $(window).scroll(() => {
-  $('.search-dropdown').html('');
+  // $('.search-dropdown').html('');
+  $('.search-dropdown').hide();
 });
 
 // Perform movie search for final search value, then display list of found movies
@@ -178,16 +190,13 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
       const checkedGenre = genre.value;
       checkedGenres += `&with_genres=${checkedGenre}`;
     });
-    // $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${checkedGenres}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
-    // .then(data => {
-    //   displayMovies(data);
-    // })
-    // .catch(err => {
-    //   // display error
-    // });
-    $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${checkedGenres}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`, (data) => {
+    $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${checkedGenres}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+    .then(data => {
       displayMovies(data);
     })
+    .catch(err => {
+      // display error
+    });
   });
 })
 .catch(err => {
@@ -196,14 +205,24 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
 
 // Then add onclick event listener for "clear all" button to clear all filters
 $('.clear-filters').click(() => {
-  $('.genre-filter').each((i, checkbox) =>  {
-    if (checkbox.checked) {
-      checkbox.click();
-    };
+  // Code below works, it progammatically clicks all checked checkboxes and trigger change event, but API responses are coming in unexpected order, so the last response can be with filtered genre/genres and this data will be displayed on page
+  // $('.genre-filter').each((i, checkbox) =>  {
+  //   if (checkbox.checked) {
+  //     checkbox.click();
+  //   };
+  // });
+  // Code below will just change checkbox state, but will not trigger change event, so we make API request without genres:
+  $('.genre-filter').prop( 'checked', false );
+  $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+  .then(data => {
+    displayMovies(data);
+  })
+  .catch(err => {
+    // display error
   });
 });
 
-// This is just test function:
+// This is just test function for testing API requests:
 // $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=28&with_genres=12&include_adult=false&page=1`)
 // .then(data => {
 //   console.log(data);
