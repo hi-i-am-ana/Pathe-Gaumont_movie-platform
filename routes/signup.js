@@ -92,7 +92,7 @@ router.post("/", (req, res) => {
         .then(() => {
           // TODO: add conditional to home and details page that immediately shows the modal if there is a message query in the URL
           // return res.redirect('/?message=Sign%20up%20successful.')
-          return res.redirect("/");
+          return res.render("pages/signupConfirmation")
         })
         .catch((err) => {
           return res.render("pages/error", {
