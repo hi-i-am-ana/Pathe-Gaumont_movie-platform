@@ -5,6 +5,7 @@ const crypto = require("crypto");
 const db = require("../db/database.js");
 const nodemailer = require("nodemailer");
 const nodemailerSendgrid = require("nodemailer-sendgrid");
+const cron = require('node-cron');
 
 
 // post new user
@@ -25,7 +26,7 @@ router.post("/", (req, res) => {
   let newUser = {};
   let message = "There was an error signing up.";
 
-  db.oneOrNone("SELECT * FROM users WHERE email = $1", [email])
+  db.oneOrNone("SELECT * FROM users WHERE email = $1", email)
   .then((user) => {
     let valid = true;
 
@@ -54,7 +55,7 @@ router.post("/", (req, res) => {
           email: email.toLowerCase(),
           password: hash,
         };
-        // TODO: email confirmation
+
         db.none("INSERT INTO users(firstname, lastname, email, password, is_active) VALUES ($1, $2, $3, $4, false)", [newUser.firstname, newUser.lastname, newUser.email, newUser.password])
         .then(() => {
           const confirmationHash = crypto.randomBytes(30).toString('hex');
@@ -67,11 +68,13 @@ router.post("/", (req, res) => {
               })
             );
 
+              // TODO: Add link to resend email
             const emailHTML = `
             <!-- <img src="/static/assets/Logo.png" alt="No CAAP Logo" style="display:block;"> -->
             <h2>Thank you for signing up with No CAAP</h2>
             <p>To verify your account, please click on the link below.</p>
             <p><a href="http://localhost:${process.env.PORT}/email/${confirmationHash}">http://localhost:${process.env.PORT}/email/${confirmationHash}</a></p>
+            <p>This link will expire in 48 hours.</p>
             <footer>2021 © No CAAP</footer>
             `
   
@@ -83,8 +86,9 @@ router.post("/", (req, res) => {
               html: emailHTML
             }, function (err) {
               if (err) {
-              // TODO: error handling if failed to send email
-              console.log(err);
+                return res.render("pages/error", {
+                  err: {message: "Email failed to send, please try again."},
+                });
               }
             });
           })   
@@ -108,5 +112,21 @@ router.post("/", (req, res) => {
     });
   });
 });
+
+// Delete hashes after 48 hours - this runs every minute and not sure if it's bad to run it this often
+cron.schedule('* * * * *', () =>{
+  db.any("SELECT * FROM email_confirmation")
+  .then((rows) => {
+    if (rows.length > 0) {
+      db.none("DELETE FROM email_confirmation WHERE create_at < now() - interval '2 days'")
+      .then(() => {
+        console.log("Hash deleted")
+      })
+      .catch(() => {
+        console.log("Cron tried to delete hash and it didn't work.")
+      })
+    }
+  })
+})
 
 module.exports = router;

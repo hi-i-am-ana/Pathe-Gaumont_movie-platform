@@ -1,0 +1,3 @@
+ALTER TABLE email_confirmation ADD COLUMN create_at TIMESTAMPTZ NOT NULL DEFAULT now();
+
+ALTER TABLE password_reset ADD COLUMN create_at TIMESTAMPTZ NOT NULL DEFAULT now();
