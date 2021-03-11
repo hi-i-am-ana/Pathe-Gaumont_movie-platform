@@ -1,6 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const db = require("../db/database.js");
+const express = require("express")
+const router = express.Router()
+const db = require("../db/database.js")
 
 
 router.get('^/:id([a-z0-9]{60})$', (req, res) => {
@@ -11,7 +11,9 @@ router.get('^/:id([a-z0-9]{60})$', (req, res) => {
             .then (() => {
                 db.none('DELETE FROM email_confirmation WHERE hash = $1', req.params.id)
                 .then (() => {
-                    res.render('pages/emailconfirmation')
+                    res.render('pages/emailconfirmation', {
+                        email: user.email
+                    })
                 })
                 .catch((err) => {
                     res.render('pages/error', {

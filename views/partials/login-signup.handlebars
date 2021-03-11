@@ -3,11 +3,11 @@
         <span><i class="fas fa-times-circle close-modal"></i></span>
         <div class="flex">
             <div>
-                <img src="/static/assets/Logo.png" alt="No CAAP Logo" class="logo">
-                <h3>Login</h3>
+                <img src="/static/assets/Logo.png" alt="No CAAP Logo" class="logo" width="150">
             </div>
 
             <div class="login">
+                <h3>Login</h3>
                 <p class="alert">{{message}}</p>
                 <form method="POST" action="/login">
                     <div class="form-control">
@@ -19,11 +19,9 @@
                         <label for="login-password">Password</label>
                         <input id="login-password" class="password rectangle-two" name="login-password" type="password" />
                         <i class="fas fa-eye password-toggle"></i>
-                        {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
                         {{!-- NOT WORKING FOR PASSWORD --}}
                         <small class="alert hidden">Invalid input</small>
                     </div>
-                    {{!-- TODO: toggleForgottenPassword function --}}
                     <p>Forget <a id="forgotten-password">Password</a>?
                         <button class="center btn" type="submit">Login</button>
                 </form>
@@ -37,7 +35,7 @@
             <hr style="border: 1px solid black;">
 
             <div class="signup hidden">
-                <h3 class="center">Sign up</h3>
+                <h3>Sign up</h3>
                 <p class="alert">{{message}}</p>
                 <form method="POST" action="/signup">
                     <div class="flex">
@@ -80,7 +78,7 @@
             </div>
 
             <div class="forgotten-password hidden">
-                <h3 class="center">Forgotten Password</h3>
+                <h3>Forgotten Password</h3>
                 <p class="alert">{{message}}</p>
                 <form method="POST" action="/forgotten-password">
                     <div class="form-control">
@@ -88,7 +86,7 @@
                         <input id="forgot-pass-email" name="forgot-pass-email" type="text" class="rectangle-two" />
                         <small class="alert hidden">Invalid input</small>
                     </div>
-                    <button class="center btn" type="submit">Send</button>
+                    <button class="center btn" type="submit">Send Reset Link</button>
                 </form>
                 <p class="center">
                     <a class="uppercase toggle-login">Log In</a>

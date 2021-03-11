@@ -66,19 +66,21 @@ router.post("/", (req, res) => {
                 apiKey: process.env.SENDGRID_API_KEY,
               })
             );
+
+            const emailHTML = `
+            <!-- <img src="/static/assets/Logo.png" alt="No CAAP Logo" style="display:block;"> -->
+            <h2>Thank you for signing up with No CAAP</h2>
+            <p>To verify your account, please click on the link below.</p>
+            <p><a href="http://localhost:${process.env.PORT}/email/${confirmationHash}">http://localhost:${process.env.PORT}/email/${confirmationHash}</a></p>
+            <footer>2021 © No CAAP</footer>
+            `
   
             transport.sendMail({
-              from: '"Pathé Gaumont" <admin@pathegaumont.com>',
+              from: '"Pathé Gaumont" <caterina.turnbull@gmail.com>',
               to: newUser.email,
               subject: "Signup Confirmation",
               text: `Thank you for signing up with No CAAP. To verify your account, please use the following link. http://localhost:${process.env.PORT}/email/${confirmationHash}`,
-              html: `
-              <img src="/static/assets/Logo.png" alt="No CAAP Logo" style="display:block;">
-              <h2>Thank you for signing up with No CAAP</h2>
-              <p>To verify your account, please click on the link below.</p>
-              <p><a href="http://localhost:${process.env.PORT}/email/${confirmationHash} target="_blank">http://localhost:${process.env.PORT}/email/${confirmationHash}</a></p>
-              <footer>2021 © No CAAP</footer>
-              `
+              html: emailHTML
             }, function (err) {
               if (err) {
               // TODO: error handling if failed to send email
