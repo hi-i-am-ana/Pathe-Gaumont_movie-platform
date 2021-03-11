@@ -6,7 +6,7 @@ To develop a fictitious movie rating platform for Pathé Gaumont cinemas, by acc
 The website is accessible for both registered and unregistered visiors, however the ratings are only accessible for registered users. Registered users is to rate their favourite movies (between 0 and 5), thus creating Pathé Gaumont cinemas' own community score. 
 
 ## Motivation 
-This is a student project only for the purpose of learning, which is a part of the 3 month web development course organised by [Inco Academy](https://www.inco.org.au/incode)
+This is a student project only for the purpose of learning, which is a part of the 3 month web development course organised by [INCO Academy](https://www.inco.org.au/incode)
 
 ## Demo 
 ![Demo]

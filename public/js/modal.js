@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     function modalToggle() {
+        const blur = document.getElementById('blur');
+        blur.classList.toggle('active')
         const modal = document.querySelector('.modal')
         modal.classList.toggle('active')
     }
