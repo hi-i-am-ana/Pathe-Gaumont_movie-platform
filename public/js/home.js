@@ -2,14 +2,10 @@
 // TODO: Pagination
 // TODO: Logic for searching from movie page??? search button onclick -> get request with special URL -> in get route redirect (render? - url will be misleading) home page but passing some query parameter -> in home get route pass this parameter to template -> using this parameter in script
 // TODO: Media queries
-// TODO: Put search bar dropdown logic in a separate file - will be used on both pages
-// TODO: Put search bar/dropdown CSS in Amelia's file
-// TODO: Style filter by genre button in navbar, but don't remove ids/classes I added - Amelia
-// TODO: CSS - remove outline for search button (magnifying glass), add something to show that button is clicked - Amelia
-// TODO: If content of the page is less then window size, footer goes up, should always be at the bottom
-// TODO: Run search by clicking enter button
+// TODO: Put all search logic in a separate file - will be used on both pages
+// TODO: Put all search CSS in Amelia's file - will be used on both pages
 
-// TODO: Add close x button to advanced search
+// TODO: Run search by clicking enter button
 // TODO: Local filters for search results
 // TODO: Display hero movie details
 
@@ -172,6 +168,12 @@ $('.advanced-search-button').click(() => {
 
 // Add onclick event listener for "clear all" button to clear all filters
 $('.search-clear-filters').click(() => {
+  $('.search-genre-filter').prop( 'checked', false );
+});
+
+// Add onclick event listener for "close filter by genre" button
+$('.close-advanced-search-button').click(() => {
+  $('.search-filters-container').hide();
   $('.search-genre-filter').prop( 'checked', false );
 });
 
