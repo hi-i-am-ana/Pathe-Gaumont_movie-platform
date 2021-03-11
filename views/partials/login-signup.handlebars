@@ -1,75 +1,75 @@
-<div class="overlay">
+
     <div class="modal">
-        <i class="fas fa-times-circle" id="close-modal"></i>
+        <span><i class="fas fa-times-circle close-modal"></i></span>
         <div class="flex">
             <div>
-                <img src="#" alt="">
-                <img src="#" alt="">
+                <img src="/static/assets/Logo.png" alt="No CAAP Logo" class="logo" width="150">
             </div>
 
             <div class="login">
-                <h3 class="center">Login</h3>
+                <h3>Login</h3>
                 <p class="alert">{{message}}</p>
                 <form method="POST" action="/login">
-                    <div>
+                    <div class="form-control">
                         <label for="login-email">Email</label>
-                        <input id="login-email" name="login-email" type="text" />
+                        <input id="login-email" name="login-email" type="text" class="rectangle-two" />
                         <small class="alert hidden">Invalid input</small>
                     </div>
-                    <div>
+                    <div class="form-control">
                         <label for="login-password">Password</label>
-                        <input id="login-password" class="password" name="login-password" type="password" />
+                        <input id="login-password" class="password rectangle-two" name="login-password" type="password" />
                         <i class="fas fa-eye password-toggle"></i>
-                        {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
+                        {{!-- NOT WORKING FOR PASSWORD --}}
                         <small class="alert hidden">Invalid input</small>
                     </div>
-                    {{!-- TODO: toggleForgottenPassword function --}}
-                    <p>Forget <a id="forgotten-password" >Password</a>?
-                    <button class="center" type="submit">Login</button>
+                    <p>Forget <a id="forgotten-password">Password</a>?
+                        <button class="center btn" type="submit">Login</button>
                 </form>
                 <p class="center">
                     Don't have an account yet?
                     {{!-- TODO: toggleSignUp function --}}
-                    <a class="uppercase" id="toggle-signup">Sign Up</a>
+                    <a class="uppercase toggle-signup">Sign Up</a>
                 </p>
             </div>
 
+            <hr style="border: 1px solid black;">
+
             <div class="signup hidden">
-                <h3 class="center">Sign up</h3>
+                <h3>Sign up</h3>
                 <p class="alert">{{message}}</p>
                 <form method="POST" action="/signup">
                     <div class="flex">
-                        <div>
+                        <div class="form-control">
                             <label for="first-name">First Name</label>
-                            <input id="first-name" name="first-name" type="text" />
+                            <input id="first-name" name="first-name" type="text" class="rectangle-two"  />
                             <small class="alert hidden">Invalid input</small>
                         </div>
-                        <div>
+                        <div class="form-control">
                             <label for="last-name">Last Name</label>
-                            <input id="last-name" name="last-name" type="text" />
+                            <input id="last-name" name="last-name" type="text" class="rectangle-two"  />
                             <small class="alert hidden">Invalid input</small>
                         </div>
                     </div>
-                    <div>
+                    <div class="form-control">
                         <label for="signup-email">Email</label>
-                        <input id="signup-email" name="signup-email" type="text" />
+                        <input id="signup-email" name="signup-email" type="text" class="rectangle-two" />
                         <small class="alert hidden">Invalid input</small>
                     </div>
-                    <div>
+                    <div class="form-control">
                         <label for="signup-password">Password</label>
-                        <input id="signup-password" class="password" name="signup-password" type="password" />
+                        <input id="signup-password" class="password rectangle-two" name="signup-password" type="password" />
                         <i class="fas fa-eye password-toggle"></i>
                         {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
                         <small class="alert hidden">Invalid input</small>
                     </div>
-                    <div>
+                    <div class="form-control">
                         <label for="confirm-password">Confirm Password</label>
-                        <input id="confirm-password" class="password" name="confirm-password" type="password" />
+                        <input id="confirm-password" class="password rectangle-two" name="confirm-password" type="password"  />
                         <i class="fas fa-eye password-toggle"></i>
                         {{!-- Class for eye with slash through it: replace fa-eye with fa-eye-slash --}}
                         <small class="alert hidden">Invalid input</small>
                     </div>
-                    <button class="center" type="submit">Signup</button>
+                    <button class="center btn" type="submit">Signup</button>
                 </form>
                 <p class="center">
                     Already have an account?
@@ -78,15 +78,15 @@
             </div>
 
             <div class="forgotten-password hidden">
-                <h3 class="center">Forgotten Password</h3>
+                <h3>Forgotten Password</h3>
                 <p class="alert">{{message}}</p>
                 <form method="POST" action="/forgotten-password">
-                    <div>
+                    <div class="form-control">
                         <label for="forgot-pass-email">Email</label>
-                        <input id="forgot-pass-email" name="forgot-pass-email" type="text" />
+                        <input id="forgot-pass-email" name="forgot-pass-email" type="text" class="rectangle-two" />
                         <small class="alert hidden">Invalid input</small>
                     </div>
-                    <button class="center" type="submit">Send</button>
+                    <button class="center btn" type="submit">Send Reset Link</button>
                 </form>
                 <p class="center">
                     <a class="uppercase toggle-login">Log In</a>
@@ -94,3 +94,4 @@
             </div>
         </div>
     </div>
+

@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    $('#close-modal').click(modalToggle);
-    $('#open-modal').click(modalToggle);
-    $('#toggle-signup').click(toggleSignUp);
+    $('.close-modal').click(modalToggle);
+    $('.open-modal').click(modalToggle);
+    $('.toggle-signup').click(toggleSignUp);
     $('.toggle-login').click(toggleLogIn);
     $('#forgotten-password').click(toggleForgottenPassword);
 
@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     function modalToggle() {
+        const blur = document.getElementById('blur');
+        blur.classList.toggle('active')
         const modal = document.querySelector('.modal')
         modal.classList.toggle('active')
     }

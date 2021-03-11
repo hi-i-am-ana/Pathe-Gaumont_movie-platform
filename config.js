@@ -6,7 +6,9 @@ module.exports = {
   pgdatabase: process.env.POSTGRES_DATABASE,
   pgpassword: process.env.POSTGRES_PASSWORD,
 
-  api_key: process.env.API_KEY
+  api_key: process.env.API_KEY,
+
+  sendgrid_api_key: process.env.SENDGRID_API_KEY,
 };
 
 // This is how my .env looks like:
