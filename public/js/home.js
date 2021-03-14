@@ -82,10 +82,13 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
     $.getJSON(`https://api.themoviedb.org/3/person/${actor1}/images?api_key=${api_key}`)
     .then(data => {
       console.log(data);
-      actor1ImageUrl = `https://image.tmdb.org/t/p/w185${data.profiles[0].file_path}`
-      console.log(actor1ImageUrl)
-    })
-
+      actor1ImageUrl = `https://image.tmdb.org/t/p/w185${data.profiles[0].file_path}`;
+      console.log(actor1ImageUrl);
+      actor2ImageUrl = `https://image.tmdb.org/t/p/w185${data.profiles[1].file_path}`;
+      console.log(actor2ImageUrl);
+      actor3ImageUrl = `https://image.tmdb.org/t/p/w185${data.profiles[3].file_path}`;
+      console.log(actor13mageUrl);
+    });
   })
   .catch(err => {
     // display error
