@@ -61,7 +61,6 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
   const randomIndex = Math.floor(Math.random() * data.results.length);
   const heroMovie = data.results[randomIndex];
   $('.hero-title').text(heroMovie.title);
-  console.log(heroMovie.overview)
   $('.hero-overview').text(heroMovie.overview);
   $('.hero-release_date').text(heroMovie.release_date);
   return heroMovie.id;
@@ -74,7 +73,7 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
     $.each(data.genres, (i, genre) => {
       heroGenres.push(genre.name);
     });
-    $('.hero-runtime-genres-release').text(`${data.runtime} min \u00A0 | \u00A0 ${heroGenres.join(', ')} \u00A0 | \u00A0 ${data.release_date}`);
+    $('.hero-runtime-genres-release').text(`${data.runtime} min\u00A0\u00A0|\u00A0\u00A0${heroGenres.join(', ')}\u00A0\u00A0|\u00A0\u00A0${data.release_date}`);
   })
   .catch(err => {
     // display error
@@ -120,12 +119,12 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
     // display error
   });
   // And fourth: get hero movie rating
-  $.getJSON(`/ratings/${heroMovieid}`)
+  $.getJSON(`/ratings/${heroMovieId}`)
       .then(data => {
         if (data.numberOfVotes !== 0) {
-          $(`.hero-rating-value`).text(`${data.communityRating}/`);
-          $(`.hero-number-of-votes`).text(data.numberOfVotes);
-          $(`.hero-rating-star`).attr('style', 'color:orange');
+          $(`.hero-rating-value`).text(`\u00A0${data.communityRating}`);
+          $(`.hero-number-of-votes`).text(`(${data.numberOfVotes})`);
+          $(`#hero-rating-star`).attr('style', 'color:orange');
         };
       })
       .catch(err => {
@@ -258,8 +257,12 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
 $('.search-dropdown').hide();
 
 // Add onblur event listener for search input to hide search dropdown when search input loses focus
-$('#search-input').blur(() => {
-  $('.search-dropdown').hide();
+$('#search-input').blur((e) => {
+  $(window).click((e) => {
+    if(e.target !== $('.search-dropdown')) {
+      $('.search-dropdown').hide();
+    };
+  });
 });
 
 // TODO: Do we need this?
