@@ -4,40 +4,64 @@ const db = require("../db/database.js")
 
 
 router.get('^/:id([a-z0-9]{60})$', (req, res) => {
-    db.oneOrNone('SELECT email FROM email_confirmation WHERE hash = $1', req.params.id)
-    .then ((user) => {
-        if (user !== null) {
-            db.none('UPDATE users SET is_active = true WHERE email = $1', user.email)
-            .then (() => {
-                db.none('DELETE FROM email_confirmation WHERE hash = $1', req.params.id)
-                .then (() => {
-                    res.render('pages/emailconfirmation', {
-                        email: user.email
-                    })
+    db.any("SELECT * FROM email_confirmation WHERE hash = $1 AND create_at < now() - interval '2 days'", req.params.id)
+    .then((rows) => {
+        if (rows.length > 0) {
+            db.none("DELETE FROM email_confirmation WHERE hash = $1 AND create_at < now() - interval '2 days'", req.params.id)
+            .then(() => {
+                res.render('pages/error', {
+                    err: {message: 'Your confirmation link has expired, please click resend in your email.'}
                 })
-                .catch((err) => {
+            })
+            .catch((err) => {
+                res.render('pages/error', {
+                    err: err
+                })
+            })
+            
+        } else {
+            db.oneOrNone('SELECT email FROM email_confirmation WHERE hash = $1', req.params.id)
+            .then ((user) => {
+                if (user !== null) {
+                    db.none('UPDATE users SET is_active = true WHERE email = $1', user.email)
+                    .then (() => {
+                        db.none('DELETE FROM email_confirmation WHERE hash = $1', req.params.id)
+                        .then (() => {
+                            res.render('pages/emailconfirmation', {
+                                email: user.email
+                            })
+                        })
+                        .catch((err) => {
+                            res.render('pages/error', {
+                                err: err
+                            })
+                        })
+                    })
+                    .catch ((err) => {
+                        res.render('pages/error', {
+                            err: err
+                        })
+                    })
+                } else {
+                    // no hash error
                     res.render('pages/error', {
-                        err: err
+                        err: {message: 'HTTP ERROR 404. This page does not exist'},
+                        title: 'Error | Pathe Gaumont Movie Platform'
                     })
-                })
+                }
             })
             .catch ((err) => {
                 res.render('pages/error', {
                     err: err
                 })
             })
-        } else {
-            // no hash error
-            res.render('pages/error', {
-                err: {message: 'No such hash'}
-            })
         }
     })
-    .catch ((err) => {
-        res.render('pages/error', {
+    .catch((err) => {
+        return res.render('pages/error', {
             err: err
         })
-    })
+    })    
 })
 
 

@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/static/css/movie.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo&display=swap" rel="stylesheet" />
+
+<section>
+    <div class="movie-details-container">
+        <div class="left-container">
+            {{!-- poster, title, genres, and release date will appear here --}}
+        </div>
+
+        <div class="right-container">
+            {{!-- video, ratings, and overview will appear here --}}
+            <iframe class="movie-video" allowfullscreen></iframe>
+            <div class="rating-container">
+                <i class="fas fa-star" style="font-size:40px;color:orange"></i>
+                <p class="rating"></p>
+                <button>Rate this movie</button>
+            </div>
+
+            <!--<div class="cast-slider-container">
+                <ul class="cast-slider">
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                </ul>
+            </div>-->
+        </div>
+
+    </div>
+
+</section>
+
+<script src="/static/js/movie.js" defer></script>
+<script>const api_key = "{{api_key}}"</script>
+<script>const movie_id = "{{movie_id}}"</script>

@@ -6,7 +6,9 @@ const db = require("../db/database.js");
 const nodemailer = require("nodemailer");
 const nodemailerSendgrid = require("nodemailer-sendgrid");
 const cron = require("node-cron");
+// Is this needed? v
 const querystring = require("querystring");
+const { sendgrid_api_key } = require("../config");
 
 // post new user
 //TODO: confirm redirect middleware name
@@ -83,7 +85,7 @@ router.post("/", (req, res) => {
                 .then(() => {
                   const transport = nodemailer.createTransport(
                     nodemailerSendgrid({
-                      apiKey: process.env.SENDGRID_API_KEY,
+                      apiKey: sendgrid_api_key,
                     })
                   );
 
@@ -175,7 +177,7 @@ router.get("/resend", (req, res) => {
               .then(() => {
                 const transport = nodemailer.createTransport(
                   nodemailerSendgrid({
-                    apiKey: process.env.SENDGRID_API_KEY,
+                    apiKey: sendgrid_api_key,
                   })
                 );
 
@@ -234,13 +236,11 @@ router.get("/resend", (req, res) => {
     });
 });
 
-// Delete hashes after 48 hours - this runs every minute and not sure if it's bad to run it this often
-cron.schedule("* * * * *", () => {
+// Delete hashes after 48 hours - this runs at midnight every day
+cron.schedule("0 0 * * *", () => {
   db.any("SELECT * FROM email_confirmation").then((rows) => {
     if (rows.length > 0) {
-      db.none(
-        "DELETE FROM email_confirmation WHERE create_at < now() - interval '2 days'"
-      )
+      db.none("DELETE FROM email_confirmation WHERE create_at < now() - interval '2 days'")
         .then(() => {
           console.log("Cron job run: hash check");
         })
