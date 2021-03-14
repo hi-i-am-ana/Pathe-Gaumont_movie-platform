@@ -11,8 +11,7 @@ router.get('',(req, res) => {
   });
 });
 
-// TODO: Add regex or change path
-router.get('/:id', (req,res) => {
+router.get('/ratings/:id', (req,res) => {
   db.any('SELECT rating_value FROM ratings WHERE movie_id = $1', req.params.id)
   .then(ratings => {
     console.log(ratings)

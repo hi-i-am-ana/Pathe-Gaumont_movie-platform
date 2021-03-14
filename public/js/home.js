@@ -22,7 +22,7 @@ const displayMovies = (data) => {
         // TODO: Change placeholder image
         posterUrl = 'https://loremflickr.com/185/278';
       } else {
-        posterUrl = `https://image.tmdb.org/t/p/w185/${movie.poster_path}`;
+        posterUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
       };
       moviesContent += `
         <div class="movie" id="movie-${movie.id}">
@@ -37,14 +37,16 @@ const displayMovies = (data) => {
           </div>
         </div>
       `;
-      // TODO: How else can I pass id?
-      $.getJSON(`/${movie.id}`)
+      $.getJSON(`/ratings/${movie.id}`)
       .then(data => {
         if (data.numberOfVotes !== 0) {
           $(`#rating-${movie.id}`).text(`${data.communityRating}/`);
           $(`#number-of-votes-${movie.id}`).text(data.numberOfVotes);
           $(`#rating-star-${movie.id}`).attr('style', 'color:orange');
         };
+      })
+      .catch(err => {
+        // display error
       });
     });
   };
@@ -53,19 +55,42 @@ const displayMovies = (data) => {
 
 // HERO MOVIE
 
-// Get movie for hero - random movie from the first 20 now playing movies
+// Get hero movie - random movie from the first 20 now playing movies
 $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&page=1`)
 .then(data => {
   const randomIndex = Math.floor(Math.random() * data.results.length);
   const heroMovie = data.results[randomIndex];
-
+  heroMovie.title
+  heroMovie.release_date
+  heroMovie.overview
+  heroMovie.genre_ids
 
   
   console.log(heroMovie);
   return heroMovie;
 })
-// Then get videos for hero movie, filter trailers and display random trailer
 .then(heroMovie => {
+  // Then first: get hero movie cast
+  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovie.id}/credits?api_key=${api_key}`)
+  .then(data => {
+    console.log(data);
+    data.cast.sort((a, b) => b.popularity - a.popularity);
+    console.log(data.cast);
+    actor1 = data.cast[0].id
+    actor2 = data.cast[1].id
+    actor3 = data.cast[2].id
+    $.getJSON(`https://api.themoviedb.org/3/person/${actor1}/images?api_key=${api_key}`)
+    .then(data => {
+      console.log(data);
+      actor1ImageUrl = `https://image.tmdb.org/t/p/w185${data.profiles[0].file_path}`
+      console.log(actor1ImageUrl)
+    })
+
+  })
+  .catch(err => {
+    // display error
+  });
+  // And second: hero movie videos, filter trailers only and display random trailer
   $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovie.id}/videos?api_key=${api_key}`)
   .then((data) => {
     const filteredResults = data.results.filter(video => video.type === 'Trailer' & (video.site === 'YouTube' || video.site === 'Vimeo'));
@@ -83,7 +108,7 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
   })
   .catch(err => {
     // display error
-  }); 
+  });
 })
 .catch(err => {
   // display error
