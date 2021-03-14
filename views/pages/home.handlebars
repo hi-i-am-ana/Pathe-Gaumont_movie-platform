@@ -2,9 +2,34 @@
 
 <section class="hero-section">
   {{!-- src (link to video of random "now-playing" movie) will be added by script --}}
-  <iframe class="hero-video" width="853" height="480" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  <div class="hero-movie-details">
-    
+  <iframe class="hero-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="hero-details-container">
+    <div class="hero-details">
+      <p class="hero-title"></p>
+      <p class="hero-runtime-genres-release"></p>
+      <div class="hero-rating-container">
+            <i class="fas fa-star rating-star" id="hero-rating-star"></i>
+            <div class="hero-rating">
+              <span class="hero-rating-value"></span>
+              <span class="hero-number-of-votes"></span>
+            </div>
+          </div>
+    </div>
+    <p class="hero-overview"></p>
+    <div class="hero-cast">
+      <div class="hero-actor">
+        <img class="hero-actor-image" id="hero-actor0-image">
+        <p class="hero-actor-name" id="hero-actor0-name"></p>
+      </div>
+      <div class="hero-actor">
+        <img class="hero-actor-image" id="hero-actor1-image">
+        <p class="hero-actor-name" id="hero-actor1-name"></p>
+      </div>
+      <div class="hero-actor">
+        <img class="hero-actor-image" id="hero-actor2-image">
+        <p class="hero-actor-name" id="hero-actor2-name"></p>
+      </div>
+    </div>
   </div>
 </section>
 

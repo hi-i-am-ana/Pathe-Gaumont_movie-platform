@@ -7,7 +7,7 @@
 
 // TODO: Run search by clicking enter button
 // TODO: Local filters for search results
-// TODO: Display hero movie details
+// TODO: Display hero movie rating
 
 // Declare function to display list of movies from received data
 const displayMovies = (data) => {
@@ -60,58 +60,77 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
 .then(data => {
   const randomIndex = Math.floor(Math.random() * data.results.length);
   const heroMovie = data.results[randomIndex];
-  heroMovie.title
-  heroMovie.release_date
-  heroMovie.overview
-  heroMovie.genre_ids
-
-  
-  console.log(heroMovie);
-  return heroMovie;
+  $('.hero-title').text(heroMovie.title);
+  console.log(heroMovie.overview)
+  $('.hero-overview').text(heroMovie.overview);
+  $('.hero-release_date').text(heroMovie.release_date);
+  return heroMovie.id;
 })
-.then(heroMovie => {
-  // Then first: get hero movie cast
-  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovie.id}/credits?api_key=${api_key}`)
+.then(heroMovieId => {
+  // Then first: get hero movie additional details (genre names and runtime)
+  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovieId}?api_key=${api_key}`)
   .then(data => {
-    console.log(data);
+    const heroGenres = [];
+    $.each(data.genres, (i, genre) => {
+      heroGenres.push(genre.name);
+    });
+    $('.hero-runtime-genres-release').text(`${data.runtime} min \u00A0 | \u00A0 ${heroGenres.join(', ')} \u00A0 | \u00A0 ${data.release_date}`);
+  })
+  .catch(err => {
+    // display error
+  });
+  // Second: get hero movie cast (3 most popular) and their profile pictures
+  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovieId}/credits?api_key=${api_key}`)
+  .then(data => {
     data.cast.sort((a, b) => b.popularity - a.popularity);
-    console.log(data.cast);
-    actor1 = data.cast[0].id
-    actor2 = data.cast[1].id
-    actor3 = data.cast[2].id
-    $.getJSON(`https://api.themoviedb.org/3/person/${actor1}/images?api_key=${api_key}`)
-    .then(data => {
-      console.log(data);
-      actor1ImageUrl = `https://image.tmdb.org/t/p/w185${data.profiles[0].file_path}`;
-      console.log(actor1ImageUrl);
-      actor2ImageUrl = `https://image.tmdb.org/t/p/w185${data.profiles[1].file_path}`;
-      console.log(actor2ImageUrl);
-      actor3ImageUrl = `https://image.tmdb.org/t/p/w185${data.profiles[3].file_path}`;
-      console.log(actor13mageUrl);
+    const heroActors = [data.cast[0], data.cast[1], data.cast[2]];
+    $.each(heroActors, (i, actor) => {
+      $.getJSON(`https://api.themoviedb.org/3/person/${actor.id}/images?api_key=${api_key}`)
+      .then(data => {
+        const actorImageUrl = `https://image.tmdb.org/t/p/w45${data.profiles[0].file_path}`;
+        return actorImageUrl;
+      })
+      .then(actorImageUrl => {
+        $(`#hero-actor${i}-image`).attr('src', actorImageUrl);
+        $(`#hero-actor${i}-name`).text(actor.name)
+      })
+      .catch(err => {
+        // display error
+      });
     });
   })
   .catch(err => {
     // display error
   });
-  // And second: hero movie videos, filter trailers only and display random trailer
-  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovie.id}/videos?api_key=${api_key}`)
+  // Third: get hero movie video - filter trailers only and choose random trailer
+  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovieId}/videos?api_key=${api_key}`)
   .then((data) => {
     const filteredResults = data.results.filter(video => video.type === 'Trailer' & (video.site === 'YouTube' || video.site === 'Vimeo'));
     const randomIndex = Math.floor(Math.random() * filteredResults.length);
     const heroVideo = filteredResults[randomIndex];
-    console.log(heroVideo);
     // TODO: Add condition for case of other sites
-    let heroVideoURL = '';
     if (heroVideo.site === 'YouTube') {
-      heroVideoURL = `https://www.youtube.com/embed/${heroVideo.key}`;
+      heroVideoUrl = `https://www.youtube.com/embed/${heroVideo.key}`;
     } else if (heroVideo.site === 'Vimeo') {
-      heroVideoURL = `https://vimeo.com/${heroVideo.key}`;
+      heroVideoUrl = `https://vimeo.com/${heroVideo.key}`;
     };
-    $('.hero-video').attr('src', heroVideoURL);
+    $('.hero-video').attr('src', heroVideoUrl);
   })
   .catch(err => {
     // display error
   });
+  // And fourth: get hero movie rating
+  $.getJSON(`/ratings/${heroMovieid}`)
+      .then(data => {
+        if (data.numberOfVotes !== 0) {
+          $(`.hero-rating-value`).text(`${data.communityRating}/`);
+          $(`.hero-number-of-votes`).text(data.numberOfVotes);
+          $(`.hero-rating-star`).attr('style', 'color:orange');
+        };
+      })
+      .catch(err => {
+        // display error
+      });
 })
 .catch(err => {
   // display error

@@ -7,6 +7,7 @@ h2 {
 }
 
 h3 {
+  text-align: initial;
   margin-bottom: 1rem;
 }
 
@@ -110,6 +111,53 @@ h3 {
   padding: 1rem;
 }
 
+iframe {
+  width: 853px;
+  height: 480px;
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.hero-details-container {
+  color: #ffff;
+  width: 853px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.hero-details, .hero-overview, .hero-cast {
+  margin-top: 1rem;
+}
+
+.hero-details {
+  display: flex;
+  align-items: baseline;
+}
+
+.hero-title {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.hero-runtime-genres-release {
+  margin-right: 1rem;
+}
+
+.hero-cast {
+  display: flex;
+}
+
+.hero-actor {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.hero-actor-image {
+  margin-right: 0.5rem;
+}
+
 .movies-container {
   display: flex;
   padding: 2rem;
@@ -129,11 +177,6 @@ h3 {
   margin: 0 1rem 2rem;
   position: relative;
   text-align: center;
-}
-
-iframe {
-  display: block;
-  margin: auto;
 }
 
 .rating-container {
