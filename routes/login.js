@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
                     if (result) {
                         // create user id session data for logged in user
                         req.session.userId = user['user_id']
-                        return res.redirect('/')
+                        return res.redirect('back')
                     } else {
                         // TODO: add conditional to home and details page that immediately shows the modal if there is a message query in the URL
                         // return res.redirect('/?message=Incorrect%20email%20or%20password.')

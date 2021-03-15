@@ -61,6 +61,21 @@
   margin-top: 20px;
 }
 
+.rating-container.individual-movie i {
+  font-size: 40px;
+  color: grey;
+  position: relative;
+}
+
+.rating-container i.filled {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  font-size: 40px;
+  color: orange;
+}
+
 .rating {
   font-size: 30px;
   margin-left: 10px;
@@ -79,6 +94,21 @@
 
 .rating-container button:hover {
   background-color: darkgrey;
+}
+
+.cast-slider-container {
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.cast-item {
+  margin: 15px;
+  text-align: center;
+}
+
+.cast-item img {
+  width: 55px;
 }
 
 h1,
