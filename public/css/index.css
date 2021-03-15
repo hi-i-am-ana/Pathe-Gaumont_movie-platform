@@ -124,7 +124,7 @@ nav li {
 
 nav img {
   width: 150px;
-  padding: 5px;
+  padding-top: 3px;
 }
 
 .rectangle-one {
@@ -224,6 +224,7 @@ iframe {
   opacity: 0.9;
 }
 
+
 /* POP UP WINDOW*/
 div#blur.active {
   -webkit-filter: blur(10px);
@@ -256,7 +257,7 @@ div#blur.active {
   -webkit-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  min-width: 33.3333%;
+  min-width: 25%;
 }
 
 .modal.active {
