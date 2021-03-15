@@ -1,74 +1,82 @@
-    <header>
-      <nav>
+<header>
+    <nav>
         <div>
-          <ul>
-            <li>
-              <img src="/static/assets/Logo.png" class="logo" alt="No CAAP Logo" />
-            </li>
-            <li>
-              <form class="rectangle-one search-bar" action="" method="">
-                <input type="search" id="search-input" autocomplete="off" placeholder="Search for a movie" name="" />
-                <span>
-                  <button type="submit" class="searchBtn">
-                  <i class="fas fa-search"></i></button>
-                </span>
-                <div class="search-filters-container">
-                  <i class="fas fa-times-circle close-advanced-search-button"></i>
-                  <button class="search-clear-filters" type="button">Clear all</button>
-                  <div class="search-filters-subcontainer">
-                    <div class="search-filters-half1">
-                      {{!-- Half of search filtres will appear here --}}
+            <ul>
+                <li>
+                    <img src="/static/assets/Logo.png" class="logo" alt="No CAAP Logo" />
+                </li>
+                <li>
+                    <div class="rectangle-one">
+                        <span><i class="fas fa-search"></i></span>
+                        <input type="search" id="search-input" autocomplete="off" placeholder="Search" name=""
+                            spellcheck="flase" />
+
+                        <span><button type="button" class="advanced-search-button">
+                            {{!-- Why is it button? --}}
+                            <i class="fas fa-filter"></i></button></span>
+
+                        <div class="search-filters-container">
+                            <i class="fas fa-times-circle close-advanced-search-button"></i>
+                            <h3>Refine Results</h3>
+
+                            <div class="search-filters-subcontainer">
+                                <div class="search-filters-half1">
+                                    {{!-- Half of search filtres will appear here --}}
+                                </div>
+                                <div class="search-filters-half2">
+                                    {{!-- Another half of search filtres will appear here --}}
+                                </div>
+
+                            </div>
+                            <button class="search-clear-filters" type="button">Clear all</button>
+
+                        </div>
+                        <div class="search-dropdown">
+                            {{!-- Search dropdown will appear here --}}
+                        </div>
                     </div>
-                    <div class="search-filters-half2">
-                      {{!-- Another half of search filtres will appear here --}}
-                    </div>
-                  </div>
-                </div>
-                <div class="search-dropdown">
-                  {{!-- Search dropdown will appear here --}}
-                </div>
-              </form>
-            </li>
-            <li>
-              <button type="button" class="advanced-search-button">Filter by genre</button>
-            </li>
-          </ul>
+                </li>
+
+            </ul>
         </div>
 
+
+        {{!-- Icon Button on the right --}}
         <div class="iconsButton">
-          <ul>
-            {{#if currentUser}}
-            <li>
-              <a href="#">
-                <i class="far fa-circle"></i>
-                <span>Profile</span>
-              </a>
-            </li>
-            {{/if}}
-            <li>
-              <a href="/">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-              </a>
-            </li>
-            {{#if currentUser}}
-            <li>
-              {{!-- <form method="post" action="/logout"> --}}
-                <a href="/logout">
-                  <i class="fas fa-door-closed"></i>
-                  <span>Logout</span>
-                </a>
-              {{!-- </form> --}}
-            </li>
-            {{else}}
-            <li>
-              <a class="open-modal">
-                <i class="fas fa-door-open"></i>
-                <span>Login</span>
-              </a>
-            </li>
-            {{/if}}
-          </ul>
+            <ul>
+                {{#if currentUser}}
+                <li>
+                    <a href="#">
+                        <i class="far fa-circle"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                {{/if}}
+                <li>
+                    <a href="/">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                {{#if currentUser}}
+                <li>
+                    {{!-- <form method="post" action="/logout"> --}}
+                        <a href="/logout">
+                            <i class="fas fa-door-closed"></i>
+                            <span>Logout</span>
+                        </a>
+                        {{!--
+                    </form> --}}
+                </li>
+                {{else}}
+                <li>
+                    <a class="open-modal">
+                        <i class="fas fa-door-open"></i>
+                        <span>Login</span>
+                    </a>
+                </li>
+                {{/if}}
+            </ul>
         </div>
-      </nav>
-    </header>
+    </nav>
+</header>

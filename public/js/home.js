@@ -305,3 +305,4 @@ $('.searchBtn').click(() => {
     console.log(filteredResults);
   };
 });
+
