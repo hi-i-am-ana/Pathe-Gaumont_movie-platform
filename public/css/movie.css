@@ -96,6 +96,21 @@
   background-color: darkgrey;
 }
 
+.cast-slider-container {
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.cast-item {
+  margin: 15px;
+  text-align: center;
+}
+
+.cast-item img {
+  width: 55px;
+}
+
 h1,
 h3 {
   text-align: start;

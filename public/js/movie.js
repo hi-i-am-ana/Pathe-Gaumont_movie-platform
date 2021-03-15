@@ -47,6 +47,10 @@ const displayMovieDetails = (data) => {
   `;
 
   $(".right-container").append(movieDetailsRight);
+  $(".right-container").append($(".cast-slider-container"))
+
+  // change the page title to the name of the movie
+  $("title").text(`${data.title} | No CAAP`)
 };
 
 //get movie's details
@@ -72,23 +76,33 @@ $.getJSON(
   }
 ).catch((err) => {});
 
-// TODO: get movie's cast
-$.getJSON();
-
-/*$.getJSON(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api_key}`)
-  .then((data) => {
-    console.log(data);
-    console.log(data.title);
-    displayMovieDetails(data);
-  })
-  .catch((err) => {
-    console.log(err);
+// get movie's cast - top 30 most popular
+$.getJSON(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${api_key}`)
+.then(data => {
+  data.cast.sort((a, b) => b.popularity - a.popularity);
+  const Actors = data.cast.slice(0, 30);
+  $.each(Actors, (i, actor) => {
+    $.getJSON(`https://api.themoviedb.org/3/person/${actor.id}/images?api_key=${api_key}`)
+    .then(data => {
+      const actorImageUrl = `https://image.tmdb.org/t/p/w45${data.profiles[0].file_path}`;
+      return actorImageUrl;
+    })
+    .then(actorImageUrl => {
+      $(".cast-slider-container").append(`
+      <div class="cast-item">
+      <img src="${actorImageUrl}" alt="${actor.name}">
+      <p class="cast-name">${actor.name}</p>
+      </div>
+      `)
+    })
+    .catch(err => {
+      // display error
+    });
   });
-*/
-/*$.getJSON(`/${movie.id}`).then((data) => {
-  console.log("HERE IS THE DATA IN JSON: " + data);
+})
+.catch(err => {
+  // display error
 });
-*/
 
 // rating hover for logged in users
 $(".rating-container.individual-movie a").mouseover(function() {
