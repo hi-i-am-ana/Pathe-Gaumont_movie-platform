@@ -127,8 +127,6 @@ nav img {
   padding: 5px;
 }
 
-
-
 .rectangle-one {
   padding: 10px;
   border-radius: 37px;
@@ -136,8 +134,7 @@ nav img {
   display: -ms-flexbox;
   display: flex;
   text-align: left;
-  border: 2px solid transparent;
-  border-color: #fcc9b9;
+  border: 2px solid #7304ff;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   position: relative;
@@ -193,7 +190,7 @@ nav img {
 }
 
 /* HOMEPAGE */
-.main-wrapper {
+/* .main-wrapper {
   width: 100vw;
   background-color: black;
   padding: 20%;
@@ -201,11 +198,30 @@ nav img {
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   margin-top: auto;
-}
+} */
 
 .secondary-wrapper {
   width: 80%;
   height: 200px;
+}
+
+.hero-background { 
+  background: #eee;
+  height: 600px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  border: 
+}
+
+iframe { 
+  box-sizing: border-box;
+  height: fit-content;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  width: 100vw;
+  opacity: 0.9;
 }
 
 /* POP UP WINDOW*/
@@ -240,7 +256,7 @@ div#blur.active {
   -webkit-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  min-width: 40%;
+  min-width: 33.3333%;
 }
 
 .modal.active {
@@ -484,10 +500,8 @@ i.fas.fa-eye {
   outline: 0;
 }
 
-.hero-section {
-  background-color: black;
-  padding: 1rem;
-}
+/* .hero-section {
+} */
 
 .movies-container {
   display: -webkit-box;
