@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $('#signup-password + .password-toggle').click(passwordToggle2);
     $('#confirm-password + .password-toggle').click(passwordToggle3);
 
+
     
 
     function modalToggle() {
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         blur.classList.toggle('active')
         const modal = document.querySelector('.modal')
         modal.classList.toggle('active')
+        
     }
 
     function toggleForgottenPassword() {

@@ -1,0 +1,235 @@
+Put all CSS related to search bar to Amelia's file */
+
+h2 {
+  font-size: 3rem;
+  margin: 2rem 0 0 2rem;
+}
+
+h3 {
+  text-align: initial;
+  margin-bottom: 1rem;
+}
+
+/* .search-bar {
+  position: relative;
+}
+
+.search-dropdown {
+  position: absolute;
+  left: 0;
+  top: 45px;
+  z-index: 1;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  border-radius: 4px;
+  background-color: #ffff;
+  letter-spacing: initial;
+  align-items: initial;
+}
+
+.search-item {
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  margin: initial;
+}
+
+.search-item:hover {
+  background-color: #fffff4;
+}
+
+.search-item-container {
+  display: flex;
+  width: 100%;
+  min-height: 140px;
+  border-bottom: 1px solid #9c84d6;
+}
+
+.search-item-image {
+  width: calc(92px + 1rem);
+  padding: 0.5rem;
+}
+
+.search-item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.search-item-title {
+  margin-bottom: 0.5rem;
+  font-weight: 900;
+}
+
+.search-filters-container {
+  position: absolute;
+  top: 45px;
+  z-index: 1;
+  padding: 1rem;
+  border-radius: 4px;
+  background-color: #fffff4;
+  border: 1px solid #9c84d6;
+  letter-spacing: initial;
+}
+
+.search-filters-subcontainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.search-filters-half1 {
+  margin-right: 1rem;
+}
+
+.search-genre-filter {
+  width: initial;
+}
+
+.search-clear-filters {
+  margin: 0 auto 1rem;
+  display: block;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+.search-clear-filters:focus {
+  outline: 0;
+}
+
+.hero-section {
+  background-color: black;
+  padding: 1rem;
+}
+
+iframe {
+  width: 853px;
+  height: 480px;
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.hero-details-container {
+  color: #ffff;
+  width: 853px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.hero-details, .hero-overview, .hero-cast {
+  margin-top: 1rem;
+}
+
+.hero-details {
+  display: flex;
+  align-items: baseline;
+}
+
+.hero-title {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.hero-runtime-genres-release {
+  margin-right: 1rem;
+}
+
+.hero-cast {
+  display: flex;
+}
+
+.hero-actor {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.hero-actor-image {
+  margin-right: 0.5rem;
+}
+
+.hero-rating-container {
+  display: flex;
+}
+
+.movies-container {
+  display: flex;
+  padding: 2rem;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  margin: 0 1rem 2rem;
+  position: relative;
+  text-align: center;
+}
+
+.rating-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: -5px;
+  top: 5px;
+  background-color: #693BDC;
+  padding: 1px;
+  min-width: 40px;
+  min-height: 30px;
+}
+
+.rating-star {
+  color: grey;
+}
+
+.rating-value {
+ font-size: 1.2rem;
+ color: white;
+}
+
+.number-of-votes {
+  font-size: 0.8rem;
+  color: lightgrey;
+}
+
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  width: 40%;
+}
+
+.genre-filter-container {
+  margin-bottom: 0.5rem;
+}
+
+.clear-filters {
+  border: none;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  background-color: inherit;
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+.clear-filters:focus {
+  outline: 0;
+}
