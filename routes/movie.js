@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db/database.js");
 const { api_key } = require("../config");
+const querystring = require('querystring');
 
 /*router.get("/movie", (req, res) => {
   res.render("pages/movie", {
@@ -61,6 +62,28 @@ router.get("/:id", (req, res) => {
       })
     );
 });
+
+router.get("/rate/:id", (req, res) => {
+  const currentUser = req.session.userId
+
+  if (currentUser) {
+    db.none("INSERT INTO ratings(movie_id, user_id, rating_value, create_at, update_at) VALUES ($1, $2, $3, now(), now())", [req.params.id, currentUser, req.query.rating])
+    .then(() => {
+      res.redirect(`/movie/${req.params.id}`)
+    })
+    .catch(() => {
+      res.render("pages/error", {
+        err: err,
+        title: "Error | No CAAP",
+      })
+    })
+  } else {
+    res.status(404).render("pages/error", {
+      err: { message: "HTTP ERROR 404. This page does not exist" },
+      title: "Error | Pathe Gaumont Movie Platform",
+    });
+  }
+})
 
 module.exports = router;
 

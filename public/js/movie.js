@@ -48,11 +48,35 @@ const displayMovieDetails = (data) => {
     genres.push(genre.name);
   });
 
-  $.getJSON(`/${movie_id}`).then((data) => {
+  // star display ratings
+  $.getJSON(`/ratings/${movie_id}`).then((data) => {
+    // get first 2 digits of rating
     communityRating = data.communityRating;
     numberOfVotes = data.numberOfVotes;
-    console.log(communityRating + "(" + numberOfVotes + ")");
-    $(".rating").text(communityRating + " (" + numberOfVotes + " reviews)");
+    starSelector = Number(communityRating.toString()[0]) + 1;
+
+    if (communityRating.toString().length > 1) {
+      communityRatingPercentage = communityRating.toString()[2] + "0%";
+    } else {
+      communityRatingPercentage = undefined
+    }
+
+    if (numberOfVotes !== 0) {
+      $(".rating").text(communityRating + " (" + numberOfVotes + " reviews)");
+      $(`.rating-container.individual-movie i:nth-child(${starSelector})`).prevAll().append(
+        `<i class="fas fa-star filled"></i>`
+      );
+      $(`.rating-container.individual-movie a:nth-child(${starSelector})`).prevAll().find("i").append(
+        `<i class="fas fa-star filled"></i>`
+      )
+      if (communityRatingPercentage !== undefined) {
+        $(`.rating-container.individual-movie i:nth-child(${starSelector}), .rating-container.individual-movie a:nth-child(${starSelector}) i`).append(
+          `<i class="fas fa-star filled" style="width:${communityRatingPercentage}"></i>`
+        );
+      }
+    } else {
+      $(".rating").text("(" + numberOfVotes + " reviews)");
+    }
   });
 
   let movieDetailsLeft = `
@@ -118,3 +142,16 @@ $.getJSON();
   console.log("HERE IS THE DATA IN JSON: " + data);
 });
 */
+
+// rating hover
+$(".rating-container.individual-movie a").mouseover(function() {
+  console.log("hovered")
+  $(this).prevAll().find("i").css("color", "orange");
+  $(this).find("i").css("color", "orange");
+  $(this).nextAll().find("i").css("color", "grey");
+});
+
+$(".rating-container.individual-movie").mouseleave(function () { 
+  $(this).find("i").css("color", "");
+});
+

@@ -61,6 +61,21 @@
   margin-top: 20px;
 }
 
+.rating-container.individual-movie i {
+  font-size: 40px;
+  color: grey;
+  position: relative;
+}
+
+.rating-container i.filled {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  font-size: 40px;
+  color: orange;
+}
+
 .rating {
   font-size: 30px;
   margin-left: 10px;

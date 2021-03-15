@@ -10,8 +10,20 @@
         <div class="right-container">
             {{!-- video, ratings, and overview will appear here --}}
             <iframe class="movie-video" allowfullscreen></iframe>
-            <div class="rating-container">
-                <i class="fas fa-star" style="font-size:40px;color:orange"></i>
+            <div class="rating-container individual-movie">
+                {{#if currentUser}}
+                <a href="/movie/rate/{{movie_id}}?rating=1"><i class="fas fa-star"></i></a>
+                <a href="/movie/rate/{{movie_id}}?rating=2"><i class="fas fa-star"></i></a>
+                <a href="/movie/rate/{{movie_id}}?rating=3"><i class="fas fa-star"></i></a>
+                <a href="/movie/rate/{{movie_id}}?rating=4"><i class="fas fa-star"></i></a>
+                <a href="/movie/rate/{{movie_id}}?rating=5"><i class="fas fa-star"></i></a>
+                {{else}}
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                {{/if}}
                 <p class="rating"></p>
                 <button>Rate this movie</button>
             </div>
