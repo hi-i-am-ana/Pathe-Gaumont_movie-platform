@@ -51,34 +51,48 @@
 
 .right-container iframe {
   border-radius: 20px;
-  height: 700px;
+  height: 480px;
   /*box-shadow: 5px 5px 10px #97979793;*/
 }
 
 .rating-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin-top: 20px;
 }
 
 .rating {
-  font-size: 30px;
+  font-size: 20px;
   margin-left: 10px;
 }
 
-.rating-container button {
-  margin-left: 20px;
+.movie-details-container button {
+  margin-top: 20px;
   padding: 15px 45px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   font-size: 15px;
-  /*color: white;*/
   border: 1px;
   border-radius: 8px;
   cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.left-container button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.rating-container button {
+  margin-top: 0px;
+  margin-left: 20px;
+}
+
+.rating-container p {
+  margin-top: 0px;
 }
 
 .rating-container button:hover {
-  background-color: darkgrey;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 h1,
