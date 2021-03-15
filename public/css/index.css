@@ -267,4 +267,8 @@ div#blur.active {
       -ms-flex-direction: column;
           flex-direction: column;
 }
+
+.hidden {
+  display: none;
+}
 /*# sourceMappingURL=index.css.map */
