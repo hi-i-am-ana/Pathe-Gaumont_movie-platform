@@ -1,29 +1,5 @@
 // for API request from TMDB and front-end stuff
 
-//const api_key = "cfefc3e8ca19cda5321de4a1caac0c85";
-
-/*console.log("HELLO WORLD! FROM movie.js");
-$(document).ready(function () {
-  $.getJSON(`/${movie.id}`).then((data) => {
-    console.log("THIS IS MY DATA: " + data);
-  });
-  /*const getMovieDetails = function () {
-    $.getJSON(`/${movie.id}`).then((data) => {
-      // get the movie id
-      console.log("THIS IS MY DATA: " + data);
-      console.log("THIS IS MY MOVIE ID: " + data.movie_id);
-    });
-
-    $.getJSON(
-      `https://api.themoviedb.org/3/movie/587807?api_key=${api_key}`
-    ).then((movie) => {
-      console.log("TESTING!!!");
-      console.log(movie.original_title);
-      getMovieDetails(movie);
-    });
-  };
-});*/
-
 // function definition
 const displayMovieDetails = (data) => {
   console.log(data);
@@ -48,36 +24,7 @@ const displayMovieDetails = (data) => {
     genres.push(genre.name);
   });
 
-  // star display ratings
-  $.getJSON(`/ratings/${movie_id}`).then((data) => {
-    // get first 2 digits of rating
-    communityRating = data.communityRating;
-    numberOfVotes = data.numberOfVotes;
-    starSelector = Number(communityRating.toString()[0]) + 1;
-
-    if (communityRating.toString().length > 1) {
-      communityRatingPercentage = communityRating.toString()[2] + "0%";
-    } else {
-      communityRatingPercentage = undefined
-    }
-
-    if (numberOfVotes !== 0) {
-      $(".rating").text(communityRating + " (" + numberOfVotes + " reviews)");
-      $(`.rating-container.individual-movie i:nth-child(${starSelector})`).prevAll().append(
-        `<i class="fas fa-star filled"></i>`
-      );
-      $(`.rating-container.individual-movie a:nth-child(${starSelector})`).prevAll().find("i").append(
-        `<i class="fas fa-star filled"></i>`
-      )
-      if (communityRatingPercentage !== undefined) {
-        $(`.rating-container.individual-movie i:nth-child(${starSelector}), .rating-container.individual-movie a:nth-child(${starSelector}) i`).append(
-          `<i class="fas fa-star filled" style="width:${communityRatingPercentage}"></i>`
-        );
-      }
-    } else {
-      $(".rating").text("(" + numberOfVotes + " reviews)");
-    }
-  });
+  displayRatingStars()
 
   let movieDetailsLeft = `
   <img src="${posterUrl}" alt="${data.title}">
@@ -125,7 +72,7 @@ $.getJSON(
   }
 ).catch((err) => {});
 
-// get movie's cast
+// TODO: get movie's cast
 $.getJSON();
 
 /*$.getJSON(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api_key}`)
@@ -143,9 +90,8 @@ $.getJSON();
 });
 */
 
-// rating hover
+// rating hover for logged in users
 $(".rating-container.individual-movie a").mouseover(function() {
-  console.log("hovered")
   $(this).prevAll().find("i").css("color", "orange");
   $(this).find("i").css("color", "orange");
   $(this).nextAll().find("i").css("color", "grey");
@@ -155,3 +101,59 @@ $(".rating-container.individual-movie").mouseleave(function () {
   $(this).find("i").css("color", "");
 });
 
+// ajax request to send rating to db
+$(".rating-container.individual-movie a").click(function(e) {
+  e.preventDefault();
+  $.getJSON(`/movie/allratings/${movie_id}`)
+  .then((data) => {
+    // prevents voting more than once
+    if (data.length !== 0) {
+      $(".rating-container.individual-movie .alert").text("You have already rated this movie, you cannot rate again.")
+    } else {
+      const rating = $(".rating-container.individual-movie a").index(this) + 1
+      $.post( `/movie/rate/${movie_id}?rating=${rating}`)
+      .done(function() {
+        setTimeout(displayRatingStars, 300)
+        $(".rating-container.individual-movie .alert").text("Thank you for rating this movie!")
+      })
+      .fail(function() {
+        $(".rating-container.individual-movie .alert").text("There was an error submitting your rating, please try again.")
+      })
+    }
+  })
+  .catch((err) => {
+    $(".rating-container.individual-movie .alert").text("There was an error submitting your rating, please try again.")
+  })
+})
+
+function displayRatingStars() {
+  // star display ratings
+  $.getJSON(`/ratings/${movie_id}`).then((data) => {
+    communityRating = data.communityRating;
+    numberOfVotes = data.numberOfVotes;
+    starSelector = Number(communityRating.toString()[0]) + 1;
+
+    if (communityRating.toString().length > 1) {
+      communityRatingPercentage = communityRating.toString()[2] + "0%";
+    } else {
+      communityRatingPercentage = undefined
+    }
+
+    if (numberOfVotes !== 0) {
+      $(".rating").text(communityRating + " (" + numberOfVotes + " reviews)");
+      $(`.rating-container.individual-movie i:nth-child(${starSelector})`).prevAll().append(
+        `<i class="fas fa-star filled"></i>`
+      );
+      $(`.rating-container.individual-movie a:nth-child(${starSelector})`).prevAll().find("i").append(
+        `<i class="fas fa-star filled"></i>`
+      )
+      if (communityRatingPercentage !== undefined) {
+        $(`.rating-container.individual-movie i:nth-child(${starSelector}), .rating-container.individual-movie a:nth-child(${starSelector}) i`).append(
+          `<i class="fas fa-star filled" style="width:${communityRatingPercentage}"></i>`
+        );
+      }
+    } else {
+      $(".rating").text("(" + numberOfVotes + " reviews)");
+    }
+  });
+}

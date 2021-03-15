@@ -17,15 +17,17 @@
                 <a href="/movie/rate/{{movie_id}}?rating=3"><i class="fas fa-star"></i></a>
                 <a href="/movie/rate/{{movie_id}}?rating=4"><i class="fas fa-star"></i></a>
                 <a href="/movie/rate/{{movie_id}}?rating=5"><i class="fas fa-star"></i></a>
+                <p class="rating"></p>
+                <p class="alert"></p>
                 {{else}}
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
-                {{/if}}
                 <p class="rating"></p>
-                <button>Rate this movie</button>
+                <button class="open-modal">Login to rate this movie</button>
+                {{/if}}
             </div>
 
             <!--<div class="cast-slider-container">
