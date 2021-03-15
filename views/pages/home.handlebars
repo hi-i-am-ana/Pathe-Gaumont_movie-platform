@@ -48,6 +48,15 @@
   </div>
 </section>
 
-<script src="/static/js/home.js" defer></script>
-<script src="/static/js/search.js" defer></script>
 <script>const api_key = "{{api_key}}"</script>
+<script src="/static/js/search.js" defer></script>
+
+{{#if search}}
+<script>
+  const searchValue = "{{search}}"
+  let genres = "{{genres}}"
+</script>
+<script src="/static/js/search_from_movie.js" defer></script>
+{{else}}
+<script src="/static/js/home.js" defer></script>
+{{/if}}

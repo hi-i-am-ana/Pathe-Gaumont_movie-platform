@@ -8,6 +8,18 @@ router.get('', (req, res) => {
     currentUser: req.session.userId,
     title: 'Home | No CAAP',
     api_key: api_key,
+    search: req.query.search
+  });
+});
+
+router.post('/', (req, res) => {
+  console.log(req.body.genre)
+  res.render('pages/home', {
+    currentUser: req.session.userId,
+    title: 'Home | No CAAP',
+    api_key: api_key,
+    search: req.body.search,
+    genres: req.body.genre
   });
 });
 

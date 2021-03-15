@@ -1,4 +1,48 @@
-// SEARCH
+// This script - is shared code for home and movie page: function for displaying list of movies; search filters; search dropdown
+
+// Declare function to display list of movies from received data
+const displayMovies = (data) => {
+  console.log(data);
+  let moviesContent = '';
+  if (data.results.length === 0) {
+    moviesContent = '<p>There are no movies that matched your query</p>';
+  } else {
+    $.each(data.results, (i, movie) => {
+      let posterUrl = '';
+      if (movie.poster_path === null) {
+        // TODO: Change placeholder image
+        posterUrl = 'https://loremflickr.com/185/278';
+      } else {
+        posterUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
+      };
+      moviesContent += `
+        <div class="movie" id="movie-${movie.id}">
+          <a href="/movie/${movie.id}"><img src="${posterUrl}" alt="${movie.title}"></a>
+          <h4>${movie.title}</h4>
+          <div class="rating-container">
+            <i class="fas fa-star rating-star" id="rating-star-${movie.id}"></i>
+            <div class="rating">
+              <span class="rating-value" id="rating-${movie.id}"></span>
+              <span class="number-of-votes" id="number-of-votes-${movie.id}"></span>
+            </div>
+          </div>
+        </div>
+      `;
+      $.getJSON(`/ratings/${movie.id}`)
+      .then(data => {
+        if (data.numberOfVotes !== 0) {
+          $(`#rating-${movie.id}`).text(`${data.communityRating}/`);
+          $(`#number-of-votes-${movie.id}`).text(data.numberOfVotes);
+          $(`#rating-star-${movie.id}`).attr('style', 'color:orange');
+        };
+      })
+      .catch(err => {
+        // display error
+      });
+    });
+  };
+  $('.movies').html(moviesContent);
+};
 
 // FILTERS FOR SEARCH
 
@@ -29,14 +73,14 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
     if (i <= halfLength) {
       $(`
       <div class="search-genre-filter-container">
-        <input class="search-genre-filter" type="checkbox" id="search-genre-${genre.id}" name="" value="${genre.id}">
+        <input class="search-genre-filter" type="checkbox" id="search-genre-${genre.id}" name="genre" value="${genre.id}">
         <label for="search-genre-${genre.id}">${genre.name}</label>
       </div>
       `).appendTo('.search-filters-half1');
     } else {
       $(`
       <div class="search-genre-filter-container">
-        <input class="search-genre-filter" type="checkbox" id="search-genre-${genre.id}" name="" value="${genre.id}">
+        <input class="search-genre-filter" type="checkbox" id="search-genre-${genre.id}" name="genre" value="${genre.id}">
         <label for="search-genre-${genre.id}">${genre.name}</label>
       </div>
       `).appendTo('.search-filters-half2');

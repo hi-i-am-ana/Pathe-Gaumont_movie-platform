@@ -1,56 +1,9 @@
 // TODO: .catch() - display errors
 // TODO: Pagination
-// TODO: Logic for searching from movie page??? search button onclick -> get request with special URL -> in get route redirect (render? - url will be misleading) home page but passing some query parameter -> in home get route pass this parameter to template -> using this parameter in script
 // TODO: Media queries
-// TODO: Put all search logic in a separate file - will be used on both pages
 // TODO: Put all search CSS in Amelia's file - will be used on both pages
-
 // TODO: Run search by clicking enter button
 // TODO: Local filters for search results
-
-// Declare function to display list of movies from received data
-const displayMovies = (data) => {
-  console.log(data);
-  let moviesContent = '';
-  if (data.results.length === 0) {
-    moviesContent = '<p>There are no movies that matched your query</p>';
-  } else {
-    $.each(data.results, (i, movie) => {
-      let posterUrl = '';
-      if (movie.poster_path === null) {
-        // TODO: Change placeholder image
-        posterUrl = 'https://loremflickr.com/185/278';
-      } else {
-        posterUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
-      };
-      moviesContent += `
-        <div class="movie" id="movie-${movie.id}">
-          <a href="/movie/${movie.id}"><img src="${posterUrl}" alt="${movie.title}"></a>
-          <h4>${movie.title}</h4>
-          <div class="rating-container">
-            <i class="fas fa-star rating-star" id="rating-star-${movie.id}"></i>
-            <div class="rating">
-              <span class="rating-value" id="rating-${movie.id}"></span>
-              <span class="number-of-votes" id="number-of-votes-${movie.id}"></span>
-            </div>
-          </div>
-        </div>
-      `;
-      $.getJSON(`/ratings/${movie.id}`)
-      .then(data => {
-        if (data.numberOfVotes !== 0) {
-          $(`#rating-${movie.id}`).text(`${data.communityRating}/`);
-          $(`#number-of-votes-${movie.id}`).text(data.numberOfVotes);
-          $(`#rating-star-${movie.id}`).attr('style', 'color:orange');
-        };
-      })
-      .catch(err => {
-        // display error
-      });
-    });
-  };
-  $('.movies').html(moviesContent);
-};
 
 // HERO MOVIE
 
@@ -203,7 +156,12 @@ $('.clear-filters').click(() => {
 
 // SEARCH
 
-// Perform movie search (with or without filters) for final search value, then display list of found movies
+// Prevent search form from submitting
+$('.search-bar').submit((e) => {
+  e.preventDefault();
+});
+
+// Perform movie search (with or without filters) for final search value, then display list of found and filtered movies
 $('.searchBtn').click(() => {
   const searchValue = $('#search-input').val();
   if (searchValue !== '') {
