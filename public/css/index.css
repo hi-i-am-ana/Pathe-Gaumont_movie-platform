@@ -44,15 +44,16 @@ body {
           flex-direction: column;
 }
 
-h4 {
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid lightgray;
-  margin: 10px 0 20px;
+h5 {
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid lightgray; 
+  line-height: 0.1em;
+  margin: 30px 0 20px; 
 } 
 
 /* TODO: Is this selector right? */
-h4 span { 
+h5 span { 
    background:#fff; 
    padding:0 10px; 
 }
