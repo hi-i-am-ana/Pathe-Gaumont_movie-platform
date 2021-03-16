@@ -2,10 +2,8 @@
 
 // function definition
 const displayMovieDetails = (data) => {
-  console.log(data);
-
   let backdropUrl = `https://image.tmdb.org/t/p/w1280/${data.backdrop_path}`;
-  //$(".right-container").css("background", "url(" + backdropUrl + ")");
+
   $(".right-container").css({
     background:
       "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))" +
@@ -107,47 +105,45 @@ $.getJSON(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${api_
 });
 
 // rating hover for logged in users
-$(".rating-container.individual-movie a").mouseover(function() {
+$(".rating-function.logged-in a").mouseover(function() {
   $(this).prevAll().find("i").css("color", "orange");
   $(this).find("i").css("color", "orange");
   $(this).nextAll().find("i").css("color", "grey");
 });
 
-$(".rating-container.individual-movie").mouseleave(function () { 
+$(".rating-function.logged-in").mouseleave(function () { 
   $(this).find("i").css("color", "");
 });
 
 // ajax request to send rating to db
-$(".rating-container.individual-movie a").click(function(e) {
+$(".rating-function.logged-in a").click(function(e) {
   e.preventDefault();
+
   $.getJSON(`/movie/allratings/${movie_id}`)
   .then((data) => {
-    // prevents voting more than once
-    if (data.length !== 0) {
-      $(".rating-container.individual-movie .alert").text("You have already rated this movie, you cannot rate again.")
-    } else {
-      const rating = $(".rating-container.individual-movie a").index(this) + 1
-      $.post( `/movie/rate/${movie_id}?rating=${rating}`)
-      .done(function() {
-        setTimeout(displayRatingStars, 300)
-        $(".rating-container.individual-movie .alert").text("Thank you for rating this movie!")
-      })
-      .fail(function() {
-        $(".rating-container.individual-movie .alert").text("There was an error submitting your rating, please try again.")
-      })
-    }
+    const rating = $(".rating-function.logged-in a").index(this) + 1
+    $.post( `/movie/rate/${movie_id}?rating=${rating}`)
+    .done(function() {
+      setTimeout(displayRatingStars, 300)
+      $(".rating-container.individual-movie .alert").text("Thank you for rating this movie!")
+    })
+    .fail(function() {
+      $(".rating-container.individual-movie .alert").text("There was an error submitting your rating, please try again.")
+    })
   })
   .catch((err) => {
     $(".rating-container.individual-movie .alert").text("There was an error submitting your rating, please try again.")
   })
 })
 
+// star display ratings
 function displayRatingStars() {
-  // star display ratings
+
+  // display community rating when logged out
   $.getJSON(`/ratings/${movie_id}`).then((data) => {
     communityRating = data.communityRating;
     numberOfVotes = data.numberOfVotes;
-    starSelector = Number(communityRating.toString()[0]) + 1;
+    starSelector = Number(communityRating.toString()[0]);
 
     if (communityRating.toString().length > 1) {
       communityRatingPercentage = communityRating.toString()[2] + "0%";
@@ -157,14 +153,12 @@ function displayRatingStars() {
 
     if (numberOfVotes !== 0) {
       $(".rating").text(communityRating + " (" + numberOfVotes + " reviews)");
-      $(`.rating-container.individual-movie i:nth-child(${starSelector})`).prevAll().append(
+      $(`.rating-function.logged-out i:nth-child(${starSelector})`).prevAll().addBack().append(
         `<i class="fas fa-star filled"></i>`
       );
-      $(`.rating-container.individual-movie a:nth-child(${starSelector})`).prevAll().find("i").append(
-        `<i class="fas fa-star filled"></i>`
-      )
+      
       if (communityRatingPercentage !== undefined) {
-        $(`.rating-container.individual-movie i:nth-child(${starSelector}), .rating-container.individual-movie a:nth-child(${starSelector}) i`).append(
+        $(`.rating-function.logged-out i:nth-child(${starSelector})`).next().append(
           `<i class="fas fa-star filled" style="width:${communityRatingPercentage}"></i>`
         );
       }
@@ -172,6 +166,18 @@ function displayRatingStars() {
       $(".rating").text("(" + numberOfVotes + " reviews)");
     }
   });
+
+  // display user rating when logged in
+  $.getJSON(`/movie/userrating/${movie_id}`).then((data) => {
+    userRating = data.rating_value
+
+    if (data !== null) {
+      $(`.rating-function.logged-in a:nth-child(${userRating})`).prevAll().addBack().find("i").append(
+        `<i class="fas fa-star filled"></i>`
+      );
+      $(`.rating-function.logged-in a:nth-child(${userRating})`).nextAll().find("i").empty()
+    }
+  })
 }
 
 // Prevent search form from submitting if search input is empty
