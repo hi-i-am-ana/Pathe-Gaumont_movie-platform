@@ -125,7 +125,7 @@ $(".rating-function.logged-in a").click(function(e) {
     $.post( `/movie/rate/${movie_id}?rating=${rating}`)
     .done(function() {
       setTimeout(displayRatingStars, 300)
-      $(".rating-container.individual-movie .alert").text("Thank you for rating your rating!")
+      $(".rating-container.individual-movie .alert").text("Thank you for rating this movie!")
     })
     .fail(function() {
       $(".rating-container.individual-movie .alert").text("There was an error submitting your rating, please try again.")
