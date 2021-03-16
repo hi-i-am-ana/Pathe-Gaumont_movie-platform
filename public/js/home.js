@@ -1,9 +1,8 @@
 // TODO: .catch() - display errors
 // TODO: Pagination
 // TODO: Media queries
-// TODO: Put all search CSS in Amelia's file - will be used on both pages
-// TODO: Run search by clicking enter button
 // TODO: Local filters for search results
+// TODO: Hide filters when search result is displayed
 
 // HERO MOVIE
 
@@ -191,6 +190,8 @@ $('.searchBtn').click(() => {
         // if (data.results.length < 20) {
         //   break;
         // };
+        $('.search-dropdown').hide();
+        $('.search-bar').removeClass('searching');
         $('.hero-section').hide();
         $('.filters-container').hide();
         $('.movies-section-header').text('Search Results');
@@ -202,4 +203,11 @@ $('.searchBtn').click(() => {
     // };
     console.log(filteredResults);
   };
+});
+
+$.ajax({
+  url: `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`,
+  async: false,
+}).done(function(data) {
+  console.log(data);
 });
