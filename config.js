@@ -10,11 +10,3 @@ module.exports = {
 
   sendgrid_api_key: process.env.SENDGRID_API_KEY,
 };
-
-// This is how my .env looks like:
-// PORT=2046
-
-// POSTGRES_PORT=5432
-// POSTGRES_DATABASE="pathe_gaumont"
-// POSTGRES_USERNAME="anastasia"
-// POSTGRES_PASSWORD="password"
