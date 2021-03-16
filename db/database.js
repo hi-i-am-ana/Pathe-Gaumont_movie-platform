@@ -1,7 +1,18 @@
 const pgp = require('pg-promise')();
-const { pgport, pguser, pgdatabase, pgpassword } = require('../config');
+const { pgport, pguser, pgdatabase, pgpassword, pghost } = require('../config');
 
-const connection = `postgres://${pguser}:${pgpassword}@localhost:${pgport}/${pgdatabase}`;
+let connection
+
+if (process.env.SSL) {
+    connection = {
+        connectionString: `postgres://${pguser}:${pgpassword}@${pghost}:${pgport}/${pgdatabase}`,
+        ssl: { rejectUnauthorized: false }
+    };
+} else {
+    connection = `postgres://${pguser}:${pgpassword}@${pghost}:${pgport}/${pgdatabase}`
+}
+
 const db = pgp(connection);
 
 module.exports = db;
+
