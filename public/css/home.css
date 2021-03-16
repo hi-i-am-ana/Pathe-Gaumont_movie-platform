@@ -1,6 +1,6 @@
 /* Put all CSS related to search bar to Amelia's file */
 
-h2 {
+/* h2 {
   font-size: 3rem;
   margin: 2rem 0 0 2rem;
 }
@@ -66,7 +66,7 @@ h3 {
   font-weight: 900;
 }
 
-.search-filters-container {
+/* .search-filters-container {
   position: absolute;
   top: 45px;
   z-index: 1;
@@ -75,9 +75,9 @@ h3 {
   background-color: #fffff4;
   border: 1px solid #9c84d6;
   letter-spacing: initial;
-}
+} */
 
-.search-filters-subcontainer {
+/* .search-filters-subcontainer {
   display: flex;
   justify-content: space-evenly;
 }
@@ -99,30 +99,18 @@ h3 {
   font-family: inherit;
   font-weight: 900;
   text-decoration: underline;
-}
+} */
 
 .search-clear-filters:focus {
   outline: 0;
-}
+} */
 
-.hero-section {
-  background-color: black;
-  padding: 1rem;
-}
 
-iframe {
-  width: 853px;
-  height: 480px;
-  max-width: 100%;
-  display: block;
-  margin: auto;
-}
 
 .hero-details-container {
-  color: #ffff;
   width: 853px;
   max-width: 100%;
-  margin: auto;
+  margin: 0 20px;
 }
 
 .hero-details, .hero-overview, .hero-cast {
