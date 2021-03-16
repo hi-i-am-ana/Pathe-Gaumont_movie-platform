@@ -13,6 +13,10 @@ body {
   height: 100%;
 }
 
+body {
+  min-height: 100vh;
+}
+
 html h3,
 body h3 {
   text-align: center;
@@ -42,10 +46,9 @@ body {
 
 h4 {
   width: 100%;
-  text-align: center; 
-  border-bottom: 1px solid lightgray; 
-  line-height: 0.1em;
-  margin: 10px 0 20px; 
+  text-align: center;
+  border-bottom: 1px solid lightgray;
+  margin: 10px 0 20px;
 } 
 
 /* TODO: Is this selector right? */
@@ -56,7 +59,7 @@ h4 span {
 
 /* FOOTER */
 footer {
-  bottom: 0;
+  margin-top: auto;
   width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -66,8 +69,6 @@ footer {
           justify-content: space-between;
   padding: 20px;
   background-color: white;
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
 }
 
 footer img {
@@ -134,37 +135,52 @@ nav img {
 }
 
 .rectangle-one {
-  padding: 10px;
-  border-radius: 37px;
+  border-radius: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   text-align: left;
-  border: 2px solid #7304ff;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  border: 1.5px solid #7304ff;
   position: relative;
+  font-size: 1rem;
+  background: white;
+  margin: 3px 5px;
+  height: 48px;
+  padding: 0 10px;
 }
 
 .rectangle-one.focus {
   -webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+  position:absolute;
 }
 
 .rectangle-one input[type="search"] {
-  width: 350px;
+  width: 300px;
   outline: none;
-  -webkit-transition: all width 0.4s ease-in;
-  transition: all width 0.4s ease-in;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   height: 100%;
+  font-size: 1rem;
 }
+
+/* .rectangle-one input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  padding-right: 4px;
+  color: #80868b;
+  background-color:lightcoral;
+  cursor: pointer;
+  border: 0;
+} */
 
 .rectangle-one input[type="search"]:focus {
   outline: 0;
-  width: 350px;
+}
+
+.rectangle-one:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid lightgray;
+  z-index: 3;
 }
 
 .rectangle-one .search-dropdown {
@@ -172,7 +188,7 @@ nav img {
   left: 0;
   top: 45px;
   background-color: #ffff;
-  width: 400px;
+  width: 100%;
   z-index: 3;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -181,24 +197,33 @@ nav img {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  overflow: scroll;
   max-height: 85vh;
   border-radius: 0 0 24px 24px;
   padding-bottom: 4px;
-  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  outline: 1px solid lightgray;
   /* letter-spacing: initial;
     align-items: initial; */
 }
 
+.rectangle-one.searching {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid lightgray;
+  border-radius: 30px 30px 0 0;
+}
+
+/* .rectangle-one .search-dropdown.searching {
+  
+} */
+
 /* TODO: Deleted in css update but keep for the moment */
 .searchBtn {
-  background-color: white;
-  cursor: pointer;
+  line-height: 48px;
 }
 
 .iconsButton {
-  padding-right: 20px;
-  padding-top: 10px;
+  padding-right: 12px;
+  padding-top: 3px;
 }
 
 /* HOMEPAGE */
@@ -214,8 +239,11 @@ nav img {
 }
 
 .secondary-wrapper {
-  width: 80%;
-  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 50px auto;
 }
 
 .hero-section {
@@ -255,6 +283,12 @@ div#blur.active {
   overflow-y: hidden;
 }
 
+#blur {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Left in max-height and overflow scroll to allow for smaller screens */
 .modal {
   z-index: 1;
@@ -279,6 +313,7 @@ div#blur.active {
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   min-width: 25%;
+  max-width: 410px;
 }
 
 .modal.active {

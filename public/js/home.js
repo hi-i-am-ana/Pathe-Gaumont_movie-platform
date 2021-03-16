@@ -304,9 +304,11 @@ $('#search-input').on('input', () => {
         });
         if (searchDropdownContent === '') {
           $('.search-dropdown').hide();
+          $('.search-bar').removeClass("searching");
         } else {
           $('.search-dropdown').show();
           $('.search-dropdown').html(searchDropdownContent);
+          $('.search-bar').addClass("searching");
         };
       })
       .catch(err => {
