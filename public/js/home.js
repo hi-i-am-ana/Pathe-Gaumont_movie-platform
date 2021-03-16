@@ -7,7 +7,7 @@
 
 // TODO: Run search by clicking enter button
 // TODO: Local filters for search results
-// TODO: Display hero movie details
+// TODO: Display hero movie rating
 
 // Declare function to display list of movies from received data
 const displayMovies = (data) => {
@@ -22,7 +22,7 @@ const displayMovies = (data) => {
         // TODO: Change placeholder image
         posterUrl = 'https://loremflickr.com/185/278';
       } else {
-        posterUrl = `https://image.tmdb.org/t/p/w185/${movie.poster_path}`;
+        posterUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
       };
       moviesContent += `
         <div class="movie" id="movie-${movie.id}">
@@ -37,14 +37,16 @@ const displayMovies = (data) => {
           </div>
         </div>
       `;
-      // TODO: How else can I pass id?
-      $.getJSON(`/${movie.id}`)
+      $.getJSON(`/ratings/${movie.id}`)
       .then(data => {
         if (data.numberOfVotes !== 0) {
           $(`#rating-${movie.id}`).text(`${data.communityRating}/`);
           $(`#number-of-votes-${movie.id}`).text(data.numberOfVotes);
           $(`#rating-star-${movie.id}`).attr('style', 'color:orange');
         };
+      })
+      .catch(err => {
+        // display error
       });
     });
   };
@@ -53,34 +55,81 @@ const displayMovies = (data) => {
 
 // HERO MOVIE
 
-// Get movie for hero - random movie from the first 20 now playing movies
+// Get hero movie - random movie from the first 20 now playing movies
 $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&page=1`)
 .then(data => {
   const randomIndex = Math.floor(Math.random() * data.results.length);
   const heroMovie = data.results[randomIndex];
-  console.log(heroMovie);
-  return heroMovie;
+  $('.hero-title').text(heroMovie.title);
+  $('.hero-overview').text(heroMovie.overview);
+  $('.hero-release_date').text(heroMovie.release_date);
+  return heroMovie.id;
 })
-// Then get videos for hero movie, filter trailers and display random trailer
-.then(heroMovie => {
-  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovie.id}/videos?api_key=${api_key}`)
+.then(heroMovieId => {
+  // Then first: get hero movie additional details (genre names and runtime)
+  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovieId}?api_key=${api_key}`)
+  .then(data => {
+    const heroGenres = [];
+    $.each(data.genres, (i, genre) => {
+      heroGenres.push(genre.name);
+    });
+    $('.hero-runtime-genres-release').text(`${data.runtime} min\u00A0\u00A0|\u00A0\u00A0${heroGenres.join(', ')}\u00A0\u00A0|\u00A0\u00A0${data.release_date}`);
+  })
+  .catch(err => {
+    // display error
+  });
+  // Second: get hero movie cast (3 most popular) and their profile pictures
+  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovieId}/credits?api_key=${api_key}`)
+  .then(data => {
+    data.cast.sort((a, b) => b.popularity - a.popularity);
+    const heroActors = [data.cast[0], data.cast[1], data.cast[2]];
+    $.each(heroActors, (i, actor) => {
+      $.getJSON(`https://api.themoviedb.org/3/person/${actor.id}/images?api_key=${api_key}`)
+      .then(data => {
+        const actorImageUrl = `https://image.tmdb.org/t/p/w45${data.profiles[0].file_path}`;
+        return actorImageUrl;
+      })
+      .then(actorImageUrl => {
+        $(`#hero-actor${i}-image`).attr('src', actorImageUrl);
+        $(`#hero-actor${i}-name`).text(actor.name)
+      })
+      .catch(err => {
+        // display error
+      });
+    });
+  })
+  .catch(err => {
+    // display error
+  });
+  // Third: get hero movie video - filter trailers only and choose random trailer
+  $.getJSON(`https://api.themoviedb.org/3/movie/${heroMovieId}/videos?api_key=${api_key}`)
   .then((data) => {
     const filteredResults = data.results.filter(video => video.type === 'Trailer' & (video.site === 'YouTube' || video.site === 'Vimeo'));
     const randomIndex = Math.floor(Math.random() * filteredResults.length);
     const heroVideo = filteredResults[randomIndex];
-    console.log(heroVideo);
     // TODO: Add condition for case of other sites
-    let heroVideoURL = '';
     if (heroVideo.site === 'YouTube') {
-      heroVideoURL = `https://www.youtube.com/embed/${heroVideo.key}`;
+      heroVideoUrl = `https://www.youtube.com/embed/${heroVideo.key}`;
     } else if (heroVideo.site === 'Vimeo') {
-      heroVideoURL = `https://vimeo.com/${heroVideo.key}`;
+      heroVideoUrl = `https://vimeo.com/${heroVideo.key}`;
     };
-    $('.hero-video').attr('src', heroVideoURL);
+    $('.hero-video').attr('src', heroVideoUrl);
   })
   .catch(err => {
     // display error
-  }); 
+  });
+  // And fourth: get hero movie rating
+  $.getJSON(`/ratings/${heroMovieId}`)
+      .then(data => {
+        if (data.numberOfVotes !== 0) {
+          $(`.hero-rating-value`).text(`\u00A0${data.communityRating}`);
+          $(`.hero-number-of-votes`).text(`(${data.numberOfVotes})`);
+          $(`#hero-rating-star`).attr('style', 'color:orange');
+        };
+      })
+      .catch(err => {
+        // display error
+      });
 })
 .catch(err => {
   // display error
@@ -208,8 +257,12 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
 $('.search-dropdown').hide();
 
 // Add onblur event listener for search input to hide search dropdown when search input loses focus
-$('#search-input').blur(() => {
-  $('.search-dropdown').hide();
+$('#search-input').blur((e) => {
+  $(window).click((e) => {
+    if(e.target !== $('.search-dropdown')) {
+      $('.search-dropdown').hide();
+    };
+  });
 });
 
 // TODO: Do we need this?

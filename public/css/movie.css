@@ -62,6 +62,21 @@
   margin-top: 20px;
 }
 
+.rating-container.individual-movie i {
+  font-size: 40px;
+  color: grey;
+  position: relative;
+}
+
+.rating-container i.filled {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  font-size: 40px;
+  color: orange;
+}
+
 .rating {
   font-size: 20px;
   margin-left: 10px;
@@ -95,6 +110,37 @@
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+.cast-slider-container {
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.cast-item {
+  margin: 15px;
+  text-align: center;
+}
+
+.cast-item img {
+  width: 55px;
+  border-radius: 8px;
+}
+
+.cast-slider-container::-webkit-scrollbar {
+  border-radius: 20px;
+  height: 10px;
+}
+
+.cast-slider-container::-webkit-scrollbar-track {
+  background: rgba(158, 158, 158, 0.2);        /* color of the tracking area */
+  border-radius: 20px;
+}
+
+.cast-slider-container::-webkit-scrollbar-thumb {
+  background-color: white;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+}
+
 h1,
 h3 {
   text-align: start;
@@ -108,3 +154,4 @@ h3 {
 p {
   margin-top: 10px;
 }
+
