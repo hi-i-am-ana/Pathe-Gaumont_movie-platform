@@ -160,6 +160,7 @@ nav img {
   outline: none;
   height: 100%;
   font-size: 1rem;
+  background-color: transparent;
 }
 
 /* .rectangle-one input[type="search"]::-webkit-search-cancel-button {
