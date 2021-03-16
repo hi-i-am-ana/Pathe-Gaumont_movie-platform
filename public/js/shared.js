@@ -30,3 +30,9 @@ function setErrorFor(input, message) {
     return add.test(inputEmail);
   }
   
+$(".formcontrol > input ").change = checkLoginInput();
+$(".formcontrol > input ").change = checkInputs();
+$('#login-form').attr('novalidate', '');
+$('#signup-form').attr('novalidate', '');
+document.getElementById("login-form").noValidate = true;
+document.getElementById("signup-form").noValidate = true;
