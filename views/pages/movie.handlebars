@@ -12,19 +12,24 @@
             <iframe class="movie-video" allowfullscreen></iframe>
             <div class="rating-container individual-movie">
                 {{#if currentUser}}
-                <a href="/movie/rate/{{movie_id}}?rating=1"><i class="fas fa-star"></i></a>
-                <a href="/movie/rate/{{movie_id}}?rating=2"><i class="fas fa-star"></i></a>
-                <a href="/movie/rate/{{movie_id}}?rating=3"><i class="fas fa-star"></i></a>
-                <a href="/movie/rate/{{movie_id}}?rating=4"><i class="fas fa-star"></i></a>
-                <a href="/movie/rate/{{movie_id}}?rating=5"><i class="fas fa-star"></i></a>
+                <h3 style="color: orange;margin: 0 15px 0 0;">Your rating:</h3>
+                <div class="rating-function logged-in">
+                    <a href="/movie/rate/{{movie_id}}?rating=1"><i class="fas fa-star"></i></a>
+                    <a href="/movie/rate/{{movie_id}}?rating=2"><i class="fas fa-star"></i></a>
+                    <a href="/movie/rate/{{movie_id}}?rating=3"><i class="fas fa-star"></i></a>
+                    <a href="/movie/rate/{{movie_id}}?rating=4"><i class="fas fa-star"></i></a>
+                    <a href="/movie/rate/{{movie_id}}?rating=5"><i class="fas fa-star"></i></a>
+                </div>
                 <p class="rating"></p>
                 <p class="alert"></p>
                 {{else}}
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+                <div class="rating-function logged-out">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
                 <p class="rating"></p>
                 <button class="open-modal">Login to rate this movie</button>
                 {{/if}}
