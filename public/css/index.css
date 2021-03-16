@@ -582,6 +582,8 @@ hr {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  background-color: white;
+  padding: 20px;
 }
 
 .movie {
@@ -601,24 +603,7 @@ hr {
   text-align: center;
 }
 
-.movies-section .rating-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  position: absolute;
-  left: -5px;
-  top: 5px;
-  background-color: #693bdc;
-  padding: 1px;
-  min-width: 40px;
-  min-height: 30px;
-}
+
 
 .rating-star {
   color: grey;
@@ -675,11 +660,11 @@ hr {
 
 .movies-section-header {
   text-align: center;
-  margin: 60px auto 20px auto;
+  margin: 60px auto 0 auto;
   font-size: 2rem;
   font-weight: 800;
   width: 100%; 
-  padding:0 10px; 
+
 }
 
 

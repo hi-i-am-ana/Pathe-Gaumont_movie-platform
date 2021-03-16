@@ -170,14 +170,19 @@ h3 {
   text-align: center;
 }
 
+.movie img {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
 .rating-container {
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: -5px;
-  top: 5px;
-  background-color: #693BDC;
+  align-items: center;
+  left: 8px;
+  top: 0px;
+  background-color: #7304ff;
   padding: 1px;
   min-width: 40px;
   min-height: 30px;
@@ -201,8 +206,10 @@ h3 {
   display: flex;
   flex-direction: column;
   border: 0;
-  width: 40%;
+  width: 55%;
+  padding-top: 20px;
 }
+
 
 .genre-filter-container {
   margin-bottom: 0.5rem;
@@ -212,10 +219,8 @@ h3 {
   border: none;
   margin-bottom: 1rem;
   cursor: pointer;
-  font-family: inherit;
-  background-color: inherit;
-  font-weight: 900;
   text-decoration: underline;
+  margin-top: 10px;
 }
 
 .clear-filters:focus {
