@@ -30,3 +30,5 @@ function setErrorFor(input, message) {
     return add.test(inputEmail);
   }
   
+$(".formcontrol > input ").change = checkLoginInput();
+$(".formcontrol > input ").change = checkInputs();

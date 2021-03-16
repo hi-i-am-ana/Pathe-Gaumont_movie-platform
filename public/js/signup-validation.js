@@ -1,17 +1,15 @@
 const form = document.getElementById("signup-form");
-const lastName = document.getElementById("last_nameInput");
-const firstName = document.getElementById("first_nameInput");
-const email = document.getElementById("emailInput");
-const password = document.getElementById("passwordInput");
-const confirmPassword = document.getElementById("confirmPasswordInput");
+const lastName = document.getElementById("last-name");
+const firstName = document.getElementById("first-name");
+const email = document.getElementById("signup-email");
+const password = document.getElementById("signup-password");
+const confirmPassword = document.getElementById("confirm-password");
 
 //NEEDS TO BE CHANGE
 form.addEventListener('submit', e => {
-
   if (!checkInputs()) {
     e.preventDefault()
   }
-
 });
 
 function checkInputs() {
@@ -22,42 +20,42 @@ function checkInputs() {
   const confirmPasswordValue = confirmPassword.value;
 
   if (lastNameValue === "") {
-    setErrorFor(last_nameInput, "Last name is required");
+    setErrorFor(lastName, "Last name is required");
   } else {
-    setSuccessFor(last_nameInput);
+    setSuccessFor(lastName);
   }
 
   if (firstNameValue === "") {
-    setErrorFor(first_nameInput, "First name is required");
+    setErrorFor(firstName, "First name is required");
   } else {
-    setSuccessFor(first_nameInput);
+    setSuccessFor(firstName);
   }
 
   if (emailValue === "") {
-    setErrorFor(emailInput, "Email address cannot be blank");
+    setErrorFor(email, "Email address cannot be blank");
   } else if (!isEmail(emailValue)) {
-    setErrorFor(emailInput, "Email is not a valid address");
+    setErrorFor(email, "Email is not a valid address");
   } else {
-    setSuccessFor(emailInput);
+    setSuccessFor(email);
   }
 
   if (passwordValue === "") {
-    setErrorFor(passwordInput, "Password cannot be blank");
+    setErrorFor(password, "Password cannot be blank");
   } else if (!isPassword(passwordValue)) {
-    setErrorFor(passwordInput, "At least six characters, lower and uppercase letter and numbers")
+    setErrorFor(password, "At least six characters, lower and uppercase letter and numbers")
   } else {
-    setSuccessFor(passwordInput);
+    setSuccessFor(password);
   }
 
 
   if (confirmPasswordValue === "") {
-    setErrorFor(confirmPasswordInput, "Password cannot be blank");
+    setErrorFor(confirmPassword, "Password cannot be blank");
   } else if (passwordValue != confirmPasswordValue) {
     console.log("this is", passwordValue)
     console.log("this is confirm", confirmPasswordValue)
-    setErrorFor(confirmPasswordInput, "Password does not match");
+    setErrorFor(confirmPassword, "Password does not match");
   } else {
-    setSuccessFor(confirmPasswordInput, "Password is a match");
+    setSuccessFor(confirmPassword, "Password is a match");
   }
   return true;
 }
