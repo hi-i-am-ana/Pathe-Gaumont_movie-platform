@@ -8,6 +8,18 @@ router.get('', (req, res) => {
     currentUser: req.session.userId,
     title: 'Home | No CAAP',
     api_key: api_key,
+    search: req.query.search
+  });
+});
+
+router.post('/', (req, res) => {
+  console.log(req.body.genre)
+  res.render('pages/home', {
+    currentUser: req.session.userId,
+    title: 'Home | No CAAP',
+    api_key: api_key,
+    search: req.body.search,
+    genres: req.body.genre
   });
 });
 
@@ -16,7 +28,7 @@ router.get('/ratings/:id', (req,res) => {
   .then(ratings => {
     if (ratings.length !== 0) {
       const reducedRatings = ratings.reduce((accu, curval) => accu + curval.rating_value, 0);
-      const communityRating = reducedRatings/ratings.length;
+      const communityRating = Math.round((reducedRatings/ratings.length) * 10) / 10;
       res.json({movie_id: req.params.id, communityRating: communityRating, numberOfVotes: ratings.length});
     } else {
       // Do I need this else??? Without it community rating will be null, but I don't show rating if it's 0

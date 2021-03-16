@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="/static/css/home.css">
 
 <section class="hero-section">
-  {{!-- src (link to video of random "now-playing" movie) will be added by script --}}
-  <iframe class="hero-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="hero-background">
+    {{!-- src (link to video of random "now-playing" movie) will be added by script --}}
+    <iframe class="hero-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
   <div class="hero-details-container">
     <div class="hero-details">
       <p class="hero-title"></p>
@@ -48,5 +50,15 @@
   </div>
 </section>
 
-<script src="/static/js/home.js" defer></script>
 <script>const api_key = "{{api_key}}"</script>
+<script src="/static/js/search.js" defer></script>
+
+{{#if search}}
+<script>
+  const searchValue = "{{search}}"
+  let genres = "{{genres}}"
+</script>
+<script src="/static/js/search_from_movie.js" defer></script>
+{{else}}
+<script src="/static/js/home.js" defer></script>
+{{/if}}
