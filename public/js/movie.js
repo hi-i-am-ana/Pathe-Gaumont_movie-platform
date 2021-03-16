@@ -3,7 +3,7 @@
 // function definition
 const displayMovieDetails = (data) => {
   console.log(data);
-  // left container: poster, movie title, genres, and release date
+
   let backdropUrl = `https://image.tmdb.org/t/p/w1280/${data.backdrop_path}`;
   //$(".right-container").css("background", "url(" + backdropUrl + ")");
   $(".right-container").css({
@@ -17,6 +17,7 @@ const displayMovieDetails = (data) => {
     "background-size": "cover",
   });
 
+  // left container: poster, movie title, genres, and release date
   let posterUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
   let releaseYear = data.release_date.slice(0, 4);
   let genres = [];
@@ -35,6 +36,7 @@ const displayMovieDetails = (data) => {
   <p>${genres.join(", ")}</p>
   <h3>Runtime:</h3>
   <p>${data.runtime} minutes</p>
+  <button onclick="location.href='${data.homepage}'">Visit homepage</button>
   `;
 
   $(".left-container").html(movieDetailsLeft);
