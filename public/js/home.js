@@ -92,7 +92,7 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
 $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
 .then(data => {
   $('.movies-section-header').text(`What's Populal`);
-  displayMovies(data);
+  displayMovies(data.results);
 })
 .catch(err => {
   // display error
@@ -123,7 +123,7 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
     });
     $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${checkedGenres}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
     .then(data => {
-      displayMovies(data);
+      displayMovies(data.results);
     })
     .catch(err => {
       // display error
@@ -146,7 +146,7 @@ $('.clear-filters').click(() => {
   $('.genre-filter').prop( 'checked', false );
   $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
   .then(data => {
-    displayMovies(data);
+    displayMovies(data.results);
   })
   .catch(err => {
     // display error
@@ -165,49 +165,51 @@ $('.searchBtn').click(() => {
   const searchValue = $('#search-input').val();
   if (searchValue !== '') {
     // Create array of filtered genres
-    // TODO: Code for a case when this array is empty
     let checkedGenres = [];
     $('.search-genre-filter:checked').each((i, genre) => {
       const checkedGenre = genre.value;
       checkedGenres.push(+checkedGenre);
     });
-    console.log(checkedGenres);
     const encodedSearchValue = encodeURIComponent(searchValue);
     const filteredResults = [];
-    let pageNumber = 1;
+    // let pageNumber = 1;
+    // let totalPages;
     // while (filteredResults.length < 20) {
-      console.log(`length: ${filteredResults.length}`)
+    for (pageNumber = 1; pageNumber <= 10; pageNumber++) {
+      // console.log(`length: ${filteredResults.length}`)
       $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=${pageNumber}`)
       .then(data => {
         console.log(data);
+        // totalPages = data.total_pages;
         $.each(data.results, (i, movie) => {
-          const isOfCheckedGenres =  checkedGenres.some(genre => movie.genre_ids.includes(genre));
-          if (isOfCheckedGenres) {
+          if (checkedGenres.length === 0) {
             filteredResults.push(movie);
+          } else {
+            const isOfCheckedGenres =  checkedGenres.some(genre => movie.genre_ids.includes(genre));
+            if (isOfCheckedGenres) {
+              filteredResults.push(movie);
+            };
           };
         });
-        pageNumber++
-        // if (data.results.length < 20) {
-        //   break;
-        // };
-        $('.search-dropdown').hide();
-        $('.search-bar').removeClass('searching');
-        $('.hero-section').hide();
-        $('.filters-container').hide();
-        $('.movies-section-header').text('Search Results');
-        displayMovies(data);
       })
       .catch(err => {
         // display error
       });
-    // };
-    console.log(filteredResults);
+      // pageNumber++;
+      // if (pageNumber > totalPages) {
+      //   break;
+      // };
+    };
+    // console.log(filteredResults);
+    $('.search-dropdown').hide();
+    $('.search-filters-container').hide();
+    $('.search-genre-filter').prop( 'checked', false );
+    $('.search-bar').removeClass('searching');
+    $('.hero-section').hide();
+    $('.filters-container').hide();
+    $('.movies-section-header').text('Search Results');
+    // displayMovies(filteredResults);
+    setTimeout(displayMovies, 300, filteredResults);
+    setTimeout(console.log, 300, filteredResults);
   };
-});
-
-$.ajax({
-  url: `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`,
-  async: false,
-}).done(function(data) {
-  console.log(data);
 });
