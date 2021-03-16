@@ -105,24 +105,12 @@ h3 {
   outline: 0;
 } */
 
-.hero-section {
-  background-color: black;
-  padding: 1rem;
-}
 
-/* iframe {
-  width: 853px;
-  height: 480px;
-  max-width: 100%;
-  display: block;
-  margin: auto;
-} */
 
 .hero-details-container {
-  color: #ffff;
   width: 853px;
   max-width: 100%;
-  margin: auto;
+  margin: 0 20px;
 }
 
 .hero-details, .hero-overview, .hero-cast {

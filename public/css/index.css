@@ -254,6 +254,8 @@ nav img {
 
 .hero-section {
   padding: 0 0 1rem !important; /*remove important after removing from home.css*/
+  background-color: rgba(0, 0, 0, 0.86);
+  color: white;
 }
 
 .hero-background { 
@@ -468,15 +470,6 @@ display: block;
   font-size: 10px;
 }
 
-/* .login {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  /* -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column; */
-/*} */
 hr {
   border: 0;
   height: 0;
@@ -674,4 +667,20 @@ hr {
 .hidden {
   display: none;
 }
+
+
+.hero-details-container {
+  margin: 0 20px;
+}
+
+.movies-section-header {
+  text-align: center;
+  margin: 60px auto 20px auto;
+  font-size: 2rem;
+  font-weight: 800;
+  width: 100%; 
+  padding:0 10px; 
+}
+
+
 /*# sourceMappingURL=index.css.map */
