@@ -44,15 +44,16 @@ body {
           flex-direction: column;
 }
 
-h4 {
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid lightgray;
-  margin: 10px 0 20px;
+h5 {
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid lightgray; 
+  line-height: 0.1em;
+  margin: 30px 0 20px; 
 } 
 
 /* TODO: Is this selector right? */
-h4 span { 
+h5 span { 
    background:#fff; 
    padding:0 10px; 
 }
@@ -202,7 +203,8 @@ nav img {
   border-radius: 0 0 24px 24px;
   padding-bottom: 4px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  outline: 1px solid lightgray;
+  outline: none;
+  border: 1px solid lightgray; 
   /* letter-spacing: initial;
     align-items: initial; */
 }
@@ -388,7 +390,7 @@ div#blur.active {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.form-control p { 
+p { 
   font-size: 0.75rem;
   margin-top: 2px;
   margin-bottom: 2px;
@@ -412,7 +414,7 @@ span i.fas.fa-times-circle {
 
 i.fas.fa-eye {
   position: absolute;
-  top: 38px;
+  top: 40px;
   right: 10px;
 }
 
@@ -444,16 +446,6 @@ display: block;
   border-color: #e74c3c;
 }
 
-.form-control.success i.fa-check-circle {
-  color: #2ecc71;
-  visibility: visible;
-}
-
-.form-control.error i.fa-exclamation-circle {
-  color: #e74c3c;
-  visibility: visible;
-}
-
 .form-control.error small {
   visibility: visible;
 }
@@ -462,8 +454,7 @@ display: block;
   color: #e74c3c;
   position: absolute;
   visibility: hidden;
-  left: 10px;
-  top: 47px;
+  top: 75px;
   font-size: 10px;
 }
 

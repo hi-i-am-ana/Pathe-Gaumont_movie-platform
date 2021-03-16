@@ -4,10 +4,8 @@ const passwordOne = document.getElementById("login-password");
 
 
 loginForm.addEventListener("submit", e => {
-
   if (!checkLoginInput())
     e.preventDefault();
-
 });
 
 function checkLoginInput() {
