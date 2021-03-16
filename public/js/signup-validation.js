@@ -1,9 +1,9 @@
-// const form = document.getElementById("signup-form");
-// const lastName = document.getElementById("last_nameInput");
-// const firstName = document.getElementById("first_nameInput");
-// const email = document.getElementById("emailInput");
-// const password = document.getElementById("passwordInput");
-// const confirmPassword = document.getElementById("confirmPasswordInput");
+const form = document.getElementById("signup-form");
+const lastName = document.getElementById("last_nameInput");
+const firstName = document.getElementById("first_nameInput");
+const email = document.getElementById("emailInput");
+const password = document.getElementById("passwordInput");
+const confirmPassword = document.getElementById("confirmPasswordInput");
 
 //NEEDS TO BE CHANGE
 form.addEventListener('submit', e => {

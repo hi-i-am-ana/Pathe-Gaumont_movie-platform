@@ -171,3 +171,10 @@ function displayRatingStars() {
     }
   });
 }
+
+// Prevent search form from submitting if search input is empty
+$('.search-bar').submit((e) => {
+  if ($('#search-input').val() === '') {
+   e.preventDefault();
+  }
+ });
