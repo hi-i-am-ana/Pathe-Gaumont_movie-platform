@@ -5,7 +5,7 @@
             <li>
               <img src="/static/assets/Logo.png" class="logo" alt="No CAAP Logo" />
             </li>
-            {{#unless err}}
+            {{#if api_key}}
             <li>
               <form class="rectangle-one search-bar" action="/" method="post">
                 <span>
@@ -34,7 +34,7 @@
                 </div>
               </form>
             </li>
-            {{/unless}}
+            {{/if}}
           </ul>
         </div>
 

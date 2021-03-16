@@ -11,7 +11,7 @@
             <iframe class="movie-video" allowfullscreen></iframe>
             <div class="rating-container individual-movie">
                 {{#if currentUser}}
-                <h3 style="color: orange;margin: 0 15px 0 0;">Your rating:</h3>
+                <h3 style="color: white;margin: 0 15px 0 0;">Your rating:</h3>
                 <div class="rating-function logged-in">
                     <a href="/movie/rate/{{movie_id}}?rating=1"><i class="fas fa-star"></i></a>
                     <a href="/movie/rate/{{movie_id}}?rating=2"><i class="fas fa-star"></i></a>
@@ -20,7 +20,7 @@
                     <a href="/movie/rate/{{movie_id}}?rating=5"><i class="fas fa-star"></i></a>
                 </div>
                 <p class="rating"></p>
-                <p class="alert"></p>
+                <p class="alert" style="margin-left: 15px;"></p>
                 {{else}}
                 <div class="rating-function logged-out">
                     <i class="fas fa-star"></i>
