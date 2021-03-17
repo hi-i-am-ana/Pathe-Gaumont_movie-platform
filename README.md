@@ -1,4 +1,6 @@
-![contributor shield](https://img.shields.io/badge/Contributors-4-%23c24d89?style=for-the-badge)![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![contributor shield](https://img.shields.io/badge/Contributors-4-%23c24d89?style=for-the-badge)
+![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+[![heroku shield](https://img.shields.io/badge/Heroku-immense--forest--31861-%2358488a?style=for-the-badge)](https://immense-forest-31861.herokuapp.com/)
 
 # <img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/df339a2d657f42ec9e6dc6df0ac2ccb8f2cf80c7/public/assets/2.png" alt="No CAAP logo" width="30"/>Movie Database :clapper:
 
@@ -9,6 +11,8 @@ The website is accessible for both registered and unregistered visiors, however 
 This is a student project only for the purpose of learning, which is a part of the 3 month web development course organised by [INCO Academy](https://www.inco.org.au/incode)
 
 ## Demo 
+[![heroku shield](https://img.shields.io/badge/Heroku-immense--forest--31861-%2358488a?style=for-the-badge)](https://immense-forest-31861.herokuapp.com/)
+
 ![Demo](https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/52d16e046d01519f8f13d46542afd7bf87d5b730/Home%20_%20No%20CAAP%20.gif)
 
 ## Technologies/Frameworks used:
