@@ -109,56 +109,35 @@ $.getJSON(
   });
 
 // rating hover for logged in users
-<<<<<<< HEAD
-$(".rating-container.individual-movie a").mouseover(function () {
-=======
-$(".rating-function.logged-in a").mouseover(function() {
->>>>>>> b02f6693ab687671077bd7d48538f040465c117c
+$(".rating-function.logged-in a").mouseover(function () {
   $(this).prevAll().find("i").css("color", "orange");
   $(this).find("i").css("color", "orange");
   $(this).nextAll().find("i").css("color", "grey");
 });
 
-<<<<<<< HEAD
-$(".rating-container.individual-movie").mouseleave(function () {
-=======
-$(".rating-function.logged-in").mouseleave(function () { 
->>>>>>> b02f6693ab687671077bd7d48538f040465c117c
+$(".rating-function.logged-in").mouseleave(function () {
   $(this).find("i").css("color", "");
 });
 
 // ajax request to send rating to db
-<<<<<<< HEAD
-$(".rating-container.individual-movie a").click(function (e) {
-=======
-$(".rating-function.logged-in a").click(function(e) {
->>>>>>> b02f6693ab687671077bd7d48538f040465c117c
+$(".rating-function.logged-in a").click(function (e) {
   e.preventDefault();
 
   $.getJSON(`/movie/allratings/${movie_id}`)
-<<<<<<< HEAD
     .then((data) => {
-      // prevents voting more than once
-      if (data.length !== 0) {
-        $(".rating-container.individual-movie .alert").text(
-          "You have already rated this movie, you cannot rate again."
-        );
-      } else {
-        const rating =
-          $(".rating-container.individual-movie a").index(this) + 1;
-        $.post(`/movie/rate/${movie_id}?rating=${rating}`)
-          .done(function () {
-            setTimeout(displayRatingStars, 300);
-            $(".rating-container.individual-movie .alert").text(
-              "Thank you for rating this movie!"
-            );
-          })
-          .fail(function () {
-            $(".rating-container.individual-movie .alert").text(
-              "There was an error submitting your rating, please try again."
-            );
-          });
-      }
+      const rating = $(".rating-function.logged-in a").index(this) + 1;
+      $.post(`/movie/rate/${movie_id}?rating=${rating}`)
+        .done(function () {
+          setTimeout(displayRatingStars, 300);
+          $(".rating-container.individual-movie .alert").text(
+            "Thank you for rating this movie!"
+          );
+        })
+        .fail(function () {
+          $(".rating-container.individual-movie .alert").text(
+            "There was an error submitting your rating, please try again."
+          );
+        });
     })
     .catch((err) => {
       $(".rating-container.individual-movie .alert").text(
@@ -166,27 +145,9 @@ $(".rating-function.logged-in a").click(function(e) {
       );
     });
 });
-=======
-  .then((data) => {
-    const rating = $(".rating-function.logged-in a").index(this) + 1
-    $.post( `/movie/rate/${movie_id}?rating=${rating}`)
-    .done(function() {
-      setTimeout(displayRatingStars, 300)
-      $(".rating-container.individual-movie .alert").text("Thank you for rating this movie!")
-    })
-    .fail(function() {
-      $(".rating-container.individual-movie .alert").text("There was an error submitting your rating, please try again.")
-    })
-  })
-  .catch((err) => {
-    $(".rating-container.individual-movie .alert").text("There was an error submitting your rating, please try again.")
-  })
-})
->>>>>>> b02f6693ab687671077bd7d48538f040465c117c
 
 // star display ratings
 function displayRatingStars() {
-
   // display community rating when logged out
   $.getJSON(`/ratings/${movie_id}`).then((data) => {
     communityRating = data.communityRating;
@@ -201,28 +162,17 @@ function displayRatingStars() {
 
     if (numberOfVotes !== 0) {
       $(".rating").text(communityRating + " (" + numberOfVotes + " reviews)");
-<<<<<<< HEAD
-      $(`.rating-container.individual-movie i:nth-child(${starSelector})`)
+      $(`.rating-function.logged-out i:nth-child(${starSelector})`)
         .prevAll()
+        .addBack()
         .append(`<i class="fas fa-star filled"></i>`);
-      $(`.rating-container.individual-movie a:nth-child(${starSelector})`)
-        .prevAll()
-        .find("i")
-        .append(`<i class="fas fa-star filled"></i>`);
+
       if (communityRatingPercentage !== undefined) {
-        $(
-          `.rating-container.individual-movie i:nth-child(${starSelector}), .rating-container.individual-movie a:nth-child(${starSelector}) i`
-        ).append(
-=======
-      $(`.rating-function.logged-out i:nth-child(${starSelector})`).prevAll().addBack().append(
-        `<i class="fas fa-star filled"></i>`
-      );
-      
-      if (communityRatingPercentage !== undefined) {
-        $(`.rating-function.logged-out i:nth-child(${starSelector})`).next().append(
->>>>>>> b02f6693ab687671077bd7d48538f040465c117c
-          `<i class="fas fa-star filled" style="width:${communityRatingPercentage}"></i>`
-        );
+        $(`.rating-function.logged-out i:nth-child(${starSelector})`)
+          .next()
+          .append(
+            `<i class="fas fa-star filled" style="width:${communityRatingPercentage}"></i>`
+          );
       }
     } else {
       $(".rating").text("(" + numberOfVotes + " reviews)");
@@ -231,15 +181,20 @@ function displayRatingStars() {
 
   // display user rating when logged in
   $.getJSON(`/movie/userrating/${movie_id}`).then((data) => {
-    userRating = data.rating_value
+    userRating = data.rating_value;
 
     if (data !== null) {
-      $(`.rating-function.logged-in a:nth-child(${userRating})`).prevAll().addBack().find("i").append(
-        `<i class="fas fa-star filled"></i>`
-      );
-      $(`.rating-function.logged-in a:nth-child(${userRating})`).nextAll().find("i").empty()
+      $(`.rating-function.logged-in a:nth-child(${userRating})`)
+        .prevAll()
+        .addBack()
+        .find("i")
+        .append(`<i class="fas fa-star filled"></i>`);
+      $(`.rating-function.logged-in a:nth-child(${userRating})`)
+        .nextAll()
+        .find("i")
+        .empty();
     }
-  })
+  });
 }
 
 // Prevent search form from submitting if search input is empty
