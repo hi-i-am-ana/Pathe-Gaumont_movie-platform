@@ -28,13 +28,7 @@ npm install
 
 ## Getting Started
 
-### 1. After cloning, install the dependencies
-
-```zsh
-npm install
-```
-
-### 2. Create .env file
+### 1. Create .env file
 
 ```
 PORT=YOUR_PORT_NUMBER
@@ -49,7 +43,7 @@ API_KEY = "your_tmdb_api_key"
 SENDGRID_API_KEY = "your_sendgrid_api_key"
 ```
 
-### 3. Open PostgreSQL and run the following scripts
+### 2. Open PostgreSQL and run the following scripts
 
 This will create the database, create tables, and seed the tables.
 
@@ -65,7 +59,7 @@ npm run create_tables
 npm run seed_tables
 ```
 
-### 4. Start up the app
+### 3. Start up the app
 
 ```zsh
 npm run dev
