@@ -43,11 +43,7 @@ router.get('^/:id([a-z0-9]{60})$', (req, res) => {
                         })
                     })
                 } else {
-                    // no hash error
-                    res.render('pages/error', {
-                        err: {message: 'HTTP ERROR 404. This page does not exist'},
-                        title: 'Error | Pathe Gaumont Movie Platform'
-                    })
+                    res.redirect('/')
                 }
             })
             .catch ((err) => {
