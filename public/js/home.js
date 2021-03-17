@@ -91,7 +91,7 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
 // Get list of movies sorted by popularity (desc), then display list
 $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
 .then(data => {
-  $('.movies-section-header').text(`What's Populal`);
+  $('.movies-section-header').text(`What's Popular`);
   displayMovies(data.results);
 })
 .catch(err => {
