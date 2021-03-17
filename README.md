@@ -1,6 +1,6 @@
 ![contributor shield](https://img.shields.io/badge/Contributors-4-%23c24d89?style=for-the-badge)
 ![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-[![heroku shield](https://img.shields.io/badge/Heroku-immense--forest--31861-%2358488a?style=for-the-badge)](https://immense-forest-31861.herokuapp.com/)
+<a href="https://immense-forest-31861.herokuapp.com/" target="_blank">![heroku shield](https://img.shields.io/badge/Heroku-immense--forest--31861-%2358488a?style=for-the-badge)</a>
 
 # <img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/df339a2d657f42ec9e6dc6df0ac2ccb8f2cf80c7/public/assets/2.png" alt="No CAAP logo" width="30"/>Movie Database :clapper:
 
