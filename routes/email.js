@@ -43,7 +43,8 @@ router.get('^/:id([a-z0-9]{60})$', (req, res) => {
                         })
                     })
                 } else {
-                    res.redirect('/')
+                    // no hash redirect for after login
+                    return res.redirect('/')
                 }
             })
             .catch ((err) => {

@@ -97,7 +97,6 @@ router.post("/", (req, res) => {
                   }
 
                   const emailHTML = `
-                  <img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/987521797690b71908812a9ab9a6aa16a0875d1d/public/assets/Logo.png?raw=true" alt="No CAAP Logo" style="display:block;width:300px;">
                   <h2>Thank you for signing up with No CAAP</h2>
                   <p>To verify your account, please click on the link below.</p>
                   <p><a href="${url}/email/${confirmationHash}">${url}/email/${confirmationHash}</a></p>
@@ -195,7 +194,6 @@ router.get("/resend", (req, res) => {
                 }
 
                 const emailHTML = `
-                <img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/987521797690b71908812a9ab9a6aa16a0875d1d/public/assets/Logo.png?raw=true" alt="No CAAP Logo" style="display:block;width:300px;">
                 <h2>Thank you for signing up with No CAAP</h2>
                 <p>To verify your account, please click on the link below.</p>
                 <p><a href="${url}/email/${confirmationHash}">${url}/email/${confirmationHash}</a></p>
