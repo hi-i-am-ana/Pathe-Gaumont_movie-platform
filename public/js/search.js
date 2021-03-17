@@ -1,13 +1,13 @@
 // This script - is shared code for home and movie page: function for displaying list of movies; search filters; search dropdown
 
 // Declare function to display list of movies from received data
-const displayMovies = (data) => {
-  console.log(data);
+const displayMovies = (results) => {
+  console.log(results);
   let moviesContent = '';
-  if (data.results.length === 0) {
+  if (results.length === 0) {
     moviesContent = '<p>There are no movies that matched your query</p>';
   } else {
-    $.each(data.results, (i, movie) => {
+    $.each(results, (i, movie) => {
       let posterUrl = '';
       if (movie.poster_path === null) {
         // TODO: Change placeholder image
