@@ -20,7 +20,7 @@ body {
 html h3,
 body h3 {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 html button,
@@ -70,6 +70,7 @@ footer {
           justify-content: space-between;
   padding: 20px;
   background-color: white;
+  border-top: 1px solid lightgray;
 }
 
 footer img {
@@ -87,6 +88,7 @@ nav {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 5px;
+  border-bottom: 1px solid lightgray;
 }
 
 nav a {
@@ -205,6 +207,7 @@ nav img {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   outline: none;
   border: 1px solid lightgray; 
+  overflow: scroll;
   /* letter-spacing: initial;
     align-items: initial; */
 }
@@ -251,6 +254,8 @@ nav img {
 
 .hero-section {
   padding: 0 0 1rem !important; /*remove important after removing from home.css*/
+  background-color: rgba(0, 0, 0, 0.86);
+  color: white;
 }
 
 .hero-background { 
@@ -412,6 +417,13 @@ span i.fas.fa-times-circle {
   cursor: pointer;
 }
 
+.search-filters-container i.fas.fa-times-circle {
+  position: absolute;
+  right: 20px; 
+  top: 15px;
+  cursor: pointer;
+}
+
 i.fas.fa-eye {
   position: absolute;
   top: 40px;
@@ -458,15 +470,13 @@ display: block;
   font-size: 10px;
 }
 
-/* .login {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  /* -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column; */
-/*} */
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 10px;
+}
 
 .search-item {
   text-decoration: none;
@@ -477,7 +487,7 @@ display: block;
 }
 
 .search-item:hover {
-  background-color: #fffff4;
+  background-color: lightgray;
 }
 
 .search-item-container {
@@ -486,7 +496,7 @@ display: block;
   display: flex;
   min-height: 140px;
   width: 100%;
-  border-bottom: 1px solid #9c84d6;
+  border-bottom: 1px solid lightgray;
 }
 
 .search-item-image {
@@ -515,15 +525,17 @@ display: block;
 
 .search-filters-container {
   position: absolute;
-  top: 45px;
-  left: 200px;
+  top: 50px;
+  left: 50px;
   background-color: #fffff4;
-  z-index: 3;
+  z-index: 1;
   padding: 1rem;
-  border: 1px solid black;
   -webkit-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 4px ;
+  display: none;
 }
+
 
 .search-filters-subcontainer {
   display: -webkit-box;
@@ -532,10 +544,11 @@ display: block;
   -webkit-box-pack: space-evenly;
   -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
+  margin: 1px;
 }
 
 .search-filters-half1 {
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 .search-genre-filter {
@@ -545,11 +558,8 @@ display: block;
 .search-clear-filters {
   border: none;
   cursor: pointer;
-  font-family: inherit;
-  background-color: inherit;
-  font-weight: 900;
   text-decoration: underline;
-  margin: 0 auto 1rem;
+  margin: 10px auto;
   display: block;
 }
 
@@ -573,6 +583,8 @@ display: block;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  background-color: white;
+  padding: 20px;
 }
 
 .movie {
@@ -592,24 +604,7 @@ display: block;
   text-align: center;
 }
 
-.movies-section .rating-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  position: absolute;
-  left: -5px;
-  top: 5px;
-  background-color: #693bdc;
-  padding: 1px;
-  min-width: 40px;
-  min-height: 30px;
-}
+
 
 .rating-star {
   color: grey;
@@ -658,4 +653,20 @@ display: block;
 .hidden {
   display: none;
 }
+
+
+.hero-details-container {
+  margin: 0 20px;
+}
+
+.movies-section-header {
+  text-align: center;
+  margin: 60px auto 0 auto;
+  font-size: 2rem;
+  font-weight: 800;
+  width: 100%; 
+
+}
+
+
 /*# sourceMappingURL=index.css.map */

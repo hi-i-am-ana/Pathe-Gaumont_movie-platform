@@ -44,10 +44,16 @@ router.post("/rate/:id", (req, res) => {
         })
       })
     } else {
-      res.render("pages/error", {
-        currentUser: req.session.userId,
-        err: {message: "You have already rated this movie"},
-        title: "Error | No CAAP",
+      db.none("UPDATE ratings SET rating_value = $1, update_at = now() WHERE movie_id = $2 AND user_id = $3", [req.query.rating, req.params.id, req.session.userId])
+      .then(() => {
+        return res.end()
+      })
+      .catch((err) => {
+        res.render("pages/error", {
+          currentUser: req.session.userId,
+          err: err,
+          title: "Error | No CAAP",
+        })
       })
     }
   })
@@ -71,5 +77,17 @@ router.get('/allratings/:id', (req,res) => {
     title: 'Error | No CAAP'
   }));
 });
+
+router.get('/userrating/:id', (req, res) => {
+  db.oneOrNone('SELECT movie_id, user_id, rating_value, update_at FROM ratings WHERE movie_id = $1 AND user_id = $2', [req.params.id, req.session.userId])
+  .then(rating => {
+    res.json(rating);
+  })
+  .catch((err) => res.render('pages/error', {
+    currentUser: req.session.userId,
+    err: err,
+    title: 'Error | No CAAP'
+  }))
+})
 
 module.exports = router;

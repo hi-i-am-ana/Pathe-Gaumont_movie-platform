@@ -1,21 +1,26 @@
-![contributor shield](https://img.shields.io/badge/Contributors-4-%23c24d89?style=for-the-badge)![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![contributor shield](https://img.shields.io/badge/Contributors-4-%23c24d89?style=for-the-badge)
+![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+<a href="https://immense-forest-31861.herokuapp.com/" target="_blank">![heroku shield](https://img.shields.io/badge/Heroku-immense--forest--31861-%2358488a?style=for-the-badge)</a>
 
 # <img src="https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/df339a2d657f42ec9e6dc6df0ac2ccb8f2cf80c7/public/assets/2.png" alt="No CAAP logo" width="30"/>Movie Database :clapper:
 
 To develop a fictitious movie rating platform for Pathé Gaumont cinemas, by accessing the API from [TMDb](https://www.themoviedb.org/). 
-The website is accessible for both registered and unregistered visiors, however the ratings are only accessible for registered users. Registered users is to rate their favourite movies (between 0 and 5), thus creating Pathé Gaumont cinemas' own community score. 
+The website is accessible for both registered and unregistered visiors, however the ratings are only accessible for registered users. Registered users is to rate their favourite movies (between 1 and 5), thus creating Pathé Gaumont cinemas' own community score. 
 
 ## Motivation 
 This is a student project only for the purpose of learning, which is a part of the 3 month web development course organised by [INCO Academy](https://www.inco.org.au/incode)
 
 ## Demo 
-![Demo]
+[![heroku shield](https://img.shields.io/badge/Heroku-immense--forest--31861-%2358488a?style=for-the-badge)](https://immense-forest-31861.herokuapp.com/)
+
+![Demo](https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform/blob/52d16e046d01519f8f13d46542afd7bf87d5b730/Home%20_%20No%20CAAP%20.gif)
 
 ## Technologies/Frameworks used:
 
 - HTML, CSS, JavaScript, JQuery
 - Node, Handlebars
 - PostgreSQL
+- TMDB API, SendGrid
 
 ## Installation
 
@@ -27,20 +32,41 @@ npm install
 
 ## Getting Started
 
-1. Edit your .env file to suit your own Postgres settings, making sure to change your username, password, and port if need be.
+### 1. Create .env file
 
-2. Run the following scripts to create the database, create tables, and seed tables.
+```
+PORT=YOUR_PORT_NUMBER
+
+POSTGRES_PORT=YOUR_POSTGRESQL_PORT
+POSTGRES_DATABASE="pathe_gaumont"
+POSTGRES_USERNAME="your_postgresql_username"
+POSTGRES_PASSWORD="your_postgresql_password"
+
+API_KEY = "your_tmdb_api_key"
+
+SENDGRID_API_KEY = "your_sendgrid_api_key"
+```
+
+### 2. Open PostgreSQL and run the following scripts
+
+This will create the database, create tables, and seed the tables.
 
 ```zsh
-npm run create-database
+npm run create_database
 ```
 
 ```zsh
-npm run create-tables
+npm run create_tables
 ```
 
 ```zsh
-npm run seed-tables
+npm run seed_tables
+```
+
+### 3. Start up the app
+
+```zsh
+npm run dev
 ```
 
 ## Contributors 

@@ -8,6 +8,7 @@
     "create_tables": "psql -h localhost -d pathe_gaumont -f sql/create_tables.sql",
     "seed_tables": "psql -h localhost -d pathe_gaumont -f sql/seed_tables.sql",
     "alter_tables": "psql -h localhost -d pathe_gaumont -f sql/alter_tables.sql",
+    "seed_rating_table": "psql -h localhost -d pathe_gaumont -f sql/seed_rating_table.sql",
     "start": "node -r dotenv/config index.js",
     "dev": "nodemon -r dotenv/config -e js,ejs,css,sql,hbs,handlebars index.js",
     "session": "DEBUG=express-session nodemon -r dotenv/config -e js,ejs,css,sql,hbs,handlebars index.js",
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
     "express-session": "^1.17.1",
@@ -37,7 +39,9 @@
     "pg-promise": "^10.9.4"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0",
     "nodemon": "^2.0.7"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

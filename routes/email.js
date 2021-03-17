@@ -27,7 +27,7 @@ router.get('^/:id([a-z0-9]{60})$', (req, res) => {
                     .then (() => {
                         db.none('DELETE FROM email_confirmation WHERE hash = $1', req.params.id)
                         .then (() => {
-                            res.render('pages/emailconfirmation', {
+                            return res.render('pages/emailconfirmation', {
                                 email: user.email
                             })
                         })
@@ -43,11 +43,8 @@ router.get('^/:id([a-z0-9]{60})$', (req, res) => {
                         })
                     })
                 } else {
-                    // no hash error
-                    res.render('pages/error', {
-                        err: {message: 'HTTP ERROR 404. This page does not exist'},
-                        title: 'Error | Pathe Gaumont Movie Platform'
-                    })
+                    // no hash redirect for after login
+                    return res.redirect('/')
                 }
             })
             .catch ((err) => {

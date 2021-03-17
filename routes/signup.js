@@ -89,23 +89,28 @@ router.post("/", (req, res) => {
                     })
                   );
 
-                  // TODO: Add link to resend email
+                  let url
+                  if (process.env.SSL) {
+                    url = `https://immense-forest-31861.herokuapp.com`
+                  } else {
+                    url = `http://localhost:${process.env.PORT}`
+                  }
+
                   const emailHTML = `
-            <!-- <img src="/static/assets/Logo.png" alt="No CAAP Logo" style="display:block;"> -->
-            <h2>Thank you for signing up with No CAAP</h2>
-            <p>To verify your account, please click on the link below.</p>
-            <p><a href="http://localhost:${process.env.PORT}/email/${confirmationHash}">http://localhost:${process.env.PORT}/email/${confirmationHash}</a></p>
-            <p>This link will expire in 48 hours.</p>
-            <p><a href="http://localhost:${process.env.PORT}/signup/resend?email=${newUser.email}">Resend Link</a></p>
-            <footer>2021 © No CAAP</footer>
-            `;
+                  <h2>Thank you for signing up with No CAAP</h2>
+                  <p>To verify your account, please click on the link below.</p>
+                  <p><a href="${url}/email/${confirmationHash}">${url}/email/${confirmationHash}</a></p>
+                  <p>This link will expire in 48 hours.</p>
+                  <p><a href="${url}/signup/resend?email=${newUser.email}">Resend Link</a></p>
+                  <footer>2021 © No CAAP</footer>
+                  `;
 
                   transport.sendMail(
                     {
                       from: '"Pathé Gaumont" <caterina.turnbull@gmail.com>',
                       to: newUser.email,
                       subject: "Signup Confirmation",
-                      text: `Thank you for signing up with No CAAP. To verify your account, please use the following link. http://localhost:${process.env.PORT}/email/${confirmationHash}`,
+                      text: `Thank you for signing up with No CAAP. To verify your account, please use the following link. ${url}/email/${confirmationHash}`,
                       html: emailHTML,
                     },
                     function (err) {
@@ -181,13 +186,19 @@ router.get("/resend", (req, res) => {
                   })
                 );
 
+                let url = ''
+                if (process.env.SSL) {
+                  url = `https://immense-forest-31861.herokuapp.com`
+                } else {
+                  url = `http://localhost:${process.env.PORT}`
+                }
+
                 const emailHTML = `
-                <!-- <img src="/static/assets/Logo.png" alt="No CAAP Logo" style="display:block;"> -->
                 <h2>Thank you for signing up with No CAAP</h2>
                 <p>To verify your account, please click on the link below.</p>
-                <p><a href="http://localhost:${process.env.PORT}/email/${confirmationHash}">http://localhost:${process.env.PORT}/email/${confirmationHash}</a></p>
+                <p><a href="${url}/email/${confirmationHash}">${url}/email/${confirmationHash}</a></p>
                 <p>This link will expire in 48 hours.</p>
-                <p><a href="http://localhost:${process.env.PORT}/signup/resend?email=${email}">Resend Link</a></p>
+                <p><a href="${url}/signup/resend?email=${email}">Resend Link</a></p>
                 <footer>2021 © No CAAP</footer>
                 `;
 
@@ -195,7 +206,7 @@ router.get("/resend", (req, res) => {
                     from: '"Pathé Gaumont" <caterina.turnbull@gmail.com>',
                     to: email,
                     subject: "Signup Confirmation",
-                    text: `Thank you for signing up with No CAAP. To verify your account, please use the following link. http://localhost:${process.env.PORT}/email/${confirmationHash}`,
+                    text: `Thank you for signing up with No CAAP. To verify your account, please use the following link. ${url}/email/${confirmationHash}`,
                     html: emailHTML,
                   },
                   function (err) {

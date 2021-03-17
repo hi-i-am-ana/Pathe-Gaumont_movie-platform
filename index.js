@@ -22,11 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/static", express.static(path.join(__dirname, "public")));
 app.use(morgan("dev"));
 
-// app.set('views', path.join(__dirname, 'views'));
-
 app.set("view engine", "handlebars");
 
-// TODO: Not sure if this is correct, need to check later
 app.engine(
   "handlebars",
   handlebars({
@@ -37,7 +34,6 @@ app.engine(
 // Configure session middleware
 app.use(
   session({
-    // name: how do we name it?, connect.sid by default
     cookie: {
       maxAge: 60 * 60 * 1000, // 1 hour
     },

@@ -1,13 +1,13 @@
 // This script - is shared code for home and movie page: function for displaying list of movies; search filters; search dropdown
 
 // Declare function to display list of movies from received data
-const displayMovies = (data) => {
-  console.log(data);
+const displayMovies = (results) => {
+  console.log(results);
   let moviesContent = '';
-  if (data.results.length === 0) {
+  if (results.length === 0) {
     moviesContent = '<p>There are no movies that matched your query</p>';
   } else {
-    $.each(data.results, (i, movie) => {
+    $.each(results, (i, movie) => {
       let posterUrl = '';
       if (movie.poster_path === null) {
         // TODO: Change placeholder image
@@ -100,6 +100,7 @@ $('#search-input').blur((e) => {
   $(window).click((e) => {
     if(e.target !== $('.search-dropdown')) {
       $('.search-dropdown').hide();
+      $('.search-bar').removeClass('searching');
     };
   });
 });
@@ -108,6 +109,7 @@ $('#search-input').blur((e) => {
 // Add onscroll event listener for document to hide search dropdown when document is scrolled
 // $(window).scroll(() => {
 //   $('.search-dropdown').hide();
+//   $('.search-bar').removeClass('searching');
 // });
 
 // If it's search without filtering genres, perform movie search for every change in search value (everything is sorted by their match relevancy boosted by popularity)
@@ -117,6 +119,7 @@ $('#search-input').on('input', () => {
     const searchValue = $('#search-input').val();
     if (searchValue === '') {
       $('.search-dropdown').hide();
+      $('.search-bar').removeClass('searching');
     } else {
       const encodedSearchValue = encodeURIComponent(searchValue);
       $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
