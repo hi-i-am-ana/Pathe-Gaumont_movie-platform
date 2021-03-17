@@ -51,8 +51,6 @@ function checkInputs() {
   if (confirmPasswordValue === "") {
     setErrorFor(confirmPassword, "Password cannot be blank");
   } else if (passwordValue != confirmPasswordValue) {
-    console.log("this is", passwordValue)
-    console.log("this is confirm", confirmPasswordValue)
     setErrorFor(confirmPassword, "Password does not match");
   } else {
     setSuccessFor(confirmPassword, "Password is a match");
