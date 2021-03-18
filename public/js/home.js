@@ -129,12 +129,12 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
 // POPULAR MOVIES
 
 // Get list of movies sorted by popularity (desc), then display list
-let jsonQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&`
-$.getJSON(jsonQuery + 'page=1')
+let jsonQueryPopular = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&`
+$.getJSON(jsonQueryPopular + 'page=1')
 .then(data => {
   $('.movies-section-header').text(`What's Popular`);
   displayMovies(data.results);
-  displayPagination(data, jsonQuery);
+  displayPagination(data, jsonQueryPopular);
 })
 .catch(err => {
   // display error
@@ -163,11 +163,11 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
       const checkedGenre = genre.value;
       checkedGenres += `&with_genres=${checkedGenre}`;
     });
-    jsonQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${checkedGenres}&sort_by=popularity.desc&include_adult=false&include_video=false&`
-    $.getJSON(jsonQuery + 'page=1')
+    let jsonQueryPopFilter = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${checkedGenres}&sort_by=popularity.desc&include_adult=false&include_video=false&`
+    $.getJSON(jsonQueryPopFilter + 'page=1')
     .then(data => {
       displayMovies(data.results);
-      displayPagination(data, jsonQuery)
+      displayPagination(data, jsonQueryPopFilter)
     })
     .catch(err => {
       // display error
@@ -188,11 +188,11 @@ $('.clear-filters').click(() => {
   // });
   // Code below will just change checkbox state, but will not trigger change event, so we make API request without genres:
   $('.genre-filter').prop( 'checked', false );
-  jsonQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&`
-  $.getJSON(jsonQuery + 'page=1')
+  let jsonQueryPopClear = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&`
+  $.getJSON(jsonQueryPopClear + 'page=1')
   .then(data => {
     displayMovies(data.results);
-    displayPagination(data, jsonQuery)
+    displayPagination(data, jsonQueryPopClear)
   })
   .catch(err => {
     // display error
@@ -219,7 +219,8 @@ $('.searchBtn').click(() => {
     });
     const encodedSearchValue = encodeURIComponent(searchValue);
     // Make API request to get total number of pages
-    $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
+    let jsonQuerySearch = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&`
+    $.getJSON(jsonQuerySearch + 'page=1')
     .then(data => {
       $('.search-dropdown').hide();
       $('.search-filters-container').hide();
@@ -235,6 +236,7 @@ $('.searchBtn').click(() => {
       const displayNumber = 20;
       const apiRequestBunchSize = 10;
       filterApiResponse(filteredResults, 0, encodedSearchValue, checkedGenres, totalPages, displayNumber, apiRequestBunchSize);
+      displayPagination(data, jsonQuerySearch);
     })
     .catch(err => {
       // display error
