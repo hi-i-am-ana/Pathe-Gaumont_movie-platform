@@ -4,9 +4,11 @@ const passwordOne = document.getElementById("login-password");
 
 
 loginForm.addEventListener("submit", e => {
+
+  checkLoginInput = true; 
+  
   if (!checkLoginInput())
     e.preventDefault();
-
 });
 
 function checkLoginInput() {
@@ -18,7 +20,7 @@ function checkLoginInput() {
   } else if (!isEmail1(emailValueOne)) {
     setErrorFor(emailOne, "Email is not a valid address");
   } else {
-    setSuccessFor(emailOne);
+    setSuccessFor(emailOne);;
   }
 
   if (passwordValueOne === "") {
@@ -26,6 +28,4 @@ function checkLoginInput() {
   } else {
     setSuccessFor(passwordOne);
   }
-  return true;
-
 }

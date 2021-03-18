@@ -715,7 +715,7 @@ input[type="search"]::-webkit-search-cancel-button {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 690px) {
   .logo {
     border-radius: 50%;
     width: 60px;
