@@ -681,5 +681,12 @@ hr {
   color: red;
 }
 
+.reset-password {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 
 /*# sourceMappingURL=index.css.map */

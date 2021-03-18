@@ -1,8 +1,48 @@
 // TODO: .catch() - display errors
-// TODO: Pagination
-// TODO: Media queries
-// TODO: Local filters for search results
-// TODO: Hide filters when search result is displayed
+
+// Declare function to display (html) list of movies from received data
+const displayMovies = results => {
+  console.log(results);
+  let moviesContent = '';
+  if (results.length === 0) {
+    moviesContent = '<p>There are no movies that matched your query</p>';
+  } else {
+    $.each(results, (i, movie) => {
+      let posterUrl = '';
+      if (movie.poster_path === null) {
+        // TODO: Change placeholder image
+        posterUrl = 'https://loremflickr.com/185/278';
+      } else {
+        posterUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
+      };
+      moviesContent += `
+        <div class="movie" id="movie-${movie.id}">
+          <a href="/movie/${movie.id}"><img src="${posterUrl}" alt="${movie.title}"></a>
+          <h4>${movie.title}</h4>
+          <div class="rating-container">
+            <i class="fas fa-star rating-star" id="rating-star-${movie.id}"></i>
+            <div class="rating">
+              <span class="rating-value" id="rating-${movie.id}"></span>
+              <span class="number-of-votes" id="number-of-votes-${movie.id}"></span>
+            </div>
+          </div>
+        </div>
+      `;
+      $.getJSON(`/ratings/${movie.id}`)
+      .then(data => {
+        if (data.numberOfVotes !== 0) {
+          $(`#rating-${movie.id}`).text(`${data.communityRating}/`);
+          $(`#number-of-votes-${movie.id}`).text(data.numberOfVotes);
+          $(`#rating-star-${movie.id}`).attr('style', 'color:orange');
+        };
+      })
+      .catch(err => {
+        // display error
+      });
+    });
+  };
+  $('.movies').html(moviesContent);
+};
 
 // HERO MOVIE
 
@@ -161,6 +201,7 @@ $('.search-bar').submit((e) => {
 });
 
 // Perform movie search (with or without filters) for final search value, then display list of found and filtered movies
+// Variant 3. Function with bunch of API request (Promise.all) is called from itself (from .then)
 $('.searchBtn').click(() => {
   const searchValue = $('#search-input').val();
   if (searchValue !== '') {
@@ -171,45 +212,144 @@ $('.searchBtn').click(() => {
       checkedGenres.push(+checkedGenre);
     });
     const encodedSearchValue = encodeURIComponent(searchValue);
-    const filteredResults = [];
-    // let pageNumber = 1;
-    // let totalPages;
-    // while (filteredResults.length < 20) {
-    for (pageNumber = 1; pageNumber <= 10; pageNumber++) {
-      // console.log(`length: ${filteredResults.length}`)
-      $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=${pageNumber}`)
-      .then(data => {
-        console.log(data);
-        // totalPages = data.total_pages;
-        $.each(data.results, (i, movie) => {
-          if (checkedGenres.length === 0) {
-            filteredResults.push(movie);
-          } else {
-            const isOfCheckedGenres =  checkedGenres.some(genre => movie.genre_ids.includes(genre));
-            if (isOfCheckedGenres) {
-              filteredResults.push(movie);
-            };
-          };
-        });
-      })
-      .catch(err => {
-        // display error
-      });
-      // pageNumber++;
-      // if (pageNumber > totalPages) {
-      //   break;
-      // };
-    };
-    // console.log(filteredResults);
-    $('.search-dropdown').hide();
-    $('.search-filters-container').hide();
-    $('.search-genre-filter').prop( 'checked', false );
-    $('.search-bar').removeClass('searching');
-    $('.hero-section').hide();
-    $('.filters-container').hide();
-    $('.movies-section-header').text('Search Results');
-    // displayMovies(filteredResults);
-    setTimeout(displayMovies, 300, filteredResults);
-    setTimeout(console.log, 300, filteredResults);
+    // Make API request to get total number of pages
+    $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
+    .then(data => {
+      $('.search-dropdown').hide();
+      $('.search-filters-container').hide();
+      $('.search-genre-filter').prop( 'checked', false );
+      $('.search-bar').removeClass('searching');
+      $('.hero-section').hide();
+      $('.filters-container').hide();
+      $('.movies-section-header').text('Search Results');
+      $('.movies').empty();
+      const totalPages = data.total_pages;
+      // This can be just number that is incremented, but left it as an array in case I need it for pagination
+      const filteredResults = [];
+      const displayNumber = 20;
+      const apiRequestBunchSize = 10;
+      filterApiResponse(filteredResults, 0, encodedSearchValue, checkedGenres, totalPages, displayNumber, apiRequestBunchSize);
+    })
+    .catch(err => {
+      // display error
+    });
   };
 });
+
+// Variant 1: Uses "for" loop, API request are made acynchronously => works well and fast, but can't break from loop when condition of 20 filtered movies is met => will continue to make API requests until all pages have been requested
+// $('.searchBtn').click(() => {
+//   const searchValue = $('#search-input').val();
+//   if (searchValue !== '') {
+//     // Create array of filtered genres
+//     let checkedGenres = [];
+//     $('.search-genre-filter:checked').each((i, genre) => {
+//       const checkedGenre = genre.value;
+//       checkedGenres.push(+checkedGenre);
+//     });
+//     const encodedSearchValue = encodeURIComponent(searchValue);
+//     const filteredResults = [];
+//     // Make API request to get total number of pages
+//     $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
+//     .then(data => {
+//       $('.search-dropdown').hide();
+//       $('.search-filters-container').hide();
+//       $('.search-genre-filter').prop( 'checked', false );
+//       $('.search-bar').removeClass('searching');
+//       $('.hero-section').hide();
+//       $('.filters-container').hide();
+//       $('.movies-section-header').text('Search Results');
+//       $('.movies').empty();
+//       const totalPages = data.total_pages;
+//       for (pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+//         $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=${pageNumber}`)
+//         .then(data => {
+//           console.log(data);
+//           $.each(data.results, (i, movie) => {
+//             // TODO: This if will limit filtered result to 20 movies. How to break loop with async stuff, so API requests are not made after 20 movies are filtered
+//             if (filteredResults.length < 20) {
+//               if (checkedGenres.length === 0) {
+//                 filteredResults.push(movie);
+//                 displayMovie(movie);
+//                 console.log(movie)
+//               } else {
+//                 const isOfCheckedGenres =  checkedGenres.some(genre => movie.genre_ids.includes(genre));
+//                 if (isOfCheckedGenres) {
+//                   filteredResults.push(movie);
+//                   displayMovie(movie);
+//                 };
+//               };
+//             };
+//           });
+//           console.log(filteredResults);
+//         })
+//         .catch(err => {
+//           // display error
+//         });
+//       };
+//     })
+//     .catch(err => {
+//       // display error
+//     });
+//   };
+// });
+
+// // Variant 2. Function with API request is called from itself (from .then) => can be stopped when condition of 20 filtered movies is met, works well, but API requests made one by one => can be slow if search value & filters are very narrowed
+// $('.searchBtn').click(() => {
+//   const searchValue = $('#search-input').val();
+//   if (searchValue !== '') {
+//     // Create array of filtered genres
+//     let checkedGenres = [];
+//     $('.search-genre-filter:checked').each((i, genre) => {
+//       const checkedGenre = genre.value;
+//       checkedGenres.push(+checkedGenre);
+//     });
+//     const encodedSearchValue = encodeURIComponent(searchValue);
+//     const filteredResults = [];
+//     // Make API request to get total number of pages
+//     $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
+//     .then(data => {
+//       const totalPages = data.total_pages;
+//       $('.search-dropdown').hide();
+//       $('.search-filters-container').hide();
+//       $('.search-genre-filter').prop( 'checked', false );
+//       $('.search-bar').removeClass('searching');
+//       $('.hero-section').hide();
+//       $('.filters-container').hide();
+//       $('.movies-section-header').text('Search Results');
+//       $('.movies').empty();
+//       filterApiResponse(filteredResults, 1, encodedSearchValue, checkedGenres, totalPages);
+//     })
+//     .catch(err => {
+//       // display error
+//     });
+//   };
+// });
+
+// const filterApiResponse = (filteredResults, pageNumber, encodedSearchValue, checkedGenres, totalPages) => {
+//   $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=${pageNumber}`)
+//   .then(data => {
+//     console.log(data);
+//     $.each(data.results, (i, movie) => {
+//       if (checkedGenres.length === 0) {
+//         filteredResults.push(movie);
+//         displayMovie(movie);
+//       } else {
+//         const isOfCheckedGenres =  checkedGenres.some(genre => movie.genre_ids.includes(genre));
+//         if (isOfCheckedGenres) {
+//           filteredResults.push(movie);
+//           displayMovie(movie);
+//         };
+//       };
+//     });
+//     pageNumber++;
+//     console.log(filteredResults);
+//     console.log(filteredResults.length)
+//     console.log(pageNumber)
+//     if (filteredResults.length < 20 && pageNumber <= totalPages) {
+//       filterApiResponse(filteredResults, pageNumber, encodedSearchValue, checkedGenres, totalPages);
+//     };
+//   })
+//   .catch(err => {
+//     // display error
+//   });
+// };
