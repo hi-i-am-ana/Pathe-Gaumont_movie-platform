@@ -25,19 +25,21 @@ const displayMovieDetails = (data) => {
 
   displayRatingStars();
 
-  let movieDetailsLeft = `
+  let movieDetailsTopLeft = `
   <img src="${posterUrl}" alt="${data.title}">
   <h1>${data.title} (${releaseYear})</h1>
-  <h3>Release date:</h3>
+  `;
+
+  let movieDetailsBottomLeft = `<h3>Release date:</h3>
   <p>${data.release_date}</p>
   <h3>Genres:</h3>
   <p>${genres.join(", ")}</p>
   <h3>Runtime:</h3>
   <p>${data.runtime} minutes</p>
-  <button onclick="location.href='${data.homepage}'">Visit homepage</button>
-  `;
+  <button onclick="location.href='${data.homepage}'">Visit homepage</button>`;
 
-  $(".left-container").html(movieDetailsLeft);
+  $(".top-left-container").html(movieDetailsTopLeft);
+  $(".bottom-left-container").html(movieDetailsBottomLeft);
 
   // right container: video, ratings, and overview
   let movieDetailsRight = `
