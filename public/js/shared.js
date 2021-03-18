@@ -29,12 +29,7 @@ function isEmail1(inputEmail) {
   return add.test(inputEmail);
 }
 
-$(".formcontrol > input ").change = checkLoginInput();
-$(".formcontrol > input ").change = checkInputs();
-$(".formcontrol > input ").change = checkPasswordResetInput();
 $("#login-form").attr("novalidate", "");
 $("#signup-form").attr("novalidate", "");
 $("#reset-password-form").attr("novalidate", "");
-document.getElementById("login-form").noValidate = true;
-document.getElementById("signup-form").noValidate = true;
-document.getElementById("reset-password-form").noValidate = true;
+

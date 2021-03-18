@@ -109,6 +109,10 @@ nav a {
   margin: 10px;
 }
 
+nav a:hover{ 
+  box-shadow: 0 5px 0px rgba(0, 0, 0, 0.15);
+}
+
 nav ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -132,10 +136,12 @@ nav input {
   width: 350px;
 }
 
+
 nav img {
   width: 150px;
   padding-top: 3px;
 }
+
 
 .rectangle-one {
   border-radius: 30px;
@@ -159,7 +165,6 @@ nav img {
 }
 
 .rectangle-one input[type="search"] {
-  width: 300px;
   outline: none;
   height: 100%;
   font-size: 1rem;
@@ -208,6 +213,7 @@ nav img {
   outline: none;
   border: 1px solid lightgray; 
   overflow: scroll;
+  display: none;
   /* letter-spacing: initial;
     align-items: initial; */
 }
@@ -230,6 +236,8 @@ nav img {
 .iconsButton {
   padding-right: 12px;
   padding-top: 3px;
+  min-width: 20px;
+
 }
 
 /* HOMEPAGE */
@@ -571,7 +579,7 @@ hr {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 2rem;
+  padding: 20px 0 20px 0;
 }
 
 .movies {
@@ -604,8 +612,6 @@ hr {
   text-align: center;
 }
 
-
-
 .rating-star {
   color: grey;
 }
@@ -629,7 +635,8 @@ hr {
   -ms-flex-direction: column;
   flex-direction: column;
   border: 0;
-  width: 40%;
+  width: 70%;
+  padding-top: 20px;
 }
 
 .genre-filter-container {
@@ -656,18 +663,34 @@ hr {
 
 
 .hero-details-container {
-  margin: 0 20px;
+  padding: 0 40px;
 }
 
 .movies-section-header {
   text-align: center;
-  margin: 60px auto 0 auto;
   font-size: 2rem;
   font-weight: 800;
   width: 100%; 
+  margin: 60px auto 0 auto;
 
 }
 
+@media only screen and (max-width: 690px) {
+
+.logo-search { 
+  display: flex;
+}
+
+.logo { 
+  border-radius: 50%;
+  width: 60px; 
+  height: 60px; 
+}
+
+nav input { 
+  max-width: 150px;
+}
+}
 .reset-password {
   display: flex;
   flex-direction: column;
@@ -676,4 +699,4 @@ hr {
 }
 
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=index.css.map #*/ 
