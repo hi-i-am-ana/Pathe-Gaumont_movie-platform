@@ -21,12 +21,16 @@ function checkInputs() {
 
   if (lastNameValue === "") {
     setErrorFor(lastName, "Last name is required");
+  } else if (!isName(lastNameValue)) {
+    setErrorFor(lastName, "Only letters, spaces, hyphens and apostrophes");
   } else {
     setSuccessFor(lastName);
   }
 
   if (firstNameValue === "") {
     setErrorFor(firstName, "First name is required");
+  } else if (!isName(firstNameValue)) {
+    setErrorFor(firstName, "Only letters, spaces, hyphens and apostrophes");
   } else {
     setSuccessFor(firstName);
   }
