@@ -25,11 +25,13 @@
   },
   "homepage": "https://github.com/hi-i-am-ana/Pathe-Gaumont_movie-platform#readme",
   "dependencies": {
+    "animate.css": "^4.1.1",
     "bcrypt": "^5.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
     "express-session": "^1.17.1",
+    "lax.js": "^2.0.3",
     "mdbootstrap": "^4.19.2",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.0",
