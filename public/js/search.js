@@ -1,47 +1,94 @@
 // This script - is shared code for home and movie page: function for displaying list of movies; search filters; search dropdown
 
-// Declare function to display list of movies from received data
-const displayMovies = (results) => {
-  console.log(results);
-  let moviesContent = '';
-  if (results.length === 0) {
-    moviesContent = '<p>There are no movies that matched your query</p>';
+// Declare function to display (append) passed movie
+const displayMovie = movie => {
+  let posterUrl = '';
+  if (movie.poster_path === null) {
+    // TODO: Change placeholder image
+    posterUrl = 'https://loremflickr.com/185/278';
   } else {
-    $.each(results, (i, movie) => {
-      let posterUrl = '';
-      if (movie.poster_path === null) {
-        // TODO: Change placeholder image
-        posterUrl = 'https://loremflickr.com/185/278';
-      } else {
-        posterUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
-      };
-      moviesContent += `
-        <div class="movie" id="movie-${movie.id}">
-          <a href="/movie/${movie.id}"><img src="${posterUrl}" alt="${movie.title}"></a>
-          <h4>${movie.title}</h4>
-          <div class="rating-container">
-            <i class="fas fa-star rating-star" id="rating-star-${movie.id}"></i>
-            <div class="rating">
-              <span class="rating-value" id="rating-${movie.id}"></span>
-              <span class="number-of-votes" id="number-of-votes-${movie.id}"></span>
-            </div>
-          </div>
+    posterUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
+  };
+  movieContent = `
+    <div class="movie" id="movie-${movie.id}">
+      <a href="/movie/${movie.id}"><img src="${posterUrl}" alt="${movie.title}"></a>
+      <h4>${movie.title}</h4>
+      <div class="rating-container">
+        <i class="fas fa-star rating-star" id="rating-star-${movie.id}"></i>
+        <div class="rating">
+          <span class="rating-value" id="rating-${movie.id}"></span>
+          <span class="number-of-votes" id="number-of-votes-${movie.id}"></span>
         </div>
-      `;
-      $.getJSON(`/ratings/${movie.id}`)
-      .then(data => {
-        if (data.numberOfVotes !== 0) {
-          $(`#rating-${movie.id}`).text(`${data.communityRating}/`);
-          $(`#number-of-votes-${movie.id}`).text(data.numberOfVotes);
-          $(`#rating-star-${movie.id}`).attr('style', 'color:orange');
+      </div>
+    </div>
+  `;
+  $.getJSON(`/ratings/${movie.id}`)
+  .then(data => {
+    if (data.numberOfVotes !== 0) {
+      $(`#rating-${movie.id}`).text(`${data.communityRating}/`);
+      $(`#number-of-votes-${movie.id}`).text(data.numberOfVotes);
+      $(`#rating-star-${movie.id}`).attr('style', 'color:orange');
+    };
+  })
+  .catch(err => {
+    // display error
+  });
+  $('.movies').append(movieContent);
+};
+
+// Declare funcion to create an array of API requests to be passed to Promise.all()
+const formApiRequestBunch = (pageNumber, encodedSearchValue, totalPages, apiRequestBunchSize) => {
+  let apiRequestBunch = [];
+  for (i = 1; i <= apiRequestBunchSize; i++) {
+    if (pageNumber + i <= totalPages) {
+      const apiRequest = $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=${pageNumber + i}`);
+      apiRequestBunch.push(apiRequest);
+    };
+  };
+  return apiRequestBunch;
+};
+
+// Declare function to make a bunch of API requests and filter their responses
+const filterApiResponse = (filteredResults, pageNumber, encodedSearchValue, checkedGenres, totalPages, displayNumber, apiRequestBunchSize) => {
+  Promise.all(formApiRequestBunch(pageNumber, encodedSearchValue, totalPages, apiRequestBunchSize))
+  .then(arrayOfdata => {
+    console.log(arrayOfdata);
+    $.each(arrayOfdata, (i, data) => {
+      $.each(data.results, (i, movie) => {
+        if (checkedGenres.length === 0) {
+          filteredResults.push(movie);
+          // This will limit number of movies displayed on page
+          if (filteredResults.length <= displayNumber) {
+            displayMovie(movie);
+          };
+        } else {
+          const isOfCheckedGenres =  checkedGenres.some(genre => movie.genre_ids.includes(genre));
+          if (isOfCheckedGenres) {
+            filteredResults.push(movie);
+            // This will limit number of movies displayed on page
+            if (filteredResults.length <= displayNumber) {
+              displayMovie(movie);
+            };
+          };
         };
-      })
-      .catch(err => {
-        // display error
       });
     });
-  };
-  $('.movies').html(moviesContent);
+    pageNumber += apiRequestBunchSize;
+    console.log(filteredResults);
+    console.log(`filtered result array length: ${filteredResults.length}`);
+    console.log(`page number: ${pageNumber}`);
+    console.log(`total pages: ${totalPages}`);
+    if (filteredResults.length < displayNumber && pageNumber < totalPages) {
+      filterApiResponse(filteredResults, pageNumber, encodedSearchValue, checkedGenres, totalPages, displayNumber, apiRequestBunchSize);
+    } else {
+      if (filteredResults.length === 0) {
+        $('.movies').html('<p>There are no movies that matched your query</p>');
+      };
+    };
+  })
+  .catch(err => {
+    // display error
+  });
 };
 
 // FILTERS FOR SEARCH
