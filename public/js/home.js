@@ -31,8 +31,8 @@ const displayMovies = results => {
       $.getJSON(`/ratings/${movie.id}`)
       .then(data => {
         if (data.numberOfVotes !== 0) {
-          $(`#rating-${movie.id}`).text(`${data.communityRating}/`);
-          $(`#number-of-votes-${movie.id}`).text(data.numberOfVotes);
+          $(`#rating-${movie.id}`).text(data.communityRating);
+          $(`#number-of-votes-${movie.id}`).text(` (${data.numberOfVotes})`);
           $(`#rating-star-${movie.id}`).attr('style', 'color:orange');
         };
       })
