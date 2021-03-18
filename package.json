@@ -9,6 +9,7 @@
     "seed_tables": "psql -h localhost -d pathe_gaumont -f sql/seed_tables.sql",
     "alter_tables": "psql -h localhost -d pathe_gaumont -f sql/alter_tables.sql",
     "seed_rating_table": "psql -h localhost -d pathe_gaumont -f sql/seed_rating_table.sql",
+    "seed_rating_table_hero": "psql -h localhost -d pathe_gaumont -f sql/seed_rating_table_hero.sql",
     "start": "node -r dotenv/config index.js",
     "dev": "nodemon -r dotenv/config -e js,ejs,css,sql,hbs,handlebars index.js",
     "session": "DEBUG=express-session nodemon -r dotenv/config -e js,ejs,css,sql,hbs,handlebars index.js",
