@@ -140,7 +140,7 @@
 }
 
 .cast-slider-container::-webkit-scrollbar {
-  height: 10px;
+  height: 5px;
 }
 
 .cast-slider-container::-webkit-scrollbar-track {
