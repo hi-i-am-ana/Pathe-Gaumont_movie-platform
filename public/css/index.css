@@ -669,6 +669,38 @@ hr {
   margin: 60px auto 0 auto;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination div {
+  padding: 7px 15px;
+  margin: 0 10px;
+  cursor: pointer;
+  color: #000;
+  background-color: #ffc0cb;
+  font-size: 15px;
+  line-height: 15px;
+  border-radius: 20px;
+}
+
+.pagination div:hover {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.pagination .current {
+  color: white;
+  background-color: #440bd4;
+}
+
+.reset-password {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 input[type="search"]::-webkit-search-cancel-button {
 
   /* Remove default */
