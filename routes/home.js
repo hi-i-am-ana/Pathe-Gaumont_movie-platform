@@ -7,9 +7,7 @@ router.get('', (req, res) => {
   res.render('pages/home', {
     currentUser: req.session.userId,
     title: 'Home | No CAAP',
-    api_key: api_key,
-    search: req.query.search,
-    pageNumber: req.query.page
+    api_key: api_key
   });
 });
 

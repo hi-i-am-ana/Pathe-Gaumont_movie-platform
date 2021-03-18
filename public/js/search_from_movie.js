@@ -6,12 +6,14 @@ let checkedGenres;
 if (genres === '') {
   checkedGenres = [];
 } else {
-  checkedGenres = genres.split(',');
+  checkedGenres = genres.split(',').map(Number);
+  console.log(checkedGenres);
 };
 const encodedSearchValue = encodeURIComponent(searchValue);
 
 // Make API request to get total number of pages
-$.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&page=1`)
+let jsonQuerySearch = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${encodedSearchValue}&include_adult=false&`
+$.getJSON(jsonQuerySearch + 'page=1')
 .then(data => {
   $('.search-dropdown').hide();
   $('.search-filters-container').hide();
@@ -27,6 +29,7 @@ $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${
   const displayNumber = 20;
   const apiRequestBunchSize = 10;
   filterApiResponse(filteredResults, 0, encodedSearchValue, checkedGenres, totalPages, displayNumber, apiRequestBunchSize);
+  displayPagination(data, jsonQuerySearch);
 })
 .catch(err => {
   // display error
