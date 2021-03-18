@@ -44,14 +44,20 @@
       <button class="clear-filters" type="button">Clear all</button>
       {{!-- Filters will appear here --}}
     </div>
-    <div class="movies">
-      {{!-- 20 most popular movies will be loaded into this space --}}
+    <div>
+      <div class="movies">
+        {{!-- 20 most popular movies will be loaded into this space --}}
+      </div>
+      <div class="pagination">
+        {{!-- Pagination buttons will be loaded into this space --}}
+      </div>
     </div>
   </div>
 </section>
 
 <script>const api_key = "{{api_key}}"</script>
 <script src="/static/js/search.js" defer></script>
+<script src="/static/js/pagination.js" defer></script>
 
 {{#if search}}
 <script>

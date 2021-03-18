@@ -668,5 +668,18 @@ hr {
 
 }
 
+.pagination {
+  display: flex;
+}
+
+.pagination div {
+  padding: 15px;
+  border: 1px solid #000;
+}
+
+.pagination .current {
+  color: red;
+}
+
 
 /*# sourceMappingURL=index.css.map */

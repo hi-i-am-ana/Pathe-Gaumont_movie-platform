@@ -8,7 +8,8 @@ router.get('', (req, res) => {
     currentUser: req.session.userId,
     title: 'Home | No CAAP',
     api_key: api_key,
-    search: req.query.search
+    search: req.query.search,
+    pageNumber: req.query.page
   });
 });
 
