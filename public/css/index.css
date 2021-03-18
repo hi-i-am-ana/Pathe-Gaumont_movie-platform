@@ -669,6 +669,20 @@ hr {
   margin: 60px auto 0 auto;
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+
+  /* Remove default */
+  -webkit-appearance: none;
+
+  /* Now your own custom styles */
+  height: 15px;
+  width: 14px;
+  background-image: url("/static/assets/times-solid.svg");
+  background-size: 10px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 480px) {
   .logo {
     border-radius: 50%;
