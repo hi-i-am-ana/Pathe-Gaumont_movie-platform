@@ -104,10 +104,23 @@ router.post("/", (req, res) => {
 
 // get route for password reset page
 router.get("/reset/:id", (req, res) => {
-  res.render("pages/passwordReset", {
-    title: "Password Reset | No CAAP",
-    passwordResetHash: req.params.id,
-  });
+  db.oneOrNone("SELECT * FROM password_reset WHERE hash = $1;", req.params.id)
+  .then((data) => {
+    if (data !== null) {
+      return res.render("pages/passwordReset", {
+        title: "Password Reset | No CAAP",
+        passwordResetHash: req.params.id,
+      });
+    } else {
+      return res.redirect('/')
+    }
+  })
+  .catch((err) => {
+    res.render("pages/error", {
+      err: err,
+    });
+  })
+  
 });
 
 // post route for password reset page
