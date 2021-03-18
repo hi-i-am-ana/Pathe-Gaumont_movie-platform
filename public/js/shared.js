@@ -29,6 +29,11 @@ function isEmail1(inputEmail) {
   return add.test(inputEmail);
 }
 
+function isName(nameInput) {
+  const add = /^([A-Za-zÀ-ÖØ-öø-ÿ'])+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ'?]?)+( |-)?([A-Za-zÀ-ÖØ-öø-ÿ'?]?)+$/;
+  return add.test(nameInput);
+}
+
 $("#login-form").attr("novalidate", "");
 $("#signup-form").attr("novalidate", "");
 $("#reset-password-form").attr("novalidate", "");
