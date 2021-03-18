@@ -129,10 +129,12 @@ $.getJSON(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&pag
 // POPULAR MOVIES
 
 // Get list of movies sorted by popularity (desc), then display list
-$.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+let jsonQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&`
+$.getJSON(jsonQuery + 'page=1')
 .then(data => {
   $('.movies-section-header').text(`What's Popular`);
   displayMovies(data.results);
+  displayPagination(data, jsonQuery);
 })
 .catch(err => {
   // display error
@@ -161,9 +163,11 @@ $.getJSON(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
       const checkedGenre = genre.value;
       checkedGenres += `&with_genres=${checkedGenre}`;
     });
-    $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${checkedGenres}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+    jsonQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}${checkedGenres}&sort_by=popularity.desc&include_adult=false&include_video=false&`
+    $.getJSON(jsonQuery + 'page=1')
     .then(data => {
       displayMovies(data.results);
+      displayPagination(data, jsonQuery)
     })
     .catch(err => {
       // display error
@@ -184,9 +188,11 @@ $('.clear-filters').click(() => {
   // });
   // Code below will just change checkbox state, but will not trigger change event, so we make API request without genres:
   $('.genre-filter').prop( 'checked', false );
-  $.getJSON(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+  jsonQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&`
+  $.getJSON(jsonQuery + 'page=1')
   .then(data => {
     displayMovies(data.results);
+    displayPagination(data, jsonQuery)
   })
   .catch(err => {
     // display error
