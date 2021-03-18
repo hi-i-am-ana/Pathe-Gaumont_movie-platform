@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
     .then((user) => {
       let valid = true;
 
-      if (user !== null) {
+      if (user !== null && user.is_active === true) {
         db.none("DELETE FROM password_reset WHERE email = $1", user.email)
           .then(() => {
             // generate a hash for password reset link
@@ -80,6 +80,10 @@ router.post("/", (req, res) => {
               err: err,
             });
           });
+      } else if (user.is_active === false) {
+        valid = false;
+        message =
+          "Your account has not been activated. Please confirm your email first.";
       } else {
         valid = false;
         message = "User does not exist, please sign up";
