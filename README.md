@@ -18,7 +18,7 @@ This is a student project only for the purpose of learning, which is a part of t
 ## Technologies/Frameworks used:
 
 - HTML, CSS, JavaScript, JQuery
-- Node, Handlebars
+- Node, Express, Handlebars
 - PostgreSQL
 - TMDB API, SendGrid
 
